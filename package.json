@@ -1,16 +1,16 @@
 {
-  "name": "minimal-frontend-boilerplate",
+  "name": "infografico-edh",
   "version": "0.1.0",
   "private": true,
   "author": "medusa.lab",
   "license": "MIT",
-  "homepage": "https://github.com/vivianedias/minimal-frontend-boilerplate#readme",
+  "homepage": "https://github.com/vivianedias/infografico-edh#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vivianedias/minimal-frontend-boilerplate.git"
+    "url": "git+https://github.com/vivianedias/infografico-edh.git"
   },
   "bugs": {
-    "url": "https://github.com/vivianedias/minimal-frontend-boilerplate/issues"
+    "url": "https://github.com/vivianedias/infografico-edh/issues"
   },
   "engines": {
     "yarn": ">=1.22.17",

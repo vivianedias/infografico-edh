@@ -1,20 +1,22 @@
-<h1 align="center">Welcome to minimal-frontend-boilerplate 👋</h1>
+<h1 align="center">Infográfico EDH 📈🌎</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
-  <a href="https://github.com/vivianedias/minimal-frontend-boilerplate#readme" target="_blank">
+  <a href="https://github.com/vivianedias/infografico-edh#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
-  <a href="https://github.com/vivianedias/minimal-frontend-boilerplate/graphs/commit-activity" target="_blank">
+  <a href="https://github.com/vivianedias/infografico-edh/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
-  <a href="https://github.com/vivianedias/minimal-frontend-boilerplate/blob/master/LICENSE" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/github/license/vivianedias/minimal-frontend-boilerplate" />
+  <a href="https://github.com/vivianedias/infografico-edh/blob/master/LICENSE" target="_blank">
+    <img alt="License: Apache" src="https://img.shields.io/github/license/vivianedias/infografico-edh" />
   </a>
 </p>
 
-> A minimal frontend template using Next.JS + Typescript
+![Continuous Integration](https://github.com/vivianedias/infografico-edh/actions/workflows/integration.yml/badge.svg)
 
-### 🏠 [Homepage](https://github.com/vivianedias/minimal-frontend-boilerplate#readme)
+> Infográfico interativo com informações atuais sobre educação em direitos humanos no Brasil.
+
+### 🏠 [Homepage](https://infografico-edh.vercel.app/)
 
 ## Install
 
@@ -53,20 +55,10 @@ yarn test
 - Website: https://www.medusalab.tech
 - Github: [@vivianedias](https://github.com/vivianedias) & [@camilacrdoso](https://github.com/camilacrdoso)
 
-## 🤝 Contributing
-
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/vivianedias/minimal-frontend-boilerplate/issues).
-
-<!-- You can also take a look at the [contributing guide](https://github.com/vivianedias/minimal-frontend-boilerplate/blob/master/CONTRIBUTING.md). -->
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
 ## 📝 License
 
 Copyright © 2022 [medusa.lab](https://github.com/vivianedias).<br />
-This project is [MIT](https://github.com/vivianedias/minimal-frontend-boilerplate/blob/master/LICENSE) licensed.
+This project is [Apache License](https://github.com/vivianedias/infografico-edh/blob/master/LICENSE) licensed.
 
 ---
 
