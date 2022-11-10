@@ -1,7 +1,7 @@
 import { log } from 'next-axiom'
+import { env } from './constants'
 
 export const getUrl = (endpoint: string) => {
-  const env = process.env.NEXT_PUBLIC_VERCEL_ENV || process.env.NODE_ENV;
 
   const urlByEnv: Record<string, string | undefined> = {
     preview: process.env.NEXT_PUBLIC_VERCEL_URL,

@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import fetcher from "../../shared/utils/fetcher";
 import { Records, Response } from "../../shared/types/airtable";
 import { log } from "next-axiom";
+import { AIRTABLE_PROD_VIEW_ID, AIRTABLE_STG_VIEW_ID, env } from "../../shared/utils/constants";
 
 const parse = ({ records }: { records: Records[] }) => {
   return records.map((record: Records) => {
@@ -18,8 +19,11 @@ export default async function handler(
   res: NextApiResponse<Response[] | string>
 ) {
   try {
-    const { query } = req
-    const endpoint = `https://api.airtable.com/v0/app828vzD9bQ4PNrN/estados__${query.lng}?maxRecords=100&view=Grid%20view`;
+    const { query } = req;
+    const tableId =
+      env !== "production" ? AIRTABLE_STG_VIEW_ID : AIRTABLE_PROD_VIEW_ID
+
+    const endpoint = `https://api.airtable.com/v0/${tableId}/estados__${query.lng}?maxRecords=100&view=Grid%20view`;
 
     const token = process.env.AIRTABLE_API_KEY;
     const opts = {
