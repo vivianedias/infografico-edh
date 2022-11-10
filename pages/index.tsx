@@ -1,28 +1,40 @@
-import { GetServerSideProps } from 'next'
-import { Box } from '@chakra-ui/react'
+import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from 'next-i18next';
-import fetcher from '../shared/utils/fetcher'
+import { useTranslation } from "next-i18next";
 
-import { Head } from '../shared/components'
+import { Box } from "@chakra-ui/react";
+import { Head } from "../shared/components";
 
-export default function Home({ data }: { data: { name: string } }) {
-  const { t } = useTranslation('common');
+import fetcher from "../shared/utils/fetcher";
+import { Response } from "../shared/types/airtable";
+
+export default function Home({
+  data,
+  error,
+}: {
+  data: Response[] | null;
+  error?: boolean;
+}) {
+  const { t } = useTranslation("common");
 
   return (
     <>
-      <Head
-        title={t("title")}
-        description={t("description")}
-      />
-      <Box>{t("content")} - {data.name}</Box>
+      <Head title={t("title")} description={t("description")} />
+      <Box>
+        {t("content")}
+        {error ? <p>There was an error while fetching the data</p> : null}
+        {data
+          ? data.map((i) => <p key={i.id}>{i.estado__nome}</p>)
+          : null}
+      </Box>
     </>
-  )
+  );
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const data = await fetcher('/api/hello')
   try {
+    const data = await fetcher("/api/airtable");
+
     return {
       props: {
         data,
@@ -30,23 +42,22 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         ...(await serverSideTranslations(ctx.locale || "pt-BR", [
           "common",
           "header",
-          "footer"
+          "footer",
         ])),
       },
-    }
+    };
   } catch (e) {
     return {
       props: {
-        data: {
-          name: 'Something went wrong'
-        },
+        data: null,
+        error: true,
         locale: ctx.locale,
         ...(await serverSideTranslations(ctx.locale || "pt-BR", [
           "common",
           "header",
-          "footer"
+          "footer",
         ])),
-      }
-    }
+      },
+    };
   }
-}
+};
