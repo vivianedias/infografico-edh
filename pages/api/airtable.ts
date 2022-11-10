@@ -18,7 +18,8 @@ export default async function handler(
   res: NextApiResponse<Response[] | string>
 ) {
   try {
-    const endpoint = `https://api.airtable.com/v0/app828vzD9bQ4PNrN/estados?maxRecords=100&view=Grid%20view`;
+    const { query } = req
+    const endpoint = `https://api.airtable.com/v0/app828vzD9bQ4PNrN/estados__${query.lng}?maxRecords=100&view=Grid%20view`;
 
     const token = process.env.AIRTABLE_API_KEY;
     const opts = {
