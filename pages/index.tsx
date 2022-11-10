@@ -33,7 +33,7 @@ export default function Home({
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
-    const data = await fetcher("/api/airtable");
+    const data = await fetcher(`/api/airtable?lng=${ctx.locale || 'pt-BR'}`);
 
     return {
       props: {
