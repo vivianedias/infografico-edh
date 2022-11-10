@@ -1,6 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import fetcher from '../../shared/utils/fetcher'
-import { Records, Response } from '../../shared/types/airtable'
+import type { NextApiRequest, NextApiResponse } from "next";
+import fetcher from "../../shared/utils/fetcher";
+import { Records, Response } from "../../shared/types/airtable";
+import { log } from "next-axiom";
 
 const parse = ({ records }: { records: Records[] }) => {
   return records.map((record: Records) => {
@@ -17,22 +18,22 @@ export default async function handler(
   res: NextApiResponse<Response[] | string>
 ) {
   try {
-    const endpoint =
-      `https://api.airtable.com/v0/app828vzD9bQ4PNrN/estados?maxRecords=100&view=Grid%20view`;
-  
+    const endpoint = `https://api.airtable.com/v0/app828vzD9bQ4PNrN/estados?maxRecords=100&view=Grid%20view`;
+
     const token = process.env.AIRTABLE_API_KEY;
     const opts = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      isExternal: true
+      isExternal: true,
     };
-  
+
     const data = await fetcher(endpoint, opts);
 
-    res.status(200).json(parse(data))
+    res.status(200).json(parse(data));
   } catch (e) {
-    console.log({ e })
-    res.status(500).send(`Request to airtable API failed ${e}`)
+    log.error(`Request to airtable API failed`, e);
+
+    res.status(400).send(`Request to airtable API failed ${e}`);
   }
-};
+}

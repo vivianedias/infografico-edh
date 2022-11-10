@@ -8,7 +8,13 @@ import { Head } from "../shared/components";
 import fetcher from "../shared/utils/fetcher";
 import { Response } from "../shared/types/airtable";
 
-export default function Home({ data }: { data: Response[] }) {
+export default function Home({
+  data,
+  error,
+}: {
+  data: Response[] | null;
+  error?: boolean;
+}) {
   const { t } = useTranslation("common");
 
   return (
@@ -16,16 +22,19 @@ export default function Home({ data }: { data: Response[] }) {
       <Head title={t("title")} description={t("description")} />
       <Box>
         {t("content")}
-        {data.map(i => <p key={i.id}>{i.estado__nome}</p>)}
+        {error ? <p>There was an error while fetching the data</p> : null}
+        {data
+          ? data.map((i) => <p key={i.id}>{i.estado__nome}</p>)
+          : null}
       </Box>
     </>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const data = await fetcher("/api/airtable");
-
   try {
+    const data = await fetcher("/api/airtable");
+
     return {
       props: {
         data,
@@ -40,9 +49,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   } catch (e) {
     return {
       props: {
-        data: {
-          name: "Something went wrong",
-        },
+        data: null,
+        error: true,
         locale: ctx.locale,
         ...(await serverSideTranslations(ctx.locale || "pt-BR", [
           "common",

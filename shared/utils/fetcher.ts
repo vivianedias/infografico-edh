@@ -1,3 +1,5 @@
+import { log } from 'next-axiom'
+
 export const getUrl = (endpoint: string) => {
   const env = process.env.NEXT_PUBLIC_VERCEL_ENV || process.env.NODE_ENV;
 
@@ -39,6 +41,7 @@ async function apiClient(endpoint: string, options?: OptionsType) {
   const res = await fetch(url, config);
 
   if (!res.ok) {
+    log.error(`Response from a request that has thrown an error`, res)
     const error: ResponseError = new Error(
       `An error occurred while making the request: ${res.statusText}`
     );
