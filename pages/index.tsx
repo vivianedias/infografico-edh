@@ -23,13 +23,9 @@ export default function Home({
       <Box width={"100%"}>
         {t("content")}
         {error ? <p>There was an error while fetching the data</p> : null}
-        {data
-          ? data.map((i) => <p key={i.id}>{i.estado__nome}</p>)
-          : null}
+        {data ? data.map((i) => <p key={i.id}>{i.estado__nome}</p>) : null}
         <BrazilGeojson>
-          {({ data, error }) => (
-            <BrazilMap data={data} error={error} />
-          )}
+          {({ data, error }) => <BrazilMap data={data} error={error} />}
         </BrazilGeojson>
       </Box>
     </>
@@ -38,7 +34,7 @@ export default function Home({
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
-    const data = await fetcher(`/api/airtable?lng=${ctx.locale || 'pt-BR'}`);
+    const data = await fetcher(`/api/airtable?lng=${ctx.locale || "pt-BR"}`);
 
     return {
       props: {

@@ -1,7 +1,11 @@
 import useSWR from "swr";
+import { BrazilStatesGeojson } from '../types/geojson'
 
 interface BrazilGeojsonType {
-  children(param: { data: Array<{}>; error: string }): React.ReactElement;
+  children(param: {
+    data: BrazilStatesGeojson;
+    error: string;
+  }): React.ReactElement;
 }
 
 const BrazilGeojson: React.FunctionComponent<BrazilGeojsonType> = ({
@@ -14,6 +18,6 @@ const BrazilGeojson: React.FunctionComponent<BrazilGeojsonType> = ({
   if (!data) return <div>Loading...</div>;
 
   return children({ data, error });
-}
+};
 
-export default BrazilGeojson
+export default BrazilGeojson;
