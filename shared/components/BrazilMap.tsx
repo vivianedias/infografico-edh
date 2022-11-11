@@ -7,7 +7,7 @@ export default function BrazilMap({
   data,
   error,
 }: {
-  data: BrazilStatesGeojson;
+  data: any;
   error: string;
 }) {
   if (!process.env.NEXT_PUBLIC_MAPBOX_KEY) {
@@ -29,7 +29,7 @@ export default function BrazilMap({
     map.on("load", () => {
       map.addSource("states", {
         type: "geojson",
-        data: data as any,
+        data: data,
       });
 
       map.addLayer({
