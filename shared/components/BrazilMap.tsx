@@ -21,7 +21,7 @@ export default function BrazilMap({
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: mapContainer.current || "",
-      style: "mapbox://styles/mapbox/streets-v11",
+      style: "mapbox://styles/mapbox/light-v10",
       center: [-47.9373578, -15.7213698],
       zoom: 4,
     });
