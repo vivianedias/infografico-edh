@@ -1,13 +1,13 @@
 import { Box } from "@chakra-ui/react";
-import mapboxgl, { Map } from "mapbox-gl";
-import { useEffect, useRef, useState } from "react";
+import mapboxgl from "mapbox-gl";
+import { useEffect, useRef } from "react";
 import { BrazilStatesGeojson } from "../types/geojson";
 
 export default function BrazilMap({
   data,
   error,
 }: {
-  data: any;
+  data: BrazilStatesGeojson;
   error: string;
 }) {
   if (!process.env.NEXT_PUBLIC_MAPBOX_KEY) {
@@ -22,14 +22,14 @@ export default function BrazilMap({
     const map = new mapboxgl.Map({
       container: mapContainer.current || "",
       style: "mapbox://styles/mapbox/streets-v11",
-      center: [-71.4244124,-9.1286515],
-      zoom: 5,
+      center: [-47.9373578, -15.7213698],
+      zoom: 4,
     });
 
     map.on("load", () => {
       map.addSource("states", {
         type: "geojson",
-        data: data,
+        data: data as any,
       });
 
       map.addLayer({
