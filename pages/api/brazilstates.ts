@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import fetcher from "../../shared/utils/fetcher";
-import { Records, Response } from "../../shared/types/airtable";
+import { Response } from "../../shared/types/airtable";
 import path from 'path';
 import { promises as fs } from 'fs';
 
