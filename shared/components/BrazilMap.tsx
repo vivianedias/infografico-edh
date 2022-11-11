@@ -22,14 +22,14 @@ export default function BrazilMap({
     const map = new mapboxgl.Map({
       container: mapContainer.current || "",
       style: "mapbox://styles/mapbox/streets-v11",
-      center: [-100.486052, 37.830348],
-      zoom: 2,
+      center: [-71.4244124,-9.1286515],
+      zoom: 5,
     });
 
     map.on("load", () => {
       map.addSource("states", {
         type: "geojson",
-        data: "https://docs.mapbox.com/mapbox-gl-js/assets/us_states.geojson",
+        data: data as any,
       });
 
       map.addLayer({
