@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import mapboxgl, { Map } from "mapbox-gl";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BrazilStatesGeojson } from "../types/geojson";
 
 export default function BrazilMap({
@@ -17,6 +17,7 @@ export default function BrazilMap({
   mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_KEY || "";
 
   const mapContainer = useRef(null);
+  const [map, setMap] = useState<Map | null>(null);
 
   function loadSources(map: Map) {
     map.addSource("states", {
@@ -85,20 +86,24 @@ export default function BrazilMap({
   }
 
   useEffect(() => {
-    const map = new mapboxgl.Map({
+    if (map) return;
+
+    const newMap = new mapboxgl.Map({
       container: mapContainer.current || "",
       style: "mapbox://styles/mapbox/light-v10",
       center: [-47.9373578, -15.7213698],
       zoom: 4,
     });
 
-    map.on("load", (e) => {
-      loadSources(e.target)
+    setMap(map);
+
+    newMap.on("load", (e) => {
+      loadSources(e.target);
     });
 
-    mapState(map)
+    mapState(newMap);
 
-    return () => map.remove();
+    return () => newMap?.remove();
   }, []);
 
   return (
