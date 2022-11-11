@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import mapboxgl from "mapbox-gl";
+import mapboxgl, { Map } from "mapbox-gl";
 import { useEffect, useRef } from "react";
 import { BrazilStatesGeojson } from "../types/geojson";
 
@@ -18,48 +18,41 @@ export default function BrazilMap({
 
   const mapContainer = useRef(null);
 
-  useEffect(() => {
-    const map = new mapboxgl.Map({
-      container: mapContainer.current || "",
-      style: "mapbox://styles/mapbox/light-v10",
-      center: [-47.9373578, -15.7213698],
-      zoom: 4,
+  function loadSources(map: Map) {
+    map.addSource("states", {
+      type: "geojson",
+      data: data as any,
     });
 
-    map.on("load", () => {
-      map.addSource("states", {
-        type: "geojson",
-        data: data as any,
-      });
-
-      map.addLayer({
-        id: "state-fills",
-        type: "fill",
-        source: "states",
-        layout: {},
-        paint: {
-          "fill-color": "#627BC1",
-          "fill-opacity": [
-            "case",
-            ["boolean", ["feature-state", "hover"], false],
-            1,
-            0.5,
-          ],
-        },
-      });
-
-      map.addLayer({
-        id: "state-borders",
-        type: "line",
-        source: "states",
-        layout: {},
-        paint: {
-          "line-color": "#627BC1",
-          "line-width": 2,
-        },
-      });
+    map.addLayer({
+      id: "state-fills",
+      type: "fill",
+      source: "states",
+      layout: {},
+      paint: {
+        "fill-color": "#627BC1",
+        "fill-opacity": [
+          "case",
+          ["boolean", ["feature-state", "hover"], false],
+          1,
+          0.5,
+        ],
+      },
     });
 
+    map.addLayer({
+      id: "state-borders",
+      type: "line",
+      source: "states",
+      layout: {},
+      paint: {
+        "line-color": "#627BC1",
+        "line-width": 2,
+      },
+    });
+  }
+
+  function mapState(map: Map) {
     let hoveredStateId: null | string | number;
 
     map.on("mousemove", "state-fills", (e: any) => {
@@ -89,6 +82,21 @@ export default function BrazilMap({
       }
       hoveredStateId = null;
     });
+  }
+
+  useEffect(() => {
+    const map = new mapboxgl.Map({
+      container: mapContainer.current || "",
+      style: "mapbox://styles/mapbox/light-v10",
+      center: [-47.9373578, -15.7213698],
+      zoom: 4,
+    });
+
+    map.on("load", (e) => {
+      loadSources(e.target)
+    });
+
+    mapState(map)
 
     return () => map.remove();
   }, []);
