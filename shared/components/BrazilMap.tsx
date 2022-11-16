@@ -1,7 +1,9 @@
 import { Box } from "@chakra-ui/react";
-import mapboxgl from "mapbox-gl";
-import { useEffect, useRef } from "react";
-import { BrazilStatesGeojson } from "../types/geojson";
+import mapboxgl, { Map } from "mapbox-gl";
+import { useEffect, useRef, useState } from "react";
+import { BrazilStatesGeojson, Feature } from "../types/geojson";
+import isValid from "../utils/isValid";
+import PopupBase, { PopupContent } from "./Popup";
 
 export default function BrazilMap({
   data,
@@ -17,54 +19,50 @@ export default function BrazilMap({
   mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_KEY || "";
 
   const mapContainer = useRef(null);
+  const [map, setMap] = useState<Map | null>(null);
+  const [content, setContent] = useState(null);
+  const [popupLngLat, setPopupLngLat] = useState(null);
 
-  useEffect(() => {
-    const map = new mapboxgl.Map({
-      container: mapContainer.current || "",
-      style: "mapbox://styles/mapbox/light-v10",
-      center: [-47.9373578, -15.7213698],
-      zoom: 4,
+  function loadSources(map: Map) {
+    map.addSource("states", {
+      type: "geojson",
+      data: data as any,
     });
 
-    map.on("load", () => {
-      map.addSource("states", {
-        type: "geojson",
-        data: data as any,
-      });
-
-      map.addLayer({
-        id: "state-fills",
-        type: "fill",
-        source: "states",
-        layout: {},
-        paint: {
-          "fill-color": "#627BC1",
-          "fill-opacity": [
-            "case",
-            ["boolean", ["feature-state", "hover"], false],
-            1,
-            0.5,
-          ],
-        },
-      });
-
-      map.addLayer({
-        id: "state-borders",
-        type: "line",
-        source: "states",
-        layout: {},
-        paint: {
-          "line-color": "#627BC1",
-          "line-width": 2,
-        },
-      });
+    map.addLayer({
+      id: "state-fills",
+      type: "fill",
+      source: "states",
+      layout: {},
+      paint: {
+        "fill-color": "#627BC1",
+        "fill-opacity": [
+          "case",
+          ["boolean", ["feature-state", "hover"], false],
+          1,
+          0.5,
+        ],
+      },
     });
 
-    let hoveredStateId: null | string | number;
+    map.addLayer({
+      id: "state-borders",
+      type: "line",
+      source: "states",
+      layout: {},
+      paint: {
+        "line-color": "#627BC1",
+        "line-width": 2,
+      },
+    });
+  }
+
+  function mapState(map: Map) {
+    let hoveredStateId: string | number = "";
 
     map.on("mousemove", "state-fills", (e: any) => {
       if (e.features.length > 0) {
-        if (hoveredStateId !== null) {
+        if (isValid(hoveredStateId)) {
           map.setFeatureState(
             { source: "states", id: hoveredStateId },
             { hover: false }
@@ -72,7 +70,7 @@ export default function BrazilMap({
         }
         hoveredStateId = e.features[0].id;
         map.setFeatureState(
-          { source: "states", id: hoveredStateId || undefined },
+          { source: "states", id: hoveredStateId },
           { hover: true }
         );
       }
@@ -81,20 +79,56 @@ export default function BrazilMap({
     // When the mouse leaves the state-fill layer, update the feature state of the
     // previously hovered feature.
     map.on("mouseleave", "state-fills", () => {
-      if (hoveredStateId !== null) {
+      if (isValid(hoveredStateId)) {
         map.setFeatureState(
           { source: "states", id: hoveredStateId },
           { hover: false }
         );
       }
-      hoveredStateId = null;
+      hoveredStateId = "";
+    });
+  }
+
+  useEffect(() => {
+    if (map) return;
+
+    const newMap = new mapboxgl.Map({
+      container: mapContainer.current || "",
+      style: "mapbox://styles/mapbox/light-v10",
+      center: [-47.9373578, -15.7213698],
+      zoom: 4,
     });
 
-    return () => map.remove();
+    setMap(newMap);
+
+    newMap.on("load", (e) => {
+      loadSources(e.target);
+    });
+
+    mapState(newMap);
+
+    newMap.on("click", "state-fills", (e: any) => {
+      const labels = e.features.map((feature: Feature) => (
+        <PopupContent
+          key={feature.properties.id}
+          label={feature.properties.name}
+        />
+      ));
+
+      setContent(labels);
+      setPopupLngLat(e.lngLat);
+    });
+
+    return () => newMap?.remove();
   }, []);
 
   return (
     <Box as="section">
+      {popupLngLat ? (
+        <PopupBase map={map} lngLat={popupLngLat}>
+          {content}
+        </PopupBase>
+      ) : null}
       <Box
         ref={mapContainer}
         className="map-container"

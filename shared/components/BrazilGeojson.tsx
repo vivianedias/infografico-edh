@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 import { BrazilStatesGeojson } from '../types/geojson'
 
 interface BrazilGeojsonType {
@@ -11,7 +11,7 @@ interface BrazilGeojsonType {
 const BrazilGeojson: React.FunctionComponent<BrazilGeojsonType> = ({
   children,
 }) => {
-  const { data, error } = useSWR("/api/brazilstates");
+  const { data, error } = useSWRImmutable("/api/brazilstates");
 
   if (error) return <div>Failed to load</div>;
 
