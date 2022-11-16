@@ -1,7 +1,9 @@
 import { Box } from "@chakra-ui/react";
 import mapboxgl, { Map } from "mapbox-gl";
 import { useEffect, useRef, useState } from "react";
-import { BrazilStatesGeojson } from "../types/geojson";
+import { BrazilStatesGeojson, Feature } from "../types/geojson";
+import isValid from "../utils/isValid";
+import PopupBase, { PopupContent } from "./Popup";
 
 export default function BrazilMap({
   data,
@@ -18,6 +20,8 @@ export default function BrazilMap({
 
   const mapContainer = useRef(null);
   const [map, setMap] = useState<Map | null>(null);
+  const [content, setContent] = useState(null);
+  const [popupLngLat, setPopupLngLat] = useState(null);
 
   function loadSources(map: Map) {
     map.addSource("states", {
@@ -54,11 +58,11 @@ export default function BrazilMap({
   }
 
   function mapState(map: Map) {
-    let hoveredStateId: null | string | number;
+    let hoveredStateId: string | number = "";
 
     map.on("mousemove", "state-fills", (e: any) => {
       if (e.features.length > 0) {
-        if (hoveredStateId !== null) {
+        if (isValid(hoveredStateId)) {
           map.setFeatureState(
             { source: "states", id: hoveredStateId },
             { hover: false }
@@ -66,7 +70,7 @@ export default function BrazilMap({
         }
         hoveredStateId = e.features[0].id;
         map.setFeatureState(
-          { source: "states", id: hoveredStateId || undefined },
+          { source: "states", id: hoveredStateId },
           { hover: true }
         );
       }
@@ -75,13 +79,13 @@ export default function BrazilMap({
     // When the mouse leaves the state-fill layer, update the feature state of the
     // previously hovered feature.
     map.on("mouseleave", "state-fills", () => {
-      if (hoveredStateId !== null) {
+      if (isValid(hoveredStateId)) {
         map.setFeatureState(
           { source: "states", id: hoveredStateId },
           { hover: false }
         );
       }
-      hoveredStateId = null;
+      hoveredStateId = "";
     });
   }
 
@@ -95,7 +99,7 @@ export default function BrazilMap({
       zoom: 4,
     });
 
-    setMap(map);
+    setMap(newMap);
 
     newMap.on("load", (e) => {
       loadSources(e.target);
@@ -103,11 +107,28 @@ export default function BrazilMap({
 
     mapState(newMap);
 
+    newMap.on("click", "state-fills", (e: any) => {
+      const labels = e.features.map((feature: Feature) => (
+        <PopupContent
+          key={feature.properties.id}
+          label={feature.properties.name}
+        />
+      ));
+
+      setContent(labels);
+      setPopupLngLat(e.lngLat);
+    });
+
     return () => newMap?.remove();
   }, []);
 
   return (
     <Box as="section">
+      {popupLngLat ? (
+        <PopupBase map={map} lngLat={popupLngLat}>
+          {content}
+        </PopupBase>
+      ) : null}
       <Box
         ref={mapContainer}
         className="map-container"
