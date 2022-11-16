@@ -1,8 +1,12 @@
-import { Box, Button, Flex, Heading, Link, Stack } from "@chakra-ui/react";
-import NextLink from "next/link";
+import { Box, Flex, Link, Stack } from "@chakra-ui/react";
+import NextImage from "next/image";
 import { useTranslation } from "next-i18next";
 import { IS_IN_MAINTENANCE } from "../utils/constants";
 import React from "react";
+
+import logo from "/public/imgs/logo-instituto-aurora.png";
+
+type translation = (param: string) => string;
 
 export default function Header() {
   const { t } = useTranslation("header");
@@ -12,32 +16,37 @@ export default function Header() {
   }
 
   return (
-    <Box position={"fixed"} width={"100%"} zIndex={1000} fontFamily={"heading"}>
+    // <Box position={"fixed"} width={"100%"} zIndex={1000} fontFamily={"heading"}>
       <Flex
         bg={"header.background"}
-        // color={useColorModeValue("gray.600", "gray.50")}
         minH={"124px"}
-        py={{ base: 2 }}
-        px={{ base: 4 }}
+        w={"100%"}
+        // py={{ base: 2 }}
+        // px={{ base: 4 }}
         borderStyle={"solid"}
         align={"center"}
+        justify={"center"}
       >
-        <Flex
-          flex={{ base: 1 }}
-          display={{ base: "none", md: "flex" }}
-          justify={{ base: "center" }}
+        <Flex 
+          w={"1080px"} 
+          align={"center"}
+          justify={"space-between"}
         >
-          <DesktopNav />
+        
+          <Logo t={t} />
+          {/* <Flex justify={"center"}> */}
+            <DesktopNav t={t} />
+          {/* </Flex> */}
         </Flex>
+
       </Flex>
-    </Box>
+
   );
 }
 
-const DesktopNav = () => {
-  const { t } = useTranslation("header");
+const DesktopNav = ({ t }: { t: translation }) => {
   return (
-    <Stack direction={"row"} spacing={4}>
+    <Stack direction={"row"} spacing={5}>
       {NAV_ITEMS(t).map((navItem, i) => (
         <Link
           key={`${navItem.label}-${i}`}
@@ -59,7 +68,24 @@ const DesktopNav = () => {
   );
 };
 
-const NAV_ITEMS = (t: any) => {
+const Logo = ({ t }: { t: translation }) => {
+  return <ChakraNextImage w={168} src={logo} alt={t("title")} />;
+};
+
+const ChakraNextImage = (props: any) => {
+  const { src, alt, ...rest } = props;
+  return (
+    <Box position="relative" {...rest}>
+      <NextImage 
+        objectFit="cover" 
+        src={src} 
+        alt={alt} 
+      />
+    </Box>
+  );
+};
+
+const NAV_ITEMS = (t: translation): Array<{ label: string; href: string; }> => {
   return [
     {
       label: t("whatWeDo"),
