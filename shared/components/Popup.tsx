@@ -1,9 +1,20 @@
 import React, { ReactNode, useContext, useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 
+export function PopupContent ({ label }: { label: string }) {
+  return (
+    <div>
+      <div>hello {label}</div>
+    </div>
+  );
+}
+
 const PopupBase: React.FunctionComponent<{
   children: ReactNode;
-  lngLat: any;
+  lngLat: {
+    lat: number;
+    lng: number;
+  };
   map: any;
 }> = ({ children, lngLat, map }) => {
   const popupRef = useRef(null);
