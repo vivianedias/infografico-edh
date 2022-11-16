@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext, useEffect, useRef } from "react";
+import { FunctionComponent, ReactNode, useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 
 export function PopupContent ({ label }: { label: string }) {
@@ -9,7 +9,7 @@ export function PopupContent ({ label }: { label: string }) {
   );
 }
 
-const PopupBase: React.FunctionComponent<{
+const PopupBase: FunctionComponent<{
   children: ReactNode;
   lngLat: {
     lat: number;
