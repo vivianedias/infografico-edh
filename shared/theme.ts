@@ -7,9 +7,14 @@ const theme: Record<string, any> = {
   },
   colors: {
     header: {
-      background: "#000000",
-      link: "#FFFFFF",
-      linkHover: "#878787",
+      menuBackground: "#000000",
+      menuLink: "#FFFFFF",
+      menuLinkHover: "#878787",
+      subMenuBackground: "#FFFFFF",
+      subMenuLink: "#4B4B4B",
+      subMenuLinkHover: "#878787",
+      subMenuLinkHoverBackground: "#FAFAFA",
+      subMenuBorder: "#FBBC44",
       button: "#FBBC44"
     }
   }
