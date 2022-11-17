@@ -9,7 +9,8 @@ const theme: Record<string, any> = {
     header: {
       background: "#000000",
       link: "#FFFFFF",
-      linkHover: "#878787"
+      linkHover: "#878787",
+      button: "#FBBC44"
     }
   }
 
