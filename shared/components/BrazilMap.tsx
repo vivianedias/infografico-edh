@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import mapboxgl, { Map } from "mapbox-gl";
 import { useEffect, useRef, useState } from "react";
 import { BrazilStatesGeojson, Feature } from "../types/geojson";
+import buildCaseFilters from "../utils/buildCaseFilters";
 import isValid from "../utils/isValid";
 import PopupBase, { PopupContent } from "./Popup";
 
@@ -23,24 +24,19 @@ export default function BrazilMap({
   const [content, setContent] = useState(null);
   const [popupLngLat, setPopupLngLat] = useState(null);
 
-  function loadSources(map: Map) {
-    map.addSource("states", {
-      type: "geojson",
-      data: data as any,
-    });
-
+  function setDefaultLayers(map: Map) {
     map.addLayer({
       id: "state-fills",
       type: "fill",
       source: "states",
       layout: {},
       paint: {
-        "fill-color": "#627BC1",
+        "fill-color": ["case", ...buildCaseFilters(), "#F4F0EF"],
         "fill-opacity": [
           "case",
           ["boolean", ["feature-state", "hover"], false],
+          0.75,
           1,
-          0.5,
         ],
       },
     });
@@ -51,10 +47,19 @@ export default function BrazilMap({
       source: "states",
       layout: {},
       paint: {
-        "line-color": "#627BC1",
+        "line-color": "#FFFFFF",
         "line-width": 2,
       },
     });
+  }
+
+  function loadSources(map: Map) {
+    map.addSource("states", {
+      type: "geojson",
+      data: data as any,
+    });
+
+    setDefaultLayers(map)
   }
 
   function mapState(map: Map) {
