@@ -7,6 +7,7 @@ import { Head, BrazilMap, BrazilGeojson } from "../shared/components";
 
 import fetcher from "../shared/utils/fetcher";
 import { Response } from "../shared/types/airtable";
+import { log } from "next-axiom";
 
 export default function Home({
   data,
@@ -23,10 +24,11 @@ export default function Home({
       <Box width={"100%"}>
         {t("content")}
         {error ? <p>There was an error while fetching the data</p> : null}
-        {data ? data.map((i) => <p key={i.id}>{i.estado__nome}</p>) : null}
-        <BrazilGeojson>
-          {({ data, error }) => <BrazilMap data={data} error={error} />}
-        </BrazilGeojson>
+        {data ? (
+          <BrazilGeojson tableData={data}>
+            {({ data, error }) => <BrazilMap data={data} error={error} />}
+          </BrazilGeojson>
+        ) : null}
       </Box>
     </>
   );
@@ -35,7 +37,7 @@ export default function Home({
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
     const data = await fetcher(`/api/airtable?lng=${ctx.locale || "pt-BR"}`);
-
+    
     return {
       props: {
         data,
@@ -48,6 +50,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       },
     };
   } catch (e) {
+    log.error(`Error trying to fetch airtable data`, e)
     return {
       props: {
         data: null,

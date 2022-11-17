@@ -24,12 +24,7 @@ export default function BrazilMap({
   const [content, setContent] = useState(null);
   const [popupLngLat, setPopupLngLat] = useState(null);
 
-  function loadSources(map: Map) {
-    map.addSource("states", {
-      type: "geojson",
-      data: data as any,
-    });
-
+  function setDefaultLayers(map: Map) {
     map.addLayer({
       id: "state-fills",
       type: "fill",
@@ -56,6 +51,15 @@ export default function BrazilMap({
         "line-width": 2,
       },
     });
+  }
+
+  function loadSources(map: Map) {
+    map.addSource("states", {
+      type: "geojson",
+      data: data as any,
+    });
+
+    setDefaultLayers(map)
   }
 
   function mapState(map: Map) {
