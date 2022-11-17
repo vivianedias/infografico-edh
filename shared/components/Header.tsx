@@ -1,3 +1,6 @@
+import NextImage from "next/image";
+import { useTranslation } from "next-i18next";
+
 import {
   Box,
   Button,
@@ -15,14 +18,11 @@ import {
   Text,
   HStack,
 } from "@chakra-ui/react";
-import NextImage from "next/image";
-import { useTranslation } from "next-i18next";
-import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
-import { IS_IN_MAINTENANCE } from "../utils/constants";
-import React from "react";
-
-import logo from "/public/imgs/logo-instituto-aurora.png";
 import { css } from "@emotion/react";
+import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
+
+import { IS_IN_MAINTENANCE } from "../utils/constants";
+import logo from "/public/imgs/logo-instituto-aurora.png";
 
 type translation = (param: string) => string;
 
@@ -38,7 +38,6 @@ export default function Header() {
       bg={"header.menuBackground"}
       minH={"124px"}
       w={"100%"}
-      borderStyle={"solid"}
       align={"center"}
       justify={"center"}
     >
@@ -55,7 +54,6 @@ const DesktopNav = ({ t }: { t: translation }) => {
   return (
     <Stack direction={"row"} spacing={5}>
       {NAV_ITEMS(t).map((navItem, i) => {
-        console.log({ navItem });
         return (
           <Box key={`${navItem.label}-${i}`}>
             <Popover trigger={"hover"} placement={"bottom-start"}>
@@ -63,7 +61,7 @@ const DesktopNav = ({ t }: { t: translation }) => {
                 <Link
                   href={navItem.href}
                   isExternal={navItem.href != "#"}
-                  fontSize={"14px"}
+                  fontSize={"sm"}
                   fontWeight={700}
                   color={"header.menuLink"}
                   _hover={{
@@ -119,7 +117,7 @@ const DesktopSubNav = ({ label, href, subLabel }: any) => {
       <Stack direction={"row"} align={"center"}>
         <Box>
           <Text
-            fontSize={"14px"}
+            fontSize={"sm"}
             color={"header.subMenuLink"}
             fontWeight={700}
             textTransform={"uppercase"}
