@@ -1,10 +1,15 @@
-import { Box } from "@chakra-ui/react";
-import mapboxgl, { Map } from "mapbox-gl";
 import { useEffect, useRef, useState } from "react";
+import mapboxgl, { Map } from "mapbox-gl";
+import {
+  Box,
+} from "@chakra-ui/react";
+
+import PopupBase, { PopupContent } from "./Popup";
+import Legend from './Legend'
+
 import { BrazilStatesGeojson, Feature } from "../types/geojson";
 import buildCaseFilters from "../utils/buildCaseFilters";
 import isValid from "../utils/isValid";
-import PopupBase, { PopupContent } from "./Popup";
 
 export default function BrazilMap({
   data,
@@ -13,6 +18,7 @@ export default function BrazilMap({
   data: BrazilStatesGeojson;
   error: string;
 }) {
+
   if (!process.env.NEXT_PUBLIC_MAPBOX_KEY) {
     throw new Error("Add a mapbox key in the envs");
   }
@@ -23,6 +29,9 @@ export default function BrazilMap({
   const [map, setMap] = useState<Map | null>(null);
   const [content, setContent] = useState(null);
   const [popupLngLat, setPopupLngLat] = useState(null);
+  const [lng] = useState(-53.4176);
+  const [lat] = useState(-14.6196);
+  const [zoom] = useState(3.43);
 
   function setDefaultLayers(map: Map) {
     map.addLayer({
@@ -59,14 +68,16 @@ export default function BrazilMap({
       data: data as any,
     });
 
-    setDefaultLayers(map)
+    setDefaultLayers(map);
   }
 
-  function mapState(map: Map) {
+  function includeHoverEffects(map: Map) {
     let hoveredStateId: string | number = "";
 
     map.on("mousemove", "state-fills", (e: any) => {
       if (e.features.length > 0) {
+        map.getCanvas().style.cursor = "pointer";
+
         if (isValid(hoveredStateId)) {
           map.setFeatureState(
             { source: "states", id: hoveredStateId },
@@ -84,6 +95,8 @@ export default function BrazilMap({
     // When the mouse leaves the state-fill layer, update the feature state of the
     // previously hovered feature.
     map.on("mouseleave", "state-fills", () => {
+      map.getCanvas().style.cursor = "default";
+
       if (isValid(hoveredStateId)) {
         map.setFeatureState(
           { source: "states", id: hoveredStateId },
@@ -94,25 +107,8 @@ export default function BrazilMap({
     });
   }
 
-  useEffect(() => {
-    if (map) return;
-
-    const newMap = new mapboxgl.Map({
-      container: mapContainer.current || "",
-      style: "mapbox://styles/mapbox/light-v10",
-      center: [-47.9373578, -15.7213698],
-      zoom: 4,
-    });
-
-    setMap(newMap);
-
-    newMap.on("load", (e) => {
-      loadSources(e.target);
-    });
-
-    mapState(newMap);
-
-    newMap.on("click", "state-fills", (e: any) => {
+  function includePopups(map: Map) {
+    map.on("click", "state-fills", (e: any) => {
       const labels = e.features.map((feature: Feature) => (
         <PopupContent
           key={feature.properties.id}
@@ -123,6 +119,28 @@ export default function BrazilMap({
       setContent(labels);
       setPopupLngLat(e.lngLat);
     });
+  }
+
+  useEffect(() => {
+    if (map) return;
+
+    const newMap = new mapboxgl.Map({
+      container: mapContainer.current || "",
+      style: "mapbox://styles/mapbox/light-v10",
+      center: [lng, lat],
+      zoom,
+      interactive: false,
+    });
+
+    setMap(newMap);
+
+    newMap.on("load", (e) => {
+      loadSources(e.target);
+    });
+
+    includeHoverEffects(newMap);
+
+    includePopups(newMap);
 
     return () => newMap?.remove();
   }, []);
@@ -134,12 +152,10 @@ export default function BrazilMap({
           {content}
         </PopupBase>
       ) : null}
-      <Box
-        ref={mapContainer}
-        className="map-container"
-        height={"1000px"}
-        width={"1000px"}
-      />
+      <Box boxSize={"700px"} position="relative">
+        <Box ref={mapContainer} className="map-container" boxSize={"100%"} />
+        <Legend />
+      </Box>
     </Box>
   );
 }

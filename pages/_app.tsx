@@ -1,11 +1,11 @@
 import '../styles/globals.css'
 import 'mapbox-gl/dist/mapbox-gl.css';
-
-import type { AppProps } from 'next/app'
+import { Montserrat } from '@next/font/google'
 import { ChakraProvider, extendTheme, VStack } from '@chakra-ui/react'
 import { SWRConfig } from "swr";
 import { appWithTranslation } from 'next-i18next';
 export { reportWebVitals } from 'next-axiom';
+import type { AppProps } from 'next/app'
 
 import customTheme from '../shared/theme'
 import { Header, Footer, Analytics } from '../shared/components'
@@ -13,8 +13,10 @@ import fetcher from '../shared/utils/fetcher'
 import { IS_IN_MAINTENANCE } from '@/shared/utils/constants';
 
 const theme = extendTheme(customTheme)
+const montserrat = Montserrat({ subsets: ['latin'] })
 
 function App({ Component, pageProps }: AppProps) {
+
   return (
     <>
       <ChakraProvider theme={theme}>
@@ -27,6 +29,9 @@ function App({ Component, pageProps }: AppProps) {
             alignItems="center"
             as="main"
             py={IS_IN_MAINTENANCE ? 0 : [8, 16]}
+            px={IS_IN_MAINTENANCE ? 0 : [12, 24]}
+            className={montserrat.className}
+            backgroundColor={"white"}
           >
             <Component {...pageProps} />
           </VStack>
