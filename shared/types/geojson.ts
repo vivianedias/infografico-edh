@@ -14,5 +14,6 @@ export type Feature = {
     regiao_id: string;
     sigla: string;
     updated_at: string;
+    estado_basico__grau_institucionalizacao?: string;
   }
 }
