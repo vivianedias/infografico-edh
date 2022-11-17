@@ -29,7 +29,9 @@ function App({ Component, pageProps }: AppProps) {
             alignItems="center"
             as="main"
             py={IS_IN_MAINTENANCE ? 0 : [8, 16]}
+            px={IS_IN_MAINTENANCE ? 0 : [12, 24]}
             className={montserrat.className}
+            backgroundColor={"white"}
           >
             <Component {...pageProps} />
           </VStack>

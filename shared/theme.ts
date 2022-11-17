@@ -14,6 +14,13 @@ const theme = {
     body: font,
   },
   config,
+  colors: {
+    brand: {
+      primary: "rgba(98, 66, 110, 1)",
+      pink: "rgba(171, 57, 124, 1)",
+      light: "rgba(244, 240, 239, 1)"
+    }
+  }
 };
 
 export default theme;
