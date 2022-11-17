@@ -9,7 +9,7 @@ export default function buildCaseFilters() {
     GOOD_ACCESS: "ALTO",
   };
 
-  Object.values(INFO_ACCESS).map((access, i) => {
+  Object.values(INFO_ACCESS).forEach((access, i) => {
     const filter = [
       "==",
       ["get", "estado_basico__grau_institucionalizacao"],
