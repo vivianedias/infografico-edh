@@ -137,8 +137,8 @@ export default function BrazilMap({
       <Box
         ref={mapContainer}
         className="map-container"
-        height={"1000px"}
-        width={"1000px"}
+        height={{base: "400px", md:"1000px"}}
+        width={{base: "400px", md:"1000px"}}
       />
     </Box>
   );
