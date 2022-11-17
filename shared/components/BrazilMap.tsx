@@ -29,9 +29,9 @@ export default function BrazilMap({
   const [map, setMap] = useState<Map | null>(null);
   const [content, setContent] = useState(null);
   const [popupLngLat, setPopupLngLat] = useState(null);
-  const [lng, setLng] = useState(-53.4176);
-  const [lat, setLat] = useState(-14.6196);
-  const [zoom, setZoom] = useState(3.43);
+  const [lng] = useState(-53.4176);
+  const [lat] = useState(-14.6196);
+  const [zoom] = useState(3.43);
 
   function setDefaultLayers(map: Map) {
     map.addLayer({
