@@ -149,7 +149,6 @@ const Logo = ({ t }: { t: translation }) => {
 const DonateButton = ({ t }: { t: translation }) => {
   return (
     <Link
-      key={"button"}
       href={
         "https://app.doare.org/br/doacao/229743/instituto-aurora/por-um-mundo-onde-nenhuma-vida-vale-menos-do-que-outra"
       }
