@@ -81,7 +81,7 @@ const DesktopNav = ({ t }: { t: translation }) => {
               {navItem.children && (
                 <PopoverContent
                   borderTopWidth={"3px"}
-                  borderColor={"header.subMenuBorder"}
+                  borderTopColor={"header.subMenuBorder"}
                   bg={"header.subMenuBackground"}
                   p={6}
                   rounded={0}
