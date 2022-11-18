@@ -1,20 +1,18 @@
 import { useTranslation } from "next-i18next";
 
-import {
-  Flex,
-  HStack,
-} from "@chakra-ui/react";
+import { Flex, HStack, useDisclosure, VStack } from "@chakra-ui/react";
 
 import { IS_IN_MAINTENANCE } from "../utils/constants";
 import DonateButton from "./Header/DonateButton";
 import Logo from "./Header/Logo";
 import DesktopNav from "./Header/DesktopNav";
-
+import MobileIcon from "./Header/MobileIcon";
 
 type translation = (param: string) => string;
 
 export default function Header() {
   const { t } = useTranslation("header");
+  const { isOpen, onToggle } = useDisclosure();
 
   if (IS_IN_MAINTENANCE) {
     return null;
@@ -31,12 +29,14 @@ export default function Header() {
       <HStack w={"1080px"} align={"center"} spacing={20}>
         <Logo t={t} />
         <DesktopNav t={t} NAV_ITEMS={NAV_ITEMS} />
-        <DonateButton t={t} />
+        <VStack align={"end"}>
+          <MobileIcon t={t} onToggle={onToggle} />
+          <DonateButton t={t} />
+        </VStack>
       </HStack>
     </Flex>
   );
 }
-
 
 const NAV_ITEMS = (
   t: translation
