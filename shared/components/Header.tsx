@@ -1,12 +1,13 @@
 import { useTranslation } from "next-i18next";
 
-import { Box, Flex, HStack, useDisclosure, VStack } from "@chakra-ui/react";
+import { Box, Collapse, Flex, HStack, useDisclosure, VStack } from "@chakra-ui/react";
 
 import { IS_IN_MAINTENANCE } from "../utils/constants";
 import DonateButton from "./Header/DonateButton";
 import Logo from "./Header/Logo";
 import DesktopNav from "./Header/DesktopNav";
 import MobileIcon from "./Header/MobileIcon";
+import MobileNav from "./Header/MobileNav";
 
 type translation = (param: string) => string;
 
@@ -29,9 +30,10 @@ export default function Header() {
         justify={"center"}
       >
         <HStack
-          w={{ base: "550px", md: "1080px" }}
+          maxW={{ base: "550px", md: "1080px" }}
+          w={"90%"}
           align={{ base: "flex-start", md: "center" }}
-          // justify={{ base: "space-between", md: "center" }}
+          justify={{ base: "space-between", md: "start"}}
           spacing={20}
           paddingRight={{ base: "15px", md: "0" }}
         >
@@ -43,6 +45,9 @@ export default function Header() {
           </VStack>
         </HStack>
       </Flex>
+      <Collapse in={isOpen} animateOpacity>
+        <MobileNav t={t} NAV_ITEMS={NAV_ITEMS} />
+      </Collapse>
     </Box>
   );
 }

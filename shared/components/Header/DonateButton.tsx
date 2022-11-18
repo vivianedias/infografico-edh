@@ -12,7 +12,7 @@ const DonateButton = ({ t }: { t: TranslationType }) => {
       isExternal
       _hover={{textDecoration: "solid"}}
     >
-      <ButtonGroup size="sm" isAttached variant="outline">
+      <ButtonGroup size="sm" isAttached variant="outline" >
         <Button
           maxW={"75px"}
           fontSize={"sm"}
