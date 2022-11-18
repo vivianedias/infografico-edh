@@ -22,6 +22,7 @@ import { css } from "@emotion/react";
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 
 import { IS_IN_MAINTENANCE } from "../utils/constants";
+import ChakraNextImage from "./ChakraNextImage";
 import logo from "/public/imgs/logo-instituto-aurora.png";
 
 type translation = (param: string) => string;
@@ -135,14 +136,6 @@ const DesktopSubNav = ({ label, href, subLabel }: any) => {
 };
 
 const Logo = ({ t }: { t: translation }) => {
-  const ChakraNextImage = (props: any) => {
-    const { src, alt, ...rest } = props;
-    return (
-      <Box position="relative" {...rest}>
-        <NextImage objectFit="cover" src={src} alt={alt} />
-      </Box>
-    );
-  };
   return <ChakraNextImage w={168} src={logo} alt={t("title")} />;
 };
 
