@@ -21,14 +21,18 @@ const theme: Record<string, any> = {
       light: "rgba(244, 240, 239, 1)"
     },
     header: {
-      menuBackground: "#000000",
-      menuLink: "#FFFFFF",
-      menuLinkHover: "#878787",
-      subMenuBackground: "#FFFFFF",
-      subMenuLink: "#4B4B4B",
-      subMenuLinkHover: "#878787",
-      subMenuLinkHoverBackground: "#FAFAFA",
-      subMenuBorder: "#FBBC44",
+      menu: {
+        background: "#000000",
+        link: "#FFFFFF",
+        hover: "#878787",
+      },
+      subMenu: {
+        background: "#FFFFFF",
+        link: "#4B4B4B",
+        hover: "#878787",
+        hoverBackground: "#FAFAFA",
+        border: "#FBBC44",
+      },
       button: "#FBBC44"
     }
   }

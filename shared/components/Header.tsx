@@ -36,7 +36,7 @@ export default function Header() {
 
   return (
     <Flex
-      bg={"header.menuBackground"}
+      bg={"header.menu.background"}
       minH={"124px"}
       w={"100%"}
       align={"center"}
@@ -64,10 +64,10 @@ const DesktopNav = ({ t }: { t: translation }) => {
                   isExternal={navItem.href != "#"}
                   fontSize={"sm"}
                   fontWeight={700}
-                  color={"header.menuLink"}
+                  color={"header.menu.link"}
                   _hover={{
                     textDecoration: "solid",
-                    color: "header.menuLinkHover",
+                    color: "header.menu.hover",
                   }}
                   textTransform={"uppercase"}
                 >
@@ -82,8 +82,8 @@ const DesktopNav = ({ t }: { t: translation }) => {
               {navItem.children && (
                 <PopoverContent
                   borderTopWidth={"3px"}
-                  borderTopColor={"header.subMenuBorder"}
-                  bg={"header.subMenuBackground"}
+                  borderTopColor={"header.subMenu.border"}
+                  bg={"header.subMenu.background"}
                   p={6}
                   rounded={0}
                   maxW={"240px"}
@@ -112,19 +112,19 @@ const DesktopSubNav = ({ label, href, subLabel }: any) => {
       p={2}
       _hover={{ 
         textDecoration: "solid",
-        bg: "header.subMenuLinkHoverBackground" 
+        bg: "header.subMenu.hoverBackground" 
       }}
     >
       <Stack direction={"row"} align={"center"}>
         <Box>
           <Text
             fontSize={"sm"}
-            color={"header.subMenuLink"}
+            color={"header.subMenu.link"}
             fontWeight={700}
             textTransform={"uppercase"}
             transition={"all .3s ease"}
             _groupHover={{
-              color: "header.subMenuLinkHover"
+              color: "header.subMenu.hover"
             }}
           >
             {label}
