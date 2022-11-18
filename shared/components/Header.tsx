@@ -1,6 +1,6 @@
 import { useTranslation } from "next-i18next";
 
-import { Flex, HStack, useDisclosure, VStack } from "@chakra-ui/react";
+import { Box, Flex, HStack, useDisclosure, VStack } from "@chakra-ui/react";
 
 import { IS_IN_MAINTENANCE } from "../utils/constants";
 import DonateButton from "./Header/DonateButton";
@@ -19,22 +19,31 @@ export default function Header() {
   }
 
   return (
-    <Flex
-      bg={"header.menu.background"}
-      minH={"124px"}
-      w={"100%"}
-      align={"center"}
-      justify={"center"}
-    >
-      <HStack w={"1080px"} align={"center"} spacing={20}>
-        <Logo t={t} />
-        <DesktopNav t={t} NAV_ITEMS={NAV_ITEMS} />
-        <VStack align={"end"}>
-          <MobileIcon t={t} onToggle={onToggle} />
-          <DonateButton t={t} />
-        </VStack>
-      </HStack>
-    </Flex>
+    <Box position={"fixed"} width={"100%"} zIndex={1000}>
+      <Flex
+        bg={"header.menu.background"}
+        minH={{ base: "190px", md: "124px" }}
+        w={"100%"}
+        borderStyle={"solid"}
+        align={"center"}
+        justify={"center"}
+      >
+        <HStack
+          w={{ base: "550px", md: "1080px" }}
+          align={{ base: "flex-start", md: "center" }}
+          // justify={{ base: "space-between", md: "center" }}
+          spacing={20}
+          paddingRight={{ base: "15px", md: "0" }}
+        >
+          <Logo t={t} />
+          <DesktopNav t={t} NAV_ITEMS={NAV_ITEMS} />
+          <VStack align={"end"}>
+            <MobileIcon t={t} onToggle={onToggle} />
+            <DonateButton t={t} />
+          </VStack>
+        </HStack>
+      </Flex>
+    </Box>
   );
 }
 
