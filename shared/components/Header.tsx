@@ -1,25 +1,9 @@
-import NextImage from "next/image";
 import { useTranslation } from "next-i18next";
 
 import {
-  Box,
-  Button,
-  ButtonGroup,
   Flex,
-  Icon,
-  IconButton,
-  Link,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  Spacer,
-  Slide,
-  Stack,
-  Text,
   HStack,
 } from "@chakra-ui/react";
-import { css } from "@emotion/react";
-import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 
 import { IS_IN_MAINTENANCE } from "../utils/constants";
 import DonateButton from "./Header/DonateButton";
