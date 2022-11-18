@@ -72,10 +72,11 @@ const DesktopNav = ({ t }: { t: translation }) => {
                   textTransform={"uppercase"}
                 >
                   {navItem.label}
-                  <Icon 
-                    as={ChevronDownIcon} 
-                    w={5} 
-                    display={navItem.href == "#" ? "inline" : "none"}/>
+                  <Icon
+                    as={ChevronDownIcon}
+                    w={5}
+                    display={navItem.href == "#" ? "inline" : "none"}
+                  />
                 </Link>
               </PopoverTrigger>
 
@@ -110,9 +111,9 @@ const DesktopSubNav = ({ label, href, subLabel }: any) => {
       role={"group"}
       display={"block"}
       p={2}
-      _hover={{ 
+      _hover={{
         textDecoration: "solid",
-        bg: "header.subMenu.hoverBackground" 
+        bg: "header.subMenu.hoverBackground",
       }}
     >
       <Stack direction={"row"} align={"center"}>
@@ -124,7 +125,7 @@ const DesktopSubNav = ({ label, href, subLabel }: any) => {
             textTransform={"uppercase"}
             transition={"all .3s ease"}
             _groupHover={{
-              color: "header.subMenu.hover"
+              color: "header.subMenu.hover",
             }}
           >
             {label}
