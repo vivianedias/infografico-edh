@@ -159,6 +159,7 @@ const DonateButton = ({ t }: { t: translation }) => {
           color={"white"}
           bg={"header.button"}
           borderRadius={0}
+          borderWidth={0}
           textTransform={"uppercase"}
           rightIcon={
             <Icon
