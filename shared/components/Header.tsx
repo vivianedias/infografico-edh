@@ -22,8 +22,10 @@ import { css } from "@emotion/react";
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 
 import { IS_IN_MAINTENANCE } from "../utils/constants";
-import ChakraNextImage from "./ChakraNextImage";
-import logo from "/public/imgs/logo-instituto-aurora.png";
+import DonateButton from "./Header/DonateButton";
+import Logo from "./Header/Logo";
+import DesktopNav from "./Header/DesktopNav";
+
 
 type translation = (param: string) => string;
 
@@ -44,140 +46,13 @@ export default function Header() {
     >
       <HStack w={"1080px"} align={"center"} spacing={20}>
         <Logo t={t} />
-        <DesktopNav t={t} />
+        <DesktopNav t={t} NAV_ITEMS={NAV_ITEMS} />
         <DonateButton t={t} />
       </HStack>
     </Flex>
   );
 }
 
-const DesktopNav = ({ t }: { t: translation }) => {
-  return (
-    <Stack direction={"row"} spacing={5}>
-      {NAV_ITEMS(t).map((navItem, i) => {
-        return (
-          <Box key={`${navItem.label}-${i}`}>
-            <Popover trigger={"hover"} placement={"bottom-start"}>
-              <PopoverTrigger>
-                <Link
-                  href={navItem.href}
-                  isExternal={navItem.href != "#"}
-                  fontSize={"sm"}
-                  fontWeight={700}
-                  color={"header.menu.link"}
-                  _hover={{
-                    textDecoration: "solid",
-                    color: "header.menu.hover",
-                  }}
-                  textTransform={"uppercase"}
-                >
-                  {navItem.label}
-                  <Icon
-                    as={ChevronDownIcon}
-                    w={5}
-                    display={navItem.href == "#" ? "inline" : "none"}
-                  />
-                </Link>
-              </PopoverTrigger>
-
-              {navItem.children && (
-                <PopoverContent
-                  borderTopWidth={"3px"}
-                  borderTopColor={"header.subMenu.border"}
-                  bg={"header.subMenu.background"}
-                  p={6}
-                  rounded={0}
-                  maxW={"240px"}
-                >
-                  <Stack>
-                    {navItem.children.map((child) => (
-                      <DesktopSubNav key={child.label} {...child} />
-                    ))}
-                  </Stack>
-                </PopoverContent>
-              )}
-            </Popover>
-          </Box>
-        );
-      })}
-    </Stack>
-  );
-};
-
-const DesktopSubNav = ({ label, href, subLabel }: any) => {
-  return (
-    <Link
-      href={href}
-      role={"group"}
-      display={"block"}
-      p={2}
-      _hover={{
-        textDecoration: "solid",
-        bg: "header.subMenu.hoverBackground",
-      }}
-    >
-      <Stack direction={"row"} align={"center"}>
-        <Box>
-          <Text
-            fontSize={"sm"}
-            color={"header.subMenu.link"}
-            fontWeight={700}
-            textTransform={"uppercase"}
-            transition={"all .3s ease"}
-            _groupHover={{
-              color: "header.subMenu.hover",
-            }}
-          >
-            {label}
-          </Text>
-        </Box>
-      </Stack>
-    </Link>
-  );
-};
-
-const Logo = ({ t }: { t: translation }) => {
-  return <ChakraNextImage w={168} src={logo} alt={t("title")} />;
-};
-
-const DonateButton = ({ t }: { t: translation }) => {
-  return (
-    <Link
-      href={
-        "https://app.doare.org/br/doacao/229743/instituto-aurora/por-um-mundo-onde-nenhuma-vida-vale-menos-do-que-outra"
-      }
-      isExternal
-      _hover={{
-        textDecoration: "solid",
-      }}
-    >
-      <ButtonGroup size="sm" isAttached variant="outline">
-        <Button
-          display={{ base: "none", md: "inline-flex" }}
-          maxW={"75px"}
-          fontSize={"sm"}
-          fontWeight={700}
-          color={"white"}
-          bg={"header.button"}
-          borderRadius={0}
-          borderWidth={0}
-          textTransform={"uppercase"}
-          rightIcon={
-            <Icon
-              className="icon"
-              as={ChevronRightIcon}
-              display={"none"}
-              _groupHover={{ display: "inline" }}
-            />
-          }
-          _groupHover={{ bg: "header.button" }}
-        >
-          {t("donateButton")}
-        </Button>
-      </ButtonGroup>
-    </Link>
-  );
-};
 
 const NAV_ITEMS = (
   t: translation
