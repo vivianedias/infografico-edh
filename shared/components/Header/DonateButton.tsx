@@ -20,6 +20,7 @@ const DonateButton = ({ t }: { t: TranslationType }) => {
           color={"white"}
           bg={"header.button"}
           borderRadius={0}
+          borderWidth={0}
           textTransform={"uppercase"}
           rightIcon={<RightArrowIcon />}
           _groupHover={{ bg: "header.button" }}
