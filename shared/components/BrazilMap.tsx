@@ -113,6 +113,7 @@ export default function BrazilMap({
         <PopupContent
           key={feature.properties.id}
           label={feature.properties.name}
+          colorCoding={feature.properties.estado_basico__grau_institucionalizacao}
         />
       ));
 

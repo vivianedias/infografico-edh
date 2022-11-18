@@ -8,7 +8,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
-import { INFO_ACCESS, INFO_COLORS } from "../utils/buildCaseFilters";
+import { INFO_ACCESS, INFO_COLORS_PRIMARY } from "../utils/buildCaseFilters";
 
 export default function Legend() {
   const { t } = useTranslation("home");
@@ -44,7 +44,7 @@ export default function Legend() {
                   <Box
                     minWidth={"20px"}
                     height={"12px"}
-                    backgroundColor={INFO_COLORS[i]}
+                    backgroundColor={INFO_COLORS_PRIMARY[i]}
                   />
                   <Text
                     fontSize={"xs"}

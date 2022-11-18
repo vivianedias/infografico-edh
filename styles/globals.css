@@ -7,3 +7,15 @@ body {
 * {
   box-sizing: border-box;
 }
+
+.popup-base .mapboxgl-popup-content {
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  overflow: hidden;
+  background: none;
+}
+
+.popup-base.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  border-top-color: #E3D7E8;
+}
