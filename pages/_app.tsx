@@ -1,6 +1,5 @@
 import '../styles/globals.css'
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { Montserrat } from '@next/font/google'
 import { ChakraProvider, extendTheme, VStack } from '@chakra-ui/react'
 import { SWRConfig } from "swr";
 import { appWithTranslation } from 'next-i18next';
@@ -17,7 +16,6 @@ import "@fontsource/montserrat/700.css"
 import "@fontsource/montserrat/300.css"
 
 const theme = extendTheme(customTheme)
-const montserrat = Montserrat({ subsets: ['latin'] })
 
 function App({ Component, pageProps }: AppProps) {
 
@@ -34,7 +32,6 @@ function App({ Component, pageProps }: AppProps) {
             as="main"
             py={IS_IN_MAINTENANCE ? 0 : [8, 16]}
             px={IS_IN_MAINTENANCE ? 0 : [12, 24]}
-            className={montserrat.className}
             backgroundColor={"white"}
           >
             <Component {...pageProps} />

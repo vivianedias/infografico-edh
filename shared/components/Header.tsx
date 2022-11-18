@@ -20,7 +20,7 @@ export default function Header() {
   }
 
   return (
-    <Box position={"fixed"} width={"100%"} zIndex={1000}>
+    <Box width={"100%"} as="header">
       <Flex
         bg={"header.menu.background"}
         minH={{ base: "190px", md: "124px" }}
