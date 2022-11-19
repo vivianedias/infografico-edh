@@ -1,6 +1,20 @@
-import { Box, Divider, Flex, HStack, Link, Text, Stack, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Flex,
+  HStack,
+  Link,
+  Text,
+  Stack,
+  VStack,
+  Icon,
+  Square,
+} from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { IS_IN_MAINTENANCE } from "../utils/constants";
+import FacebookIcon from "./Icons/FacebookIcon";
+import InstagramIcon from "./Icons/InstagramIcon";
+import YoutubeIcon from "./Icons/YoutubeIcon";
 
 import Logo from "./Logo";
 
@@ -29,11 +43,18 @@ export default function Footer() {
             <Logo t={t} w={{ base: "300px", md: "225px" }} />
             <FooterColumn FOOTER_ITEMS={FIRST_SESSION_ITEMS(t)} />
             <FooterColumn FOOTER_ITEMS={SECOND_SESSION_ITEMS(t)} />
-            <FooterColumn FOOTER_ITEMS={THIRD_SESSION_ITEMS(t)} />   
-            
-          </HStack>        
+            <FooterColumn FOOTER_ITEMS={THIRD_SESSION_ITEMS(t)} />
+          </HStack>
           <Divider borderColor={"header.menu.hover"} />
-          <FooterText t={t} />          
+          <HStack w={"100%"} justify={"space-between"}>
+            <FooterText t={t} />
+            <HStack>
+              <SocialMediaIcon bgColor={"blue.600"} SVGIcon={FacebookIcon} />
+              <SocialMediaIcon bgColor={"pink.500"} SVGIcon={InstagramIcon} />
+              <SocialMediaIcon bgColor={"red.600"} SVGIcon={YoutubeIcon} />
+
+            </HStack>
+          </HStack>
         </VStack>
       </Flex>
     </Box>
@@ -63,9 +84,9 @@ const FooterColumn = ({ FOOTER_ITEMS }: { FOOTER_ITEMS: FooterItensType }) => {
   );
 };
 
-const FooterText = ({ t }: {t: TranslationType}) => {
+const FooterText = ({ t }: { t: TranslationType }) => {
   return (
-    <VStack align={"start"} spacing={0.5} >
+    <VStack align={"start"} spacing={0.5}>
       <Text color={"header.menu.link"} fontWeight={500}>
         {t("association")}
       </Text>
@@ -73,6 +94,14 @@ const FooterText = ({ t }: {t: TranslationType}) => {
         {t("cnpj")}
       </Text>
     </VStack>
+  );
+};
+
+const SocialMediaIcon = ({ bgColor, SVGIcon }: {bgColor: string, SVGIcon: () => JSX.Element}) => {
+  return (
+    <Square bgColor={bgColor} size={"32px"}>
+      <Icon as={SVGIcon} color={"white"}/>
+    </Square>
   );
 };
 
