@@ -100,7 +100,7 @@ const FooterText = ({ t }: { t: TranslationType }) => {
 const SocialMediaIcon = ({ bgColor, SVGIcon }: {bgColor: string, SVGIcon: () => JSX.Element}) => {
   return (
     <Square bgColor={bgColor} size={"32px"}>
-      <Icon as={SVGIcon} color={"white"}/>
+      <Icon as={SVGIcon} />
     </Square>
   );
 };

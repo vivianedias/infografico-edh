@@ -8,6 +8,7 @@ export default function YoutubeIcon() {
         verticalAlign: "middle",
         fill: "currentColor",
         overflow: "hidden",
+        color: "white"
       }}
       viewBox="0 0 1024 1024"
       version="1.1"

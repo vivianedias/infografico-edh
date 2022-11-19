@@ -7,7 +7,8 @@ export default function InstagramIcon() {
         height: "1.5em",
         verticalAlign: "middle",
         fill: "currentColor",
-        overflow: "hidden"
+        overflow: "hidden",
+        color: "white"
       }}
       viewBox="0 0 1024 1024"
       version="1.1"
