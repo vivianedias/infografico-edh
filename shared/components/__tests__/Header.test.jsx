@@ -4,5 +4,5 @@ import Header from "../Header";
 test("Header", async () => {
   render(<Header />);
 
-  expect(screen.getByRole("heading", { name: /title/i })).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: /whatWeDo/i })).toBeInTheDocument();
 });
