@@ -23,11 +23,8 @@ export default function Footer() {
         <VStack spacing={7} align={"flex-start"}>
           <HStack
             w={{ base: "550px", md: "1080px" }}
-            // w={"100%"}
             align={{ base: "flex-start", md: "flex-start" }}
             justify={"space-between"}
-            // spacing={20}
-            // paddingRight={{ base: "15px", md: "0" }}
           >
             <Logo t={t} w={{ base: "300px", md: "225px" }} />
             <FooterColumn FOOTER_ITEMS={FIRST_SESSION_ITEMS(t)} />
@@ -49,6 +46,7 @@ const FooterColumn = ({ FOOTER_ITEMS }: { FOOTER_ITEMS: FooterItensType }) => {
       {FOOTER_ITEMS.map((navItem, i) => (
         <Link
           key={`${navItem.label}-${i}`}
+          color={"header.menu.link"}
           href={"#"}
           isExternal
           fontSize={"16px"}
@@ -68,10 +66,10 @@ const FooterColumn = ({ FOOTER_ITEMS }: { FOOTER_ITEMS: FooterItensType }) => {
 const FooterText = ({ t }: {t: TranslationType}) => {
   return (
     <VStack align={"start"} spacing={0.5} >
-      <Text fontWeight={500}>
+      <Text color={"header.menu.link"} fontWeight={500}>
         {t("association")}
       </Text>
-      <Text fontWeight={700}>
+      <Text color={"header.menu.link"} fontWeight={700}>
         {t("cnpj")}
       </Text>
     </VStack>
