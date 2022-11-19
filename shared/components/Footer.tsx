@@ -20,21 +20,23 @@ export default function Footer() {
         align={"center"}
         justify={"center"}
       >
-        <VStack spacing={10}>
-        <HStack
-          maxW={{ base: "550px", md: "1080px" }}
-          align={{ base: "flex-start", md: "flex-start" }}
-          justify={{ base: "space-between", md: "sparce-between" }}
-          spacing={20}
-          paddingRight={{ base: "15px", md: "0" }}
-        >
-          <Logo t={t} w={{ base: "300px", md: "225px" }} />
-          <FooterColumn FOOTER_ITEMS={FIRST_SESSION_ITEMS(t)} />
-          <FooterColumn FOOTER_ITEMS={SECOND_SESSION_ITEMS(t)} />
-          <FooterColumn FOOTER_ITEMS={THIRD_SESSION_ITEMS(t)} />
-          
-        </HStack>
-        <Divider borderColor={"header.menu.hover"} />
+        <VStack spacing={7} align={"flex-start"}>
+          <HStack
+            w={{ base: "550px", md: "1080px" }}
+            // w={"100%"}
+            align={{ base: "flex-start", md: "flex-start" }}
+            justify={"space-between"}
+            // spacing={20}
+            // paddingRight={{ base: "15px", md: "0" }}
+          >
+            <Logo t={t} w={{ base: "300px", md: "225px" }} />
+            <FooterColumn FOOTER_ITEMS={FIRST_SESSION_ITEMS(t)} />
+            <FooterColumn FOOTER_ITEMS={SECOND_SESSION_ITEMS(t)} />
+            <FooterColumn FOOTER_ITEMS={THIRD_SESSION_ITEMS(t)} />   
+            
+          </HStack>        
+          <Divider borderColor={"header.menu.hover"} />
+          <FooterText t={t} />          
         </VStack>
       </Flex>
     </Box>
@@ -60,6 +62,19 @@ const FooterColumn = ({ FOOTER_ITEMS }: { FOOTER_ITEMS: FooterItensType }) => {
         </Link>
       ))}
     </Stack>
+  );
+};
+
+const FooterText = ({ t }: {t: TranslationType}) => {
+  return (
+    <VStack align={"start"} spacing={0.5} >
+      <Text fontWeight={500}>
+        {t("association")}
+      </Text>
+      <Text fontWeight={700}>
+        {t("cnpj")}
+      </Text>
+    </VStack>
   );
 };
 
