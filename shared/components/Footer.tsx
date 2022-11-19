@@ -2,7 +2,7 @@ import { Box, Flex, HStack } from "@chakra-ui/react";
 import { useTranslation } from 'next-i18next';
 import { IS_IN_MAINTENANCE } from '../utils/constants';
 
-import Logo from "./Header/Logo"
+import Logo from "./Logo"
 
 export default function Footer() {
   const { t } = useTranslation('footer');
@@ -28,7 +28,7 @@ export default function Footer() {
           spacing={20}
           paddingRight={{ base: "15px", md: "0" }}
         >
-          <Logo t={t} />
+          <Logo t={t} w={{ base: "300px", md: 225 }} />
         </HStack>
       </Flex>
     </Box>
