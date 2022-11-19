@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Link, Text, Stack } from "@chakra-ui/react";
+import { Box, Divider, Flex, HStack, Link, Text, Stack, VStack } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { IS_IN_MAINTENANCE } from "../utils/constants";
 
@@ -20,19 +20,22 @@ export default function Footer() {
         align={"center"}
         justify={"center"}
       >
+        <VStack spacing={10}>
         <HStack
           maxW={{ base: "550px", md: "1080px" }}
-          w={"90%"}
           align={{ base: "flex-start", md: "flex-start" }}
           justify={{ base: "space-between", md: "sparce-between" }}
           spacing={20}
           paddingRight={{ base: "15px", md: "0" }}
         >
-          <Logo t={t} w={{ base: "300px", md: 225 }} />
+          <Logo t={t} w={{ base: "300px", md: "225px" }} />
           <FooterColumn FOOTER_ITEMS={FIRST_SESSION_ITEMS(t)} />
           <FooterColumn FOOTER_ITEMS={SECOND_SESSION_ITEMS(t)} />
           <FooterColumn FOOTER_ITEMS={THIRD_SESSION_ITEMS(t)} />
+          
         </HStack>
+        <Divider borderColor={"header.menu.hover"} />
+        </VStack>
       </Flex>
     </Box>
   );
