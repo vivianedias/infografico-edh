@@ -49,10 +49,23 @@ export default function Footer() {
           <HStack w={"100%"} justify={"space-between"}>
             <FooterText t={t} />
             <HStack>
-              <SocialMediaIcon bgColor={"blue.600"} SVGIcon={FacebookIcon} />
-              <SocialMediaIcon bgColor={"pink.500"} SVGIcon={InstagramIcon} />
-              <SocialMediaIcon bgColor={"red.600"} SVGIcon={YoutubeIcon} />
-
+              <SocialMediaIcon
+                bgColor={"blue.600"}
+                href={"https://facebook.com/aurora.direitoshumanos/"}
+                SVGIcon={FacebookIcon}
+              />
+              <SocialMediaIcon
+                bgColor={"pink.500"}
+                href={"https://www.instagram.com/institutoaurora/"}
+                SVGIcon={InstagramIcon}
+              />
+              <SocialMediaIcon
+                bgColor={"red.600"}
+                href={
+                  "https://www.youtube.com/channel/UCJMevU2-5jU9p7wVc0gb1TQ"
+                }
+                SVGIcon={YoutubeIcon}
+              />
             </HStack>
           </HStack>
         </VStack>
@@ -97,11 +110,21 @@ const FooterText = ({ t }: { t: TranslationType }) => {
   );
 };
 
-const SocialMediaIcon = ({ bgColor, SVGIcon }: {bgColor: string, SVGIcon: () => JSX.Element}) => {
+const SocialMediaIcon = ({
+  bgColor,
+  href,
+  SVGIcon,
+}: {
+  bgColor: string;
+  href: string;
+  SVGIcon: () => JSX.Element;
+}) => {
   return (
-    <Square bgColor={bgColor} size={"32px"}>
-      <Icon as={SVGIcon} />
-    </Square>
+    <Link isExternal href={href}>
+      <Square bgColor={bgColor} size={"32px"}>
+        <Icon as={SVGIcon} />
+      </Square>
+    </Link>
   );
 };
 
