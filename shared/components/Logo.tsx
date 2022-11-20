@@ -7,6 +7,7 @@ type LogoType = {
   t: TranslationType;
   w: {
     base: any
+    sm: any
     md: any
   }
 }

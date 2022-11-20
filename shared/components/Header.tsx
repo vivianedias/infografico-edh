@@ -37,7 +37,7 @@ export default function Header() {
           spacing={20}
           paddingRight={{ base: "15px", md: "0" }}
         >
-          <Logo t={t} w={{ base: "300px", md: 168 }}/>
+          <Logo t={t} w={{ base: "300px", sm: "300px", md: 168 }}/>
           <DesktopNav t={t} NAV_ITEMS={NAV_ITEMS} />
           <VStack align={"end"}>
             <MobileIcon t={t} onToggle={onToggle} />

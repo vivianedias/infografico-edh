@@ -26,62 +26,77 @@ export default function Footer() {
   }
 
   return (
-    <Box width={"100%"} as="header">
-      <Flex
-        bg={"black"}
-        minH={{ base: "190px", md: "385px" }}
-        w={"100%"}
-        align={"center"}
-        justify={"center"}
+    <Flex
+      width={"100%"}
+      bg={"black"}
+      paddingTop={"75px"}
+      paddingBottom={"75px"}
+      as={"footer"}
+      align={"center"}
+      justify={"center"}
+    >
+      <VStack
+        spacing={7}
+        align={"flex-start"}
+        maxW={{ base: "100%", lg: "1080px" }}
+        px={{ base: 10, lg: 0 }}
       >
-        <VStack spacing={7} align={"flex-start"}>
-          <HStack
-            w={{ base: "550px", md: "1080px" }}
-            align={{ base: "flex-start", md: "flex-start" }}
+        <HStack
+          w={"100%"}
+          h={"100%"}
+          align={{ base: "space-between", md: "flex-start" }}
+          justify={{ base: "space-between", md: "space-between" }}
+          wrap={"wrap"}
+          flexWrap={"wrap"}
+          spacing={"50px"}
+        >
+          <Flex
+            w={"100%"}
+            flexWrap={"wrap"}
+            gap={8}
+            align={"space-between"}
             justify={"space-between"}
           >
-            <Logo t={t} w={{ base: "300px", md: "225px" }} />
+            <Logo t={t} w={{ base: "80%", sm: "45%", md: "20%" }} />
             <FooterColumn FOOTER_ITEMS={FIRST_SESSION_ITEMS(t)} />
             <FooterColumn FOOTER_ITEMS={SECOND_SESSION_ITEMS(t)} />
             <FooterColumn FOOTER_ITEMS={THIRD_SESSION_ITEMS(t)} />
+          </Flex>
+        </HStack>
+        <Divider borderColor={"header.menu.hover"} />
+        <Flex flexWrap={"wrap"} gap={8} w={"100%"} justify={"space-between"}>
+          <FooterText t={t} />
+          <HStack>
+            <SocialMediaIcon
+              bgColor={"blue.600"}
+              href={"https://facebook.com/aurora.direitoshumanos/"}
+              SVGIcon={FacebookIcon}
+            />
+            <SocialMediaIcon
+              bgColor={"pink.500"}
+              href={"https://www.instagram.com/institutoaurora/"}
+              SVGIcon={InstagramIcon}
+            />
+            <SocialMediaIcon
+              bgColor={"red.600"}
+              href={"https://www.youtube.com/channel/UCJMevU2-5jU9p7wVc0gb1TQ"}
+              SVGIcon={YoutubeIcon}
+            />
           </HStack>
-          <Divider borderColor={"header.menu.hover"} />
-          <HStack w={"100%"} justify={"space-between"}>
-            <FooterText t={t} />
-            <HStack>
-              <SocialMediaIcon
-                bgColor={"blue.600"}
-                href={"https://facebook.com/aurora.direitoshumanos/"}
-                SVGIcon={FacebookIcon}
-              />
-              <SocialMediaIcon
-                bgColor={"pink.500"}
-                href={"https://www.instagram.com/institutoaurora/"}
-                SVGIcon={InstagramIcon}
-              />
-              <SocialMediaIcon
-                bgColor={"red.600"}
-                href={
-                  "https://www.youtube.com/channel/UCJMevU2-5jU9p7wVc0gb1TQ"
-                }
-                SVGIcon={YoutubeIcon}
-              />
-            </HStack>
-          </HStack>
-        </VStack>
-      </Flex>
-    </Box>
+        </Flex>
+      </VStack>
+    </Flex>
   );
 }
 
 const FooterColumn = ({ FOOTER_ITEMS }: { FOOTER_ITEMS: FooterItensType }) => {
   return (
-    <Stack align={"flex-start"} spacing={0.5} w={{ md: "225px" }}>
+    <Stack spacing={0.5} w={{ base: "80%", sm: "45%", md: "20%" }}>
       {FOOTER_ITEMS.map((navItem, i) => (
         <Link
           key={`${navItem.label}-${i}`}
           color={"header.menu.link"}
-          href={"#"}
+          href={navItem.href}
           isExternal
           fontSize={"16px"}
           fontWeight={500}
@@ -89,6 +104,7 @@ const FooterColumn = ({ FOOTER_ITEMS }: { FOOTER_ITEMS: FooterItensType }) => {
             textDecoration: "none",
             color: "header.menu.hover",
           }}
+          textAlign={"start"}
         >
           {navItem.label}
         </Link>
