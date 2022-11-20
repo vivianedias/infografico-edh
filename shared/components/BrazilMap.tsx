@@ -152,10 +152,10 @@ export default function BrazilMap({
           {content}
         </PopupBase>
       ) : null}
-      {/* <Box boxSize={"700px"} position="relative">
+      <Box boxSize={"700px"} position="relative">
         <Box ref={mapContainer} className="map-container" boxSize={"100%"} />
         <Legend />
-      </Box> */}
+      </Box>
     </Box>
   );
 }
