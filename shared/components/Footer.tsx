@@ -45,7 +45,6 @@ export default function Footer() {
           h={"100%"}
           align={{ base: "space-between", md: "flex-start" }}
           justify={{ base: "space-between", md: "space-between" }}
-          wrap={"wrap"}
           flexWrap={"wrap"}
           spacing={12}
         >
