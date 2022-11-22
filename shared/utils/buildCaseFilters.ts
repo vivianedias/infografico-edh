@@ -26,11 +26,10 @@ export function getColorByInfo(info: string) {
   const infoAccessIndex = Object.values(INFO_ACCESS).findIndex(
     (i) => i === info
   );
-  if (infoAccessIndex === -1) return ["#dad6d5", "#F4F0EF", 'brand.primary'];
+  if (infoAccessIndex === -1) return ["#dad6d5", 'brand.primary'];
   const text = infoAccessIndex <= 2 ? 'white' : "brand.primary"
   return [
     INFO_COLORS_PRIMARY[infoAccessIndex],
-    INFO_COLORS_SECONDARY[infoAccessIndex],
     text
   ];
 }

@@ -1,24 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import mapboxgl, { Map } from "mapbox-gl";
-import {
-  Box,
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 import PopupBase, { PopupContent } from "./Popup";
-import Legend from './Legend'
+import Legend from "./Legend";
 
 import { BrazilStatesGeojson, Feature } from "../types/geojson";
 import buildCaseFilters from "../utils/buildCaseFilters";
 import isValid from "../utils/isValid";
+import { Response } from "../types/airtable";
 
 export default function BrazilMap({
   data,
   error,
+  tableData,
 }: {
   data: BrazilStatesGeojson;
   error: string;
+  tableData: Response[];
 }) {
-
   if (!process.env.NEXT_PUBLIC_MAPBOX_KEY) {
     throw new Error("Add a mapbox key in the envs");
   }
@@ -109,13 +109,21 @@ export default function BrazilMap({
 
   function includePopups(map: Map) {
     map.on("click", "state-fills", (e: any) => {
-      const labels = e.features.map((feature: Feature) => (
-        <PopupContent
-          key={feature.properties.id}
-          label={feature.properties.name}
-          colorCoding={feature.properties.estado_basico__grau_institucionalizacao}
-        />
-      ));
+      const labels = e.features.map((feature: Feature) => {
+        const stateInfo = tableData.find(
+          (state) => state.estado__sigla === feature.properties.sigla
+        );
+        return (
+          <PopupContent
+            key={feature.properties.id}
+            label={feature.properties.name}
+            colorCoding={
+              feature.properties.estado_basico__grau_institucionalizacao
+            }
+            stateInfo={stateInfo}
+          />
+        );
+      });
 
       setContent(labels);
       setPopupLngLat(e.lngLat);

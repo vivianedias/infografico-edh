@@ -15,7 +15,3 @@ body {
   overflow: hidden;
   background: none;
 }
-
-.popup-base.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
-  border-top-color: #E3D7E8;
-}

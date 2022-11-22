@@ -12,5 +12,10 @@
     "low": "Baixo",
     "none": "Nenhum",
     "no_info": "Não foi possível constatar"
+  },
+  "category": {
+    "document": "Documento orientador",
+    "collegiate": "Órgão colegiado",
+    "govern": "Órgão de governo"
   }
 }
