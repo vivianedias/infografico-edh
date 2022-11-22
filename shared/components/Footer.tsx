@@ -37,8 +37,8 @@ export default function Footer() {
       <VStack
         spacing={7}
         align={"flex-start"}
-        maxW={{ base: "100%", md: "6xl" }}
-        px={{ base: 10, lg: 0 }}
+        w={{ base: "100%", lg: "6xl" }}
+        mx={10}
       >
         <HStack
           w={"100%"}
