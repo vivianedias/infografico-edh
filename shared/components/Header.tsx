@@ -4,7 +4,7 @@ import { Box, Collapse, Flex, HStack, useDisclosure, VStack } from "@chakra-ui/r
 
 import { IS_IN_MAINTENANCE } from "../utils/constants";
 import DonateButton from "./Header/DonateButton";
-import Logo from "./Header/Logo";
+import Logo from "./Logo";
 import DesktopNav from "./Header/DesktopNav";
 import MobileIcon from "./Header/MobileIcon";
 import MobileNav from "./Header/MobileNav";
@@ -37,7 +37,7 @@ export default function Header() {
           spacing={20}
           paddingRight={{ base: "15px", md: "0" }}
         >
-          <Logo t={t} />
+          <Logo t={t} w={{ base: "300px", sm: "300px", md: 168 }}/>
           <DesktopNav t={t} NAV_ITEMS={NAV_ITEMS} />
           <VStack align={"end"}>
             <MobileIcon t={t} onToggle={onToggle} />
