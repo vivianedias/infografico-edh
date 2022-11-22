@@ -10,7 +10,7 @@ import { Response } from "../shared/types/airtable";
 import { log } from "next-axiom";
 
 export default function Home({
-  data,
+  data: tableData,
   error,
 }: {
   data: Response[] | null;
@@ -29,10 +29,12 @@ export default function Home({
           {t("subtitle")}
         </Text>
         {error ? <p>There was an error while fetching the data</p> : null}
-        {data ? (
+        {tableData ? (
           <HStack justifyContent={"center"}>
-            <BrazilGeojson tableData={data}>
-              {({ data, error }) => <BrazilMap data={data} error={error} />}
+            <BrazilGeojson tableData={tableData}>
+              {({ data, error }) => (
+                <BrazilMap data={data} tableData={tableData} error={error} />
+              )}
             </BrazilGeojson>
           </HStack>
         ) : null}

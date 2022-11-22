@@ -12,5 +12,21 @@
     "low": "Baixo",
     "none": "Nenhum",
     "no_info": "Não foi possível constatar"
+  },
+  "category": {
+    "document": "Guiding document",
+    "collegiate": "Collegiate body",
+    "govern": "Governing body"
+  },
+  "popup": {
+    "expanded": {
+      "governmentBodies": "Government Bodies",
+      "budget": "Budget",
+      "concept": "Concept",
+      "mainTopics": "Main Topics",
+      "policies": "EDH Policies",
+      "plans": "Education Plans for EDH",
+      "teamSize": "EDH Team"
+    }
   }
 }

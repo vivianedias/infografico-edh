@@ -8,7 +8,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
-import { INFO_ACCESS, INFO_COLORS } from "../utils/buildCaseFilters";
+import { INFO_ACCESS } from "../utils/buildCaseFilters";
 
 export default function Legend() {
   const { t } = useTranslation("home");
@@ -37,14 +37,14 @@ export default function Legend() {
         </Text>
         <Divider borderColor={"brand.pink"} borderWidth={"0.5px"} />
         <List spacing={3}>
-          {Object.keys(INFO_ACCESS).map((label, i) => {
+          {Object.values(INFO_ACCESS).map((label, i) => {
             return (
               <ListItem key={`${label}-${i}`}>
                 <HStack spacing={2}>
                   <Box
                     minWidth={"20px"}
                     height={"12px"}
-                    backgroundColor={INFO_COLORS[i]}
+                    backgroundColor={`brand.gradient.${label}.primary`}
                   />
                   <Text
                     fontSize={"xs"}
