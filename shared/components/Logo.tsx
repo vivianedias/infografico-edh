@@ -5,11 +5,7 @@ type TranslationType = (param: string) => string;
 
 type LogoType = {
   t: TranslationType;
-  w: {
-    base: any
-    sm: any
-    md: any
-  }
+  w: string | Record<string, string | number>
 }
 
 const Logo = ({ t, w }: LogoType) => {
