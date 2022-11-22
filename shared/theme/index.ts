@@ -1,5 +1,6 @@
 import { type ThemeConfig } from "@chakra-ui/react";
 import Modal from "./ModalCustomTheme";
+import Button from "./ButtonCustomTheme";
 
 const config: ThemeConfig = {
   initialColorMode: "light",
@@ -17,6 +18,7 @@ const theme = {
   config,
   components: {
     Modal,
+    Button,
   },
   colors: {
     brand: {
