@@ -17,5 +17,16 @@
     "document": "Documento orientador",
     "collegiate": "Órgão colegiado",
     "govern": "Órgão de governo"
+  },
+  "popup": {
+    "expanded": {
+      "governmentBodies": "Orgãos",
+      "budget": "Orçamento",
+      "concept": "Conceito",
+      "mainTopics": "Temas principais",
+      "policies": "Políticas de EDH",
+      "plans": "EDH nos planos de educação",
+      "teamSize": "Equipe de EDH"
+    }
   }
 }

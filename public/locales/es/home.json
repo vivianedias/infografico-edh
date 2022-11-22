@@ -12,5 +12,16 @@
     "low": "Baixo",
     "none": "Nenhum",
     "no_info": "Não foi possível constatar"
+  },
+  "popup": {
+    "expanded": {
+      "governmentBodies": "cuerpos gubernamentales",
+      "budget": "Presupuesto",
+      "concept": "Concepto",
+      "mainTopics": "temas principales",
+      "policies": "Políticas de EDH",
+      "plans": "EDH en planes educativos",
+      "teamSize": "equipo EDH"
+    }
   }
 }
