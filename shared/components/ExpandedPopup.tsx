@@ -19,62 +19,63 @@ import {
 } from "@heroicons/react/24/outline";
 import IconWithEmoji from "./IconWithEmoji";
 import { useTranslation } from "next-i18next";
+import { INFO_ACCESS } from "../utils/buildCaseFilters";
 
 export default function ExpandedPopup({
   onClose,
   isOpen,
   stateInfo,
-  primaryColor,
-  textColor,
 }: {
   onClose: () => void;
   isOpen: boolean;
   stateInfo?: Response;
-  primaryColor: string;
-  textColor: string;
 }) {
-  const { t } = useTranslation("home") 
+  const { t } = useTranslation("home");
+
+  if (!stateInfo) {
+    return null;
+  }
+
+  const degree = stateInfo?.estado_basico__grau_institucionalizacao;
+  const gradient = INFO_ACCESS[degree];
+
   console.log({ stateInfo });
+
   return (
     <Modal
       onClose={onClose}
       isOpen={isOpen}
       isCentered
       scrollBehavior={"inside"}
+      colorScheme={gradient}
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader
-          textAlign={"center"}
-          bgColor={primaryColor}
-          color={textColor}
-        >
-          {stateInfo?.estado__nome}
-        </ModalHeader>
+        <ModalHeader>{stateInfo?.estado__nome}</ModalHeader>
         <ModalCloseButton />
-        <ModalBody bgColor={"white"} p={12}>
+        <ModalBody>
           <VStack spacing={8}>
             <HStack justify={"space-around"} color={"brand.primary"}>
               <IconWithEmoji
                 category={t("category.document")}
-                emojiBgColor={primaryColor}
+                gradient={gradient}
                 EmojiIcon={FaceSmileIcon}
                 MainIcon={BriefcaseIcon}
               />
               <IconWithEmoji
                 category={t("category.collegiate")}
-                emojiBgColor={primaryColor}
+                gradient={gradient}
                 EmojiIcon={FaceSmileIcon}
                 MainIcon={UsersIcon}
               />
               <IconWithEmoji
                 category={t("category.govern")}
-                emojiBgColor={primaryColor}
+                gradient={gradient}
                 EmojiIcon={FaceSmileIcon}
                 MainIcon={DocumentTextIcon}
               />
             </HStack>
-            <Divider color={'brand.primary'} borderWidth={"1px"} />
+            <Divider color={"brand.primary"} borderWidth={"1px"} />
           </VStack>
         </ModalBody>
       </ModalContent>

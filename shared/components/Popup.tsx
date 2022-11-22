@@ -11,21 +11,26 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
-import { getColorByInfo } from "../utils/buildCaseFilters";
+
 import ExpandedPopup from "./ExpandedPopup";
+import { INFO_ACCESS } from "../utils/buildCaseFilters";
 import { Response } from "../types/airtable";
 
 export function PopupContent({
   label,
-  colorCoding,
   stateInfo,
 }: {
   label: string;
-  colorCoding?: string;
   stateInfo?: Response;
 }) {
-  const [primaryColor, textColor] = getColorByInfo(colorCoding || "");
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  if (!stateInfo) {
+    return null;
+  }
+
+  const degree = stateInfo?.estado_basico__grau_institucionalizacao;
+  const gradient = INFO_ACCESS[degree];
 
   return (
     <>
@@ -33,10 +38,14 @@ export function PopupContent({
         <Flex
           justifyContent={"space-evenly"}
           py={2}
-          backgroundColor={primaryColor}
+          backgroundColor={`brand.gradient.${gradient}.primary`}
           alignItems={"center"}
         >
-          <Text fontSize={"lg"} fontWeight={600} color={textColor}>
+          <Text
+            fontSize={"lg"}
+            fontWeight={600}
+            color={`brand.gradient.${gradient}.text`}
+          >
             {label}
           </Text>
           <IconButton
@@ -47,7 +56,7 @@ export function PopupContent({
             icon={
               <Icon
                 as={InformationCircleIcon}
-                color={textColor}
+                color={`brand.gradient.${gradient}.text`}
                 boxSize={"25px"}
               />
             }
@@ -61,13 +70,7 @@ export function PopupContent({
           </List>
         </Box>
       </Box>
-      <ExpandedPopup
-        textColor={textColor}
-        primaryColor={primaryColor}
-        onClose={onClose}
-        isOpen={isOpen}
-        stateInfo={stateInfo}
-      />
+      <ExpandedPopup onClose={onClose} isOpen={isOpen} stateInfo={stateInfo} />
     </>
   );
 }

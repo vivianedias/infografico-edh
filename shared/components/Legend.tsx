@@ -37,7 +37,7 @@ export default function Legend() {
         </Text>
         <Divider borderColor={"brand.pink"} borderWidth={"0.5px"} />
         <List spacing={3}>
-          {Object.keys(INFO_ACCESS).map((label, i) => {
+          {Object.values(INFO_ACCESS).map((label, i) => {
             return (
               <ListItem key={`${label}-${i}`}>
                 <HStack spacing={2}>

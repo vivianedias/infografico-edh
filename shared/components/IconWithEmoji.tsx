@@ -4,12 +4,12 @@ import { ComponentType } from "react";
 export default function IconWithEmoji({
   MainIcon,
   EmojiIcon,
-  emojiBgColor,
+  gradient,
   category,
 }: {
   MainIcon: ComponentType;
   EmojiIcon: ComponentType;
-  emojiBgColor: string;
+  gradient: string;
   category: string;
 }) {
   return (
@@ -21,17 +21,16 @@ export default function IconWithEmoji({
           bottom={0}
           left={"30px"}
           size={6}
-          bgColor={emojiBgColor}
+          bgColor={`brand.gradient.${gradient}.primary`}
         >
-          <Icon as={EmojiIcon} boxSize={5} color={"brand.primary"} />
+          <Icon
+            as={EmojiIcon}
+            boxSize={5}
+            color={`brand.gradient.${gradient}.text`}
+          />
         </Circle>
       </Box>
-      <Text
-        lineHeight={6}
-        textAlign={"center"}
-        fontSize={"xl"}
-        color={"brand.primary"}
-      >
+      <Text lineHeight={6} textAlign={"center"} fontSize={"xl"}>
         {category}
       </Text>
     </VStack>
