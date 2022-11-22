@@ -46,14 +46,16 @@ export default function Home({
         {error ? <p>There was an error while fetching the data</p> : null}
         <HStack justifyContent={"center"} align={"flex-start"}>
           {tableDataFilteredByPeriod && tableDataFilteredByPeriod.length > 0 ? (
-            <BrazilGeojson tableData={tableDataFilteredByPeriod}>
-              {({ data, error }) => (
-                <BrazilMap
-                  data={data}
-                  tableData={tableDataFilteredByPeriod}
-                  error={error}
-                />
-              )}
+            <BrazilGeojson>
+              {({ data, error }) => {
+                return (
+                  <BrazilMap
+                    data={data}
+                    tableData={tableDataFilteredByPeriod}
+                    error={error}
+                  />
+                );
+              }}
             </BrazilGeojson>
           ) : null}
           <YearButtons

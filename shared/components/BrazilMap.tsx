@@ -5,9 +5,11 @@ import { Box } from "@chakra-ui/react";
 import PopupBase, { PopupContent } from "./Popup";
 import Legend from "./Legend";
 
-import { BrazilStatesGeojson, Feature } from "../types/geojson";
 import buildCaseFilters from "../utils/buildCaseFilters";
 import isValid from "../utils/isValid";
+import addInfoAccessPropertyToShape from "../utils/addInfoAccessPropertyToShape";
+
+import { BrazilStatesGeojson, Feature } from "../types/geojson";
 import { Response } from "../types/airtable";
 
 export default function BrazilMap({
@@ -22,6 +24,12 @@ export default function BrazilMap({
   if (!process.env.NEXT_PUBLIC_MAPBOX_KEY) {
     throw new Error("Add a mapbox key in the envs");
   }
+
+  const newFeatures = addInfoAccessPropertyToShape(data?.features, tableData);
+  const newData = {
+    ...data,
+    features: newFeatures,
+  };
 
   mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_KEY || "";
 
@@ -65,7 +73,7 @@ export default function BrazilMap({
   function loadSources(map: Map) {
     map.addSource("states", {
       type: "geojson",
-      data: data as any,
+      data: newData as any,
     });
 
     setDefaultLayers(map);

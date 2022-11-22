@@ -1,8 +1,3 @@
-export type BrazilStatesGeojson = Array<{
-  type: string;
-  features: Array<Record<string, any>>;
-}>;
-
 export type Feature = {
   id: number;
   properties: {
@@ -14,6 +9,10 @@ export type Feature = {
     regiao_id: string;
     sigla: string;
     updated_at: string;
-    estado_basico__grau_institucionalizacao?: string;
-  }
-}
+  };
+};
+
+export type BrazilStatesGeojson = {
+  type: string;
+  features: Array<Feature>;
+};
