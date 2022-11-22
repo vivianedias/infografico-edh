@@ -13,6 +13,11 @@
     "none": "Nenhum",
     "no_info": "Não foi possível constatar"
   },
+  "category": {
+    "document": "Guiding document",
+    "collegiate": "Collegiate body",
+    "govern": "Governing body"
+  },
   "popup": {
     "expanded": {
       "governmentBodies": "Government Bodies",

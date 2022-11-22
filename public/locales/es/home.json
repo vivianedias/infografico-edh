@@ -13,6 +13,11 @@
     "none": "Nenhum",
     "no_info": "Não foi possível constatar"
   },
+  "category": {
+    "document": "Documento guía",
+    "collegiate": "Cuerpo colegiado",
+    "govern": "Órgano rector"
+  },
   "popup": {
     "expanded": {
       "governmentBodies": "cuerpos gubernamentales",
