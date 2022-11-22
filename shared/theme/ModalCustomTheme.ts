@@ -45,13 +45,15 @@ const xl = defineStyle({
   fontWeight: 500,
 });
 
-const lg = defineStyle({
-  fontSize: "xl",
-  p: 14,
+const md = defineStyle({
+  fontSize: "md",
+  p: 12,
+  fontWeight: 400,
+  lineHeight: "shorter",
 });
 
 const sizes = {
-  lg: definePartsStyle({ header: xl, body: lg }),
+  lg: definePartsStyle({ header: xl, body: md }),
 };
 
 const modalTheme = defineMultiStyleConfig({

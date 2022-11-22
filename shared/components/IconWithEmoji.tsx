@@ -30,7 +30,12 @@ export default function IconWithEmoji({
           />
         </Circle>
       </Box>
-      <Text lineHeight={6} textAlign={"center"} fontSize={"xl"}>
+      <Text
+        lineHeight={"base"}
+        fontWeight={500}
+        textAlign={"center"}
+        fontSize={"xl"}
+      >
         {category}
       </Text>
     </VStack>
