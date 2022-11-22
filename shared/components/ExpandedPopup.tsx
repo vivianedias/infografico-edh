@@ -8,7 +8,6 @@ import {
   ModalHeader,
   ModalOverlay,
   VStack,
-  Text,
 } from "@chakra-ui/react";
 import { Response } from "../types/airtable";
 import {
