@@ -20,66 +20,31 @@ import {
 import IconWithEmoji from "./IconWithEmoji";
 import { useTranslation } from "next-i18next";
 import { INFO_ACCESS } from "../utils/buildCaseFilters";
+import SecretaryContent from "./SecretaryContent";
 
-function SecretaryContentItem({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
-  return (
-    <HStack direction={"column"} spacing={7} align={"flex-start"}>
-      <Text
-        textAlign={"right"}
-        lineHeight={"base"}
-        fontWeight={500}
-        fontSize={"lg"}
-        flex={0.5}
-        textTransform={"capitalize"}
-      >
-        {title}:
-      </Text>
-      <Text flex={1}>{description}</Text>
-    </HStack>
-  );
-}
-function SecretaryContent() {
-  const { t } = useTranslation("home");
+type IconItemsReturn = {
+  label: string;
+  EmojiIcon: React.FC;
+  MainIcon: React.FC;
+};
 
-  return (
-    <VStack spacing={5}>
-      <SecretaryContentItem
-        title={t("popup.expanded.governmentBodies")}
-        description={`Coordenadoria de Direitos Humanos da Secretaria de Estado da Mulher, Inclusão, Assistência Social, do Trabalho e dos Direitos Humanos. Serviço de Projetos Escolares em Direitos Humanos da Secretaria de Estado da Educação.`}
-      />
-      <SecretaryContentItem
-        title={t("popup.expanded.budget")}
-        description={`Coordenadoria de Direitos Humanos da Secretaria de Estado da Mulher, Inclusão, Assistência Social, do Trabalho e dos Direitos Humanos. Serviço de Projetos Escolares em Direitos Humanos da Secretaria de Estado da Educação.`}
-      />
-      <SecretaryContentItem
-        title={t("popup.expanded.concept")}
-        description={`Coordenadoria de Direitos Humanos da Secretaria de Estado da Mulher, Inclusão, Assistência Social, do Trabalho e dos Direitos Humanos. Serviço de Projetos Escolares em Direitos Humanos da Secretaria de Estado da Educação.`}
-      />
-      <SecretaryContentItem
-        title={t("popup.expanded.mainTopics")}
-        description={`Coordenadoria de Direitos Humanos da Secretaria de Estado da Mulher, Inclusão, Assistência Social, do Trabalho e dos Direitos Humanos. Serviço de Projetos Escolares em Direitos Humanos da Secretaria de Estado da Educação.`}
-      />
-      <SecretaryContentItem
-        title={t("popup.expanded.policies")}
-        description={`Coordenadoria de Direitos Humanos da Secretaria de Estado da Mulher, Inclusão, Assistência Social, do Trabalho e dos Direitos Humanos. Serviço de Projetos Escolares em Direitos Humanos da Secretaria de Estado da Educação.`}
-      />
-      <SecretaryContentItem
-        title={t("popup.expanded.plans")}
-        description={`Coordenadoria de Direitos Humanos da Secretaria de Estado da Mulher, Inclusão, Assistência Social, do Trabalho e dos Direitos Humanos. Serviço de Projetos Escolares em Direitos Humanos da Secretaria de Estado da Educação.`}
-      />
-      <SecretaryContentItem
-        title={t("popup.expanded.teamSize")}
-        description={`Coordenadoria de Direitos Humanos da Secretaria de Estado da Mulher, Inclusão, Assistência Social, do Trabalho e dos Direitos Humanos. Serviço de Projetos Escolares em Direitos Humanos da Secretaria de Estado da Educação.`}
-      />
-    </VStack>
-  );
-}
+const ICON_ITEMS = (t: (param: string) => string): IconItemsReturn[] => [
+  {
+    label: t("category.document"),
+    EmojiIcon: FaceSmileIcon,
+    MainIcon: BriefcaseIcon,
+  },
+  {
+    label: t("category.collegiate"),
+    EmojiIcon: FaceSmileIcon,
+    MainIcon: UsersIcon,
+  },
+  {
+    label: t("category.govern"),
+    EmojiIcon: FaceSmileIcon,
+    MainIcon: DocumentTextIcon,
+  },
+];
 
 export default function ExpandedPopup({
   onClose,
@@ -99,7 +64,7 @@ export default function ExpandedPopup({
   const degree = stateInfo?.estado_basico__grau_institucionalizacao;
   const gradient = INFO_ACCESS[degree];
 
-  console.log({ stateInfo });
+  // console.log({ stateInfo });
 
   return (
     <Modal
@@ -116,24 +81,14 @@ export default function ExpandedPopup({
         <ModalBody>
           <VStack spacing={8}>
             <HStack justify={"space-around"} color={"brand.primary"}>
-              <IconWithEmoji
-                category={t("category.document")}
-                gradient={gradient}
-                EmojiIcon={FaceSmileIcon}
-                MainIcon={BriefcaseIcon}
-              />
-              <IconWithEmoji
-                category={t("category.collegiate")}
-                gradient={gradient}
-                EmojiIcon={FaceSmileIcon}
-                MainIcon={UsersIcon}
-              />
-              <IconWithEmoji
-                category={t("category.govern")}
-                gradient={gradient}
-                EmojiIcon={FaceSmileIcon}
-                MainIcon={DocumentTextIcon}
-              />
+              {ICON_ITEMS(t).map(({ label, ...rest }, i) => (
+                <IconWithEmoji
+                  key={`icon-with-emoji-${i}`}
+                  category={label}
+                  gradient={gradient}
+                  {...rest}
+                />
+              ))}
             </HStack>
             <Divider borderColor={"brand.primary"} borderWidth={"1px"} />
             <SecretaryContent />
