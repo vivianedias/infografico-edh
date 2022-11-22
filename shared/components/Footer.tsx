@@ -28,8 +28,8 @@ export default function Footer() {
     <Flex
       width={"100%"}
       bg={"black"}
-      paddingTop={"75px"}
-      paddingBottom={"75px"}
+      paddingTop={20}
+      paddingBottom={20}
       as={"footer"}
       align={"center"}
       justify={"center"}
@@ -37,7 +37,7 @@ export default function Footer() {
       <VStack
         spacing={7}
         align={"flex-start"}
-        maxW={{ base: "100%", lg: "1080px" }}
+        maxW={{ base: "50%", md: "6xl" }}
         px={{ base: 10, lg: 0 }}
       >
         <HStack
@@ -47,7 +47,7 @@ export default function Footer() {
           justify={{ base: "space-between", md: "space-between" }}
           wrap={"wrap"}
           flexWrap={"wrap"}
-          spacing={"50px"}
+          spacing={12}
         >
           <Flex
             w={"100%"}
