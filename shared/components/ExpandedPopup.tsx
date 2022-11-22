@@ -44,7 +44,7 @@ function SecretaryContentItem({
     </HStack>
   );
 }
-function SecretaryContent({}) {
+function SecretaryContent() {
   const { t } = useTranslation("home");
 
   return (

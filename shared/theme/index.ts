@@ -51,6 +51,21 @@ const theme = {
         },
       },
     },
+    header: {
+      menu: {
+        background: "#000000",
+        link: "#FFFFFF",
+        hover: "#878787",
+      },
+      subMenu: {
+        background: "#FFFFFF",
+        link: "#4B4B4B",
+        hover: "#878787",
+        hoverBackground: "#FAFAFA",
+        border: "#FBBC44",
+      },
+      button: "#FBBC44",
+    },
   },
 };
 
