@@ -1,13 +1,19 @@
+import { useState } from "react";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import { log } from "next-axiom";
 
 import { Box, Heading, HStack, Text } from "@chakra-ui/react";
-import { Head, BrazilMap, BrazilGeojson } from "../shared/components";
+import {
+  Head,
+  BrazilMap,
+  BrazilGeojson,
+  YearButtons,
+} from "../shared/components";
 
 import fetcher from "../shared/utils/fetcher";
 import { Response } from "../shared/types/airtable";
-import { log } from "next-axiom";
 
 export default function Home({
   data: tableData,
@@ -17,6 +23,15 @@ export default function Home({
   error?: boolean;
 }) {
   const { t } = useTranslation("home");
+
+  const periodsDistinct = tableData
+    ? [...new Set(tableData.map((item) => item.periodo))]
+    : [""];
+  const [selectedPeriod, selectPeriod] = useState<string>(periodsDistinct[0]);
+
+  const tableDataFilteredByPeriod = tableData?.filter(
+    (data) => data.periodo === selectedPeriod
+  );
 
   return (
     <>
@@ -29,15 +44,24 @@ export default function Home({
           {t("subtitle")}
         </Text>
         {error ? <p>There was an error while fetching the data</p> : null}
-        {tableData ? (
-          <HStack justifyContent={"center"}>
-            <BrazilGeojson tableData={tableData}>
+        <HStack justifyContent={"center"} align={"flex-start"}>
+          {tableDataFilteredByPeriod && tableDataFilteredByPeriod.length > 0 ? (
+            <BrazilGeojson tableData={tableDataFilteredByPeriod}>
               {({ data, error }) => (
-                <BrazilMap data={data} tableData={tableData} error={error} />
+                <BrazilMap
+                  data={data}
+                  tableData={tableDataFilteredByPeriod}
+                  error={error}
+                />
               )}
             </BrazilGeojson>
-          </HStack>
-        ) : null}
+          ) : null}
+          <YearButtons
+            years={periodsDistinct}
+            selectPeriod={selectPeriod}
+            selectedPeriod={selectedPeriod}
+          />
+        </HStack>
       </Box>
     </>
   );
