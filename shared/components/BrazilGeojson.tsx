@@ -1,26 +1,24 @@
+import { Text } from "@chakra-ui/react";
+import { useTranslation } from "next-i18next";
 import useSWRImmutable from "swr/immutable";
-import { Response } from "../types/airtable";
 import { BrazilStatesGeojson, Feature } from "../types/geojson";
 
 interface BrazilGeojsonType {
-  children(param: {
-    data: BrazilStatesGeojson;
-    error: string;
-  }): React.ReactElement;
+  children(param: { data: BrazilStatesGeojson }): React.ReactElement;
 }
 
 const BrazilGeojson: React.FunctionComponent<BrazilGeojsonType> = ({
   children,
 }) => {
   const { data, error } = useSWRImmutable("/api/brazilstates");
+  const { t } = useTranslation("home");
 
-  if (error) return <div>Failed to load</div>;
+  if (error) return <Text>{t("errorMsg.loadingMapShape")}</Text>;
 
-  if (!data) return <div>Loading...</div>;
+  if (!data) return <Text>{t("loading")}</Text>;
 
   return children({
     data,
-    error,
   });
 };
 

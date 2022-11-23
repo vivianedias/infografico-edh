@@ -28,5 +28,10 @@
       "plans": "Education Plans for EDH",
       "teamSize": "EDH Team"
     }
-  }
+  },
+  "errorMsg": {
+    "loadingMapData": "There was an error while trying to fetch the map's data. Try again later.",
+    "loadingMapShape": "There was an error while trying to fetch the map. Try again later."
+  },
+  "loading": "Carregando..."
 }
