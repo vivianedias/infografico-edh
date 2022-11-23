@@ -33,5 +33,8 @@
     "loadingMapData": "Hubo un error al obtener los datos del mapa. Vuelva a intentarlo más tarde.",
     "loadingMapShape": "Hubo un error al obtener el mapa. Vuelva a intentarlo más tarde."
   },
-  "loading": "Cargando..."
+  "loading": "Cargando...",
+  "timeline": {
+    "title": "Timeline"
+  }
 }
