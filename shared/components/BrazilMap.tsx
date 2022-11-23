@@ -188,8 +188,8 @@ export default function BrazilMap({
         </PopupBase>
       ) : null}
       <Box
-        w={{ base: "100%", md: "700px" }}
-        h={{ base: "100vh", md: "700px" }}
+        w={{ base: "100%", md: "2xl" }}
+        h={{ base: "100vh", md: "3xl" }}
         position="relative"
       >
         <Box ref={mapContainer} className="map-container" boxSize={"100%"} />

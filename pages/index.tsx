@@ -4,12 +4,13 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { log } from "next-axiom";
 
-import { Box, Heading, Stack, Text } from "@chakra-ui/react";
+import { Box, Heading, Stack, Text, VStack } from "@chakra-ui/react";
 import {
   Head,
   BrazilMap,
   BrazilGeojson,
   YearButtons,
+  Timeline,
 } from "../shared/components";
 
 import fetcher from "../shared/utils/fetcher";
@@ -55,16 +56,19 @@ export default function Home({
                     tableData={tableData}
                     selectedPeriod={selectedPeriod}
                   />
-                  <YearButtons
-                    years={periodsDistinct}
-                    selectPeriod={selectPeriod}
-                    selectedPeriod={selectedPeriod}
-                  />
+                  <VStack spacing={6} align={"flex-start"}>
+                    <YearButtons
+                      years={periodsDistinct}
+                      selectPeriod={selectPeriod}
+                      selectedPeriod={selectedPeriod}
+                    />
+                  </VStack>
                 </Stack>
               );
             }}
           </BrazilGeojson>
         ) : null}
+        <Timeline />
       </Box>
     </>
   );
