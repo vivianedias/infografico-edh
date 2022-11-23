@@ -32,7 +32,7 @@ export default function Home({
   return (
     <>
       <Head title={t("meta.title")} description={t("meta.description")} />
-      <Box width={"full"} height={"full"}>
+      <Box width={"full"}>
         <Heading size={"3xl"} color={"brand.primary"} pb={4}>
           {t("title")}
         </Heading>

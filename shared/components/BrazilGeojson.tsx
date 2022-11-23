@@ -1,7 +1,7 @@
 import { Text } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import useSWRImmutable from "swr/immutable";
-import { BrazilStatesGeojson, Feature } from "../types/geojson";
+import { BrazilStatesGeojson } from "../types/geojson";
 
 interface BrazilGeojsonType {
   children(param: { data: BrazilStatesGeojson }): React.ReactElement;
