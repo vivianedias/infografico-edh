@@ -62,13 +62,13 @@ export default function Home({
                       selectPeriod={selectPeriod}
                       selectedPeriod={selectedPeriod}
                     />
+                    <Timeline />
                   </VStack>
                 </Stack>
               );
             }}
           </BrazilGeojson>
         ) : null}
-        <Timeline />
       </Box>
     </>
   );

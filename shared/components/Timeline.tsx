@@ -1,15 +1,17 @@
 import {
   Box,
   Circle,
+  Collapse,
   Flex,
   Heading,
   HStack,
-  Icon,
   IconButton,
   Text,
+  useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import { PlusSmallIcon } from "@heroicons/react/24/outline";
+import { css } from "@emotion/react";
+import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
 import { useTranslation } from "next-i18next";
 
 type YearBlockProps = {
@@ -31,6 +33,7 @@ function YearBlock({ years }: YearBlockProps) {
             position={"relative"}
             borderLeft={"3px solid"}
             borderColor={"brand.primary"}
+            w={"full"}
             key={`year-block-${i}`}
           >
             <Circle
@@ -41,6 +44,7 @@ function YearBlock({ years }: YearBlockProps) {
               position={"absolute"}
               left={"-10px"}
               top={0}
+              className={"circle"}
             />
             <VStack spacing={3.5}>
               {years[year].map((month, i) => (
@@ -67,10 +71,12 @@ function MonthlyBlock({
   month: string;
   description: string;
 }) {
+  const { isOpen, onToggle } = useDisclosure();
+
   return (
-    <VStack spacing={3.5} pl={8}>
+    <VStack spacing={3.5} pl={8} w={"full"}>
       <Flex
-        width={"100%"}
+        width={"full"}
         direction={"row"}
         fontSize={"2xl"}
         justifyContent={"space-between"}
@@ -90,20 +96,23 @@ function MonthlyBlock({
         <IconButton
           variant={"link"}
           aria-label={"Expandir texto do mês"}
-          icon={<PlusSmallIcon />}
+          icon={isOpen ? <MinusSmallIcon /> : <PlusSmallIcon />}
           color={"brand.primary"}
           size={"xs"}
+          onClick={onToggle}
         />
       </Flex>
-      <Text
-        color={"brand.primary"}
-        lineHeight={"shorter"}
-        letterSpacing={"tight"}
-        fontSize={"sm"}
-        fontWeight={400}
-      >
-        {description}
-      </Text>
+      <Collapse in={isOpen} animateOpacity>
+        <Text
+          color={"brand.primary"}
+          lineHeight={"shorter"}
+          letterSpacing={"tight"}
+          fontSize={"sm"}
+          fontWeight={400}
+        >
+          {description}
+        </Text>
+      </Collapse>
     </VStack>
   );
 }
@@ -129,10 +138,73 @@ export default function Timeline() {
       <Heading color={"brand.primary"} size={"xl"}>
         {t("timeline.title")}
       </Heading>
-      <Box>
+      <Box
+        w={"full"}
+        overflowY={"auto"}
+        px={2.5}
+        css={css`
+          & > :not(:first-child) {
+            padding-top: var(--chakra-space-8);
+            .circle {
+              top: var(--chakra-space-8);
+            }
+          }
+
+          & {
+            scrollbar-gutter: stable;
+            scrollbar-width: thin; /* "auto" or "thin" */
+            scrollbar-color: var(--chakra-colors-brand-pink)
+              var(--chakra-colors-white); /* scroll thumb and track */
+          }
+
+          &::-webkit-scrollbar {
+            width: 0.5rem;
+          }
+
+          &::-webkit-scrollbar-track {
+            background-color: var(--chakra-colors-white);
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background-color: var(--chakra-colors-brand-pink);
+          }
+        `}
+      >
         <YearBlock
           years={{
             "2019": [
+              {
+                month: "Jan",
+                description: `
+                  A Secretaria de Educação Continuada, Alfabetização, Diversidade e Inclusão - SECADI, intituída em 2004, é extinta. A pasta de EDH é desarticulada do MEC
+    
+                  MEC abandona o programa Pacto Universitário pela Promoção do Respeito à Diversidade, Cultura da Paz e Direitos Humanos, inciado em 2017 e que tinha a intenção de fortalecer a promoção dessas temáticas entre universidades. Na época, 326 universidades haviam aderido ao Pacto de acordo com dados do MEC.
+                  `,
+              },
+              {
+                month: "Mar",
+                description: `
+                  Sérgio Augusto de Queiroz assume a Secretaria Nacional de Proteção Global
+                  `,
+              },
+            ],
+            "2020": [
+              {
+                month: "Jan",
+                description: `
+                  A Secretaria de Educação Continuada, Alfabetização, Diversidade e Inclusão - SECADI, intituída em 2004, é extinta. A pasta de EDH é desarticulada do MEC
+    
+                  MEC abandona o programa Pacto Universitário pela Promoção do Respeito à Diversidade, Cultura da Paz e Direitos Humanos, inciado em 2017 e que tinha a intenção de fortalecer a promoção dessas temáticas entre universidades. Na época, 326 universidades haviam aderido ao Pacto de acordo com dados do MEC.
+                  `,
+              },
+              {
+                month: "Mar",
+                description: `
+                  Sérgio Augusto de Queiroz assume a Secretaria Nacional de Proteção Global
+                  `,
+              },
+            ],
+            "2021": [
               {
                 month: "Jan",
                 description: `
