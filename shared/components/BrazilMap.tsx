@@ -165,17 +165,19 @@ export default function BrazilMap({
   useEffect(() => {
     if (!map) return;
 
-    const updatedFilteredTableData = tableData.filter(
-      (data) => data.periodo === selectedPeriod
-    );
+    if (map.isStyleLoaded()) {
+      const updatedFilteredTableData = tableData.filter(
+        (data) => data.periodo === selectedPeriod
+      );
 
-    map.setPaintProperty("state-fills", "fill-color", [
-      "case",
-      ...buildCaseFilters(updatedFilteredTableData),
-      "#F4F0EF",
-    ]);
+      map.setPaintProperty("state-fills", "fill-color", [
+        "case",
+        ...buildCaseFilters(updatedFilteredTableData),
+        "#F4F0EF",
+      ]);
 
-    setCurrentTableData(updatedFilteredTableData);
+      setCurrentTableData(updatedFilteredTableData);
+    }
   }, [selectedPeriod]);
 
   return (
