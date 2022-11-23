@@ -13,7 +13,7 @@ export default function YearButtons({
   selectedPeriod,
   selectPeriod,
 }: YearButtonsProp) {
-  return (
+  return years.length > 0 ? (
     <HStack
       boxShadow={"lg"}
       css={
@@ -41,5 +41,5 @@ export default function YearButtons({
         </Button>
       ))}
     </HStack>
-  );
+  ) : null;
 }

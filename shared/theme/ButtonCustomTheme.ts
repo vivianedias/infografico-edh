@@ -6,6 +6,8 @@ const baseStyle = defineStyle({
   _hover: {
     opacity: 0.8,
   },
+  alignItems: "center",
+  display: "flex",
 });
 
 const sizes = {

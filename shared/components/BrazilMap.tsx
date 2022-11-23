@@ -13,26 +13,24 @@ import { Response } from "../types/airtable";
 
 export default function BrazilMap({
   data,
-  error,
   tableData,
   selectedPeriod,
 }: {
   data: BrazilStatesGeojson;
-  error: string;
   tableData: Response[];
   selectedPeriod: string;
 }) {
-  const filteredTableData = tableData.filter(
-    (data) => data.periodo === selectedPeriod
-  );
-  const [currentTableData, setCurrentTableData] =
-    useState<Response[]>(filteredTableData);
-
   if (!process.env.NEXT_PUBLIC_MAPBOX_KEY) {
     throw new Error("Add a mapbox key in the envs");
   }
 
   mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_KEY || "";
+
+  const filteredTableData = tableData.filter(
+    (data) => data.periodo === selectedPeriod
+  );
+  const [currentTableData, setCurrentTableData] =
+    useState<Response[]>(filteredTableData);
 
   const mapContainer = useRef(null);
   const [map, setMap] = useState<Map | null>(null);
@@ -181,13 +179,17 @@ export default function BrazilMap({
   }, [selectedPeriod]);
 
   return (
-    <Box as="section">
+    <Box as="section" width={{ base: "100%", md: "unset" }}>
       {popupLngLat ? (
         <PopupBase map={map} lngLat={popupLngLat}>
           {content}
         </PopupBase>
       ) : null}
-      <Box boxSize={"700px"} position="relative">
+      <Box
+        w={{ base: "100%", md: "700px" }}
+        h={{ base: "100vh", md: "700px" }}
+        position="relative"
+      >
         <Box ref={mapContainer} className="map-container" boxSize={"100%"} />
         <Legend />
       </Box>

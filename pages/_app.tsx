@@ -26,12 +26,12 @@ function App({ Component, pageProps }: AppProps) {
           <Header />
           <VStack
             maxWidth="100vw"
-            minHeight="calc(100vh - 120px)"
-            justifyContent="center"
+            minHeight="calc(100vh - 7.5rem - 25rem)"
+            justifyContent="flex-start"
             alignItems="center"
             as="main"
-            py={IS_IN_MAINTENANCE ? 0 : [8, 16]}
-            px={IS_IN_MAINTENANCE ? 0 : [12, 24]}
+            py={IS_IN_MAINTENANCE ? 0 : { base: 8, md: 16 }}
+            px={IS_IN_MAINTENANCE ? 0 : { base: 12, md: 24 }}
             backgroundColor={"white"}
           >
             <Component {...pageProps} />

@@ -50,9 +50,12 @@ export function PopupContent({
           </Text>
           <IconButton
             boxSize={"30px"}
+            size={"sm"}
             variant={"unstyled"}
             aria-label={"Expandir popup"}
             onClick={onOpen}
+            display={"flex"}
+            alignItems={"center"}
             icon={
               <Icon
                 as={InformationCircleIcon}

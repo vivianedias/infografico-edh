@@ -4,7 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { log } from "next-axiom";
 
-import { Box, Heading, HStack, Text } from "@chakra-ui/react";
+import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 import {
   Head,
   BrazilMap,
@@ -25,42 +25,46 @@ export default function Home({
   const { t } = useTranslation("home");
 
   const periodsDistinct = tableData
-    ? [...new Set(tableData.map((item) => item.periodo))]
-    : [""];
+    ? [...new Set(tableData.map((item) => item.periodo))].filter(Boolean)
+    : [];
   const [selectedPeriod, selectPeriod] = useState<string>(periodsDistinct[0]);
 
   return (
     <>
       <Head title={t("meta.title")} description={t("meta.description")} />
-      <Box width={"100%"}>
+      <Box width={"full"} height={"full"}>
         <Heading size={"3xl"} color={"brand.primary"} pb={4}>
           {t("title")}
         </Heading>
         <Text fontSize={"3xl"} fontWeight={300} color={"brand.primary"} pb={8}>
           {t("subtitle")}
         </Text>
-        {error ? <p>There was an error while fetching the data</p> : null}
-        <HStack justifyContent={"center"} align={"flex-start"}>
-          {tableData && tableData.length > 0 ? (
-            <BrazilGeojson>
-              {({ data, error }) => {
-                return (
+        {error ? <Text>{t("errorMsg.loadingMapData")}</Text> : null}
+        {tableData && tableData.length > 0 ? (
+          <BrazilGeojson>
+            {({ data }) => {
+              return (
+                <Stack
+                  justifyContent={"center"}
+                  align={"flex-start"}
+                  direction={{ base: "column-reverse", lg: "row" }}
+                  spacing={8}
+                >
                   <BrazilMap
                     data={data}
                     tableData={tableData}
-                    error={error}
                     selectedPeriod={selectedPeriod}
                   />
-                );
-              }}
-            </BrazilGeojson>
-          ) : null}
-          <YearButtons
-            years={periodsDistinct}
-            selectPeriod={selectPeriod}
-            selectedPeriod={selectedPeriod}
-          />
-        </HStack>
+                  <YearButtons
+                    years={periodsDistinct}
+                    selectPeriod={selectPeriod}
+                    selectedPeriod={selectedPeriod}
+                  />
+                </Stack>
+              );
+            }}
+          </BrazilGeojson>
+        ) : null}
       </Box>
     </>
   );
