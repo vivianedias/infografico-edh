@@ -1,3 +1,5 @@
+import { Response } from "../types/airtable";
+
 export const INFO_ACCESS: Record<string, string> = {
   ALTO: "high",
   MÉDIO: "medium",
@@ -14,19 +16,19 @@ export const INFO_COLORS_PRIMARY = [
   "#EFC6DF",
 ];
 
-export default function buildCaseFilters() {
+export default function buildCaseFilters(tableData: Response[]) {
   const filters: Array<any> = [];
 
-  Object.keys(INFO_ACCESS).forEach((access, i) => {
-    const filter = [
-      "==",
-      ["get", "estado_basico__grau_institucionalizacao"],
-      access,
-    ];
-
-    filters.push(filter);
-    filters.push(INFO_COLORS_PRIMARY[i]);
-  });
+  tableData.forEach(
+    ({ estado__sigla, estado_basico__grau_institucionalizacao }, i) => {
+      const filter = ["==", ["get", "sigla"], estado__sigla];
+      const colorGradingIndex = Object.keys(INFO_ACCESS).findIndex(
+        (value) => value === estado_basico__grau_institucionalizacao
+      );
+      filters.push(filter);
+      filters.push(INFO_COLORS_PRIMARY[colorGradingIndex]);
+    }
+  );
 
   return filters;
 }

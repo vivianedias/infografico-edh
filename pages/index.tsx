@@ -1,13 +1,19 @@
+import { useState } from "react";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import { log } from "next-axiom";
 
-import { Box, Heading, HStack, Text } from "@chakra-ui/react";
-import { Head, BrazilMap, BrazilGeojson } from "../shared/components";
+import { Box, Heading, Stack, Text } from "@chakra-ui/react";
+import {
+  Head,
+  BrazilMap,
+  BrazilGeojson,
+  YearButtons,
+} from "../shared/components";
 
 import fetcher from "../shared/utils/fetcher";
 import { Response } from "../shared/types/airtable";
-import { log } from "next-axiom";
 
 export default function Home({
   data: tableData,
@@ -18,25 +24,46 @@ export default function Home({
 }) {
   const { t } = useTranslation("home");
 
+  const periodsDistinct = tableData
+    ? [...new Set(tableData.map((item) => item.periodo))].filter(Boolean)
+    : [];
+  const [selectedPeriod, selectPeriod] = useState<string>(periodsDistinct[0]);
+
   return (
     <>
       <Head title={t("meta.title")} description={t("meta.description")} />
-      <Box width={"100%"}>
+      <Box width={"full"}>
         <Heading size={"3xl"} color={"brand.primary"} pb={4}>
           {t("title")}
         </Heading>
         <Text fontSize={"3xl"} fontWeight={300} color={"brand.primary"} pb={8}>
           {t("subtitle")}
         </Text>
-        {error ? <p>There was an error while fetching the data</p> : null}
-        {tableData ? (
-          <HStack justifyContent={"center"}>
-            <BrazilGeojson tableData={tableData}>
-              {({ data, error }) => (
-                <BrazilMap data={data} tableData={tableData} error={error} />
-              )}
-            </BrazilGeojson>
-          </HStack>
+        {error ? <Text>{t("errorMsg.loadingMapData")}</Text> : null}
+        {tableData && tableData.length > 0 ? (
+          <BrazilGeojson>
+            {({ data }) => {
+              return (
+                <Stack
+                  justifyContent={"center"}
+                  align={"flex-start"}
+                  direction={{ base: "column-reverse", lg: "row" }}
+                  spacing={8}
+                >
+                  <BrazilMap
+                    data={data}
+                    tableData={tableData}
+                    selectedPeriod={selectedPeriod}
+                  />
+                  <YearButtons
+                    years={periodsDistinct}
+                    selectPeriod={selectPeriod}
+                    selectedPeriod={selectedPeriod}
+                  />
+                </Stack>
+              );
+            }}
+          </BrazilGeojson>
         ) : null}
       </Box>
     </>
