@@ -7,7 +7,6 @@ import Legend from "./Legend";
 
 import buildCaseFilters from "../utils/buildCaseFilters";
 import isValid from "../utils/isValid";
-import addInfoAccessPropertyToShape from "../utils/addInfoAccessPropertyToShape";
 
 import { BrazilStatesGeojson, Feature } from "../types/geojson";
 import { Response } from "../types/airtable";
@@ -16,20 +15,22 @@ export default function BrazilMap({
   data,
   error,
   tableData,
+  selectedPeriod,
 }: {
   data: BrazilStatesGeojson;
   error: string;
   tableData: Response[];
+  selectedPeriod: string;
 }) {
+  const filteredTableData = tableData.filter(
+    (data) => data.periodo === selectedPeriod
+  );
+  const [currentTableData, setCurrentTableData] =
+    useState<Response[]>(filteredTableData);
+
   if (!process.env.NEXT_PUBLIC_MAPBOX_KEY) {
     throw new Error("Add a mapbox key in the envs");
   }
-
-  const newFeatures = addInfoAccessPropertyToShape(data?.features, tableData);
-  const newData = {
-    ...data,
-    features: newFeatures,
-  };
 
   mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_KEY || "";
 
@@ -48,7 +49,11 @@ export default function BrazilMap({
       source: "states",
       layout: {},
       paint: {
-        "fill-color": ["case", ...buildCaseFilters(), "#F4F0EF"],
+        "fill-color": [
+          "case",
+          ...buildCaseFilters(currentTableData),
+          "#F4F0EF",
+        ],
         "fill-opacity": [
           "case",
           ["boolean", ["feature-state", "hover"], false],
@@ -73,7 +78,7 @@ export default function BrazilMap({
   function loadSources(map: Map) {
     map.addSource("states", {
       type: "geojson",
-      data: newData as any,
+      data: data as any,
     });
 
     setDefaultLayers(map);
@@ -158,6 +163,22 @@ export default function BrazilMap({
 
     return () => newMap?.remove();
   }, []);
+
+  useEffect(() => {
+    if (!map) return;
+
+    const updatedFilteredTableData = tableData.filter(
+      (data) => data.periodo === selectedPeriod
+    );
+
+    map.setPaintProperty("state-fills", "fill-color", [
+      "case",
+      ...buildCaseFilters(updatedFilteredTableData),
+      "#F4F0EF",
+    ]);
+
+    setCurrentTableData(updatedFilteredTableData);
+  }, [selectedPeriod]);
 
   return (
     <Box as="section">

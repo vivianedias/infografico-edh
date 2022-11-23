@@ -29,10 +29,6 @@ export default function Home({
     : [""];
   const [selectedPeriod, selectPeriod] = useState<string>(periodsDistinct[0]);
 
-  const tableDataFilteredByPeriod = tableData?.filter(
-    (data) => data.periodo === selectedPeriod
-  );
-
   return (
     <>
       <Head title={t("meta.title")} description={t("meta.description")} />
@@ -45,14 +41,15 @@ export default function Home({
         </Text>
         {error ? <p>There was an error while fetching the data</p> : null}
         <HStack justifyContent={"center"} align={"flex-start"}>
-          {tableDataFilteredByPeriod && tableDataFilteredByPeriod.length > 0 ? (
+          {tableData && tableData.length > 0 ? (
             <BrazilGeojson>
               {({ data, error }) => {
                 return (
                   <BrazilMap
                     data={data}
-                    tableData={tableDataFilteredByPeriod}
+                    tableData={tableData}
                     error={error}
+                    selectedPeriod={selectedPeriod}
                   />
                 );
               }}
