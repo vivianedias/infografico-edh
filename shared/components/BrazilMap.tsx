@@ -9,7 +9,7 @@ import buildCaseFilters from "../utils/buildCaseFilters";
 import isValid from "../utils/isValid";
 
 import { BrazilStatesGeojson, Feature } from "../types/geojson";
-import { Response } from "../types/airtable";
+import { StatesResponse } from "../types/airtable";
 
 export default function BrazilMap({
   data,
@@ -17,7 +17,7 @@ export default function BrazilMap({
   selectedPeriod,
 }: {
   data: BrazilStatesGeojson;
-  tableData: Response[];
+  tableData: StatesResponse[];
   selectedPeriod: string;
 }) {
   if (!process.env.NEXT_PUBLIC_MAPBOX_KEY) {
@@ -30,7 +30,7 @@ export default function BrazilMap({
     (data) => data.periodo === selectedPeriod
   );
   const [currentTableData, setCurrentTableData] =
-    useState<Response[]>(filteredTableData);
+    useState<StatesResponse[]>(filteredTableData);
 
   const mapContainer = useRef(null);
   const [map, setMap] = useState<Map | null>(null);

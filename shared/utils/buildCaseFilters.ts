@@ -1,4 +1,4 @@
-import { Response } from "../types/airtable";
+import { StatesResponse } from "../types/airtable";
 
 export const INFO_ACCESS: Record<string, string> = {
   ALTO: "high",
@@ -16,7 +16,7 @@ export const INFO_COLORS_PRIMARY = [
   "#EFC6DF",
 ];
 
-export default function buildCaseFilters(tableData: Response[]) {
+export default function buildCaseFilters(tableData: StatesResponse[]) {
   const filters: Array<any> = [];
 
   tableData.forEach(

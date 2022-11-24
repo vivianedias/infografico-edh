@@ -14,14 +14,14 @@ import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
 import ExpandedPopup from "./ExpandedPopup";
 import { INFO_ACCESS } from "../utils/buildCaseFilters";
-import { Response } from "../types/airtable";
+import { StatesResponse } from "../types/airtable";
 
 export function PopupContent({
   label,
   stateInfo,
 }: {
   label: string;
-  stateInfo?: Response;
+  stateInfo?: StatesResponse;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
