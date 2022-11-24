@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import {
   Box,
   Circle,
@@ -12,65 +13,60 @@ import {
 } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
-import { useTranslation } from "next-i18next";
 
-type YearBlockProps = {
-  years: Record<
-    string,
-    Array<{
-      month: string;
-      description: string;
-    }>
-  >;
-};
+import aggregateMonthDescriptions from "../utils/aggregateMonthDescriptions";
+import { type TimelineResponse } from "../types/airtable";
+import { type MonthWithAggregatedDescription } from "../types/timeline";
+import getDistinct from "../utils/getDistinct";
 
-function YearBlock({ years }: YearBlockProps) {
+function YearBlock({
+  months,
+  year,
+}: {
+  year: number;
+  months: TimelineResponse[];
+}) {
+  const monthDistinct = getDistinct(months, "acontecimento__mes");
+
   return (
-    <>
-      {Object.keys(years).map((year, i) => {
-        return (
-          <Box
-            position={"relative"}
-            borderLeft={"3px solid"}
-            borderColor={"brand.primary"}
-            w={"full"}
-            key={`year-block-${i}`}
-          >
-            <Circle
-              size={"20px"}
-              borderColor={"brand.pink"}
-              border={"3px solid"}
-              bgColor={"white"}
-              position={"absolute"}
-              left={"-10px"}
-              top={0}
-              className={"circle"}
+    <Box
+      position={"relative"}
+      borderLeft={"3px solid"}
+      borderColor={"brand.primary"}
+      w={"full"}
+    >
+      <Circle
+        size={"20px"}
+        borderColor={"brand.pink"}
+        border={"3px solid"}
+        bgColor={"white"}
+        position={"absolute"}
+        left={"-10px"}
+        top={0}
+        className={"circle"}
+      />
+      <VStack spacing={3.5}>
+        {monthDistinct.map((month, i) => {
+          return (
+            <MonthlyBlock
+              key={`monthly-block-${i}`}
+              year={year}
+              {...aggregateMonthDescriptions(months, month)}
             />
-            <VStack spacing={3.5}>
-              {years[year].map((month, i) => (
-                <MonthlyBlock
-                  key={`monthly-block-${i}`}
-                  year={year}
-                  {...month}
-                />
-              ))}
-            </VStack>
-          </Box>
-        );
-      })}
-    </>
+          );
+        })}
+      </VStack>
+    </Box>
   );
 }
 
 function MonthlyBlock({
   year,
-  month,
+  acontecimento__mes: month,
   description,
 }: {
-  year: string;
-  month: string;
-  description: string;
-}) {
+  year: number;
+} & MonthWithAggregatedDescription) {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -103,22 +99,42 @@ function MonthlyBlock({
         />
       </Flex>
       <Collapse in={isOpen} animateOpacity>
-        <Text
-          color={"brand.primary"}
-          lineHeight={"shorter"}
-          letterSpacing={"tight"}
-          fontSize={"sm"}
-          fontWeight={400}
-        >
-          {description}
-        </Text>
+        <VStack spacing={3.5}>
+          {description.map((d, i) => (
+            <Text
+              color={"brand.primary"}
+              lineHeight={"shorter"}
+              letterSpacing={"tight"}
+              fontSize={"sm"}
+              fontWeight={400}
+              key={`description-${i}`}
+            >
+              {d}
+            </Text>
+          ))}
+        </VStack>
       </Collapse>
     </VStack>
   );
 }
 
-export default function Timeline() {
+export default function Timeline({
+  timeline,
+  selectedPeriod,
+}: {
+  timeline: TimelineResponse[];
+  selectedPeriod: string;
+}) {
   const { t } = useTranslation("home");
+  const filterSelectedYears = timeline.filter((t) => {
+    const currentYear = t.acontecimento__ano;
+    const [minPeriod, maxPeriod] = selectedPeriod.split("-");
+    if (currentYear >= Number(minPeriod) && currentYear <= Number(maxPeriod)) {
+      return true;
+    }
+    return false;
+  });
+  const yearsDistinct = getDistinct(filterSelectedYears, "acontecimento__ano");
 
   return (
     <VStack
@@ -128,8 +144,8 @@ export default function Timeline() {
       boxShadow={"0px 4px 4px rgba(0, 0, 0, 0.25)"}
       borderRadius={"lg"}
       bgColor={"white"}
-      p={10}
-      w={"sm"}
+      p={{ base: 3, lg: 10 }}
+      w={{ base: "100%", lg: "sm" }}
       h={"2xl"}
       overflowY={"hidden"}
       spacing={7}
@@ -141,9 +157,9 @@ export default function Timeline() {
       <Box
         w={"full"}
         overflowY={"auto"}
-        px={2.5}
+        px={{ base: 2, lg: 2.5 }}
         css={css`
-          & > :not(:first-child) {
+          & > :not(:first-of-type) {
             padding-top: var(--chakra-space-8);
             .circle {
               top: var(--chakra-space-8);
@@ -170,58 +186,12 @@ export default function Timeline() {
           }
         `}
       >
-        <YearBlock
-          years={{
-            "2019": [
-              {
-                month: "Jan",
-                description: `
-                  A Secretaria de Educação Continuada, Alfabetização, Diversidade e Inclusão - SECADI, intituída em 2004, é extinta. A pasta de EDH é desarticulada do MEC
-    
-                  MEC abandona o programa Pacto Universitário pela Promoção do Respeito à Diversidade, Cultura da Paz e Direitos Humanos, inciado em 2017 e que tinha a intenção de fortalecer a promoção dessas temáticas entre universidades. Na época, 326 universidades haviam aderido ao Pacto de acordo com dados do MEC.
-                  `,
-              },
-              {
-                month: "Mar",
-                description: `
-                  Sérgio Augusto de Queiroz assume a Secretaria Nacional de Proteção Global
-                  `,
-              },
-            ],
-            "2020": [
-              {
-                month: "Jan",
-                description: `
-                  A Secretaria de Educação Continuada, Alfabetização, Diversidade e Inclusão - SECADI, intituída em 2004, é extinta. A pasta de EDH é desarticulada do MEC
-    
-                  MEC abandona o programa Pacto Universitário pela Promoção do Respeito à Diversidade, Cultura da Paz e Direitos Humanos, inciado em 2017 e que tinha a intenção de fortalecer a promoção dessas temáticas entre universidades. Na época, 326 universidades haviam aderido ao Pacto de acordo com dados do MEC.
-                  `,
-              },
-              {
-                month: "Mar",
-                description: `
-                  Sérgio Augusto de Queiroz assume a Secretaria Nacional de Proteção Global
-                  `,
-              },
-            ],
-            "2021": [
-              {
-                month: "Jan",
-                description: `
-                  A Secretaria de Educação Continuada, Alfabetização, Diversidade e Inclusão - SECADI, intituída em 2004, é extinta. A pasta de EDH é desarticulada do MEC
-    
-                  MEC abandona o programa Pacto Universitário pela Promoção do Respeito à Diversidade, Cultura da Paz e Direitos Humanos, inciado em 2017 e que tinha a intenção de fortalecer a promoção dessas temáticas entre universidades. Na época, 326 universidades haviam aderido ao Pacto de acordo com dados do MEC.
-                  `,
-              },
-              {
-                month: "Mar",
-                description: `
-                  Sérgio Augusto de Queiroz assume a Secretaria Nacional de Proteção Global
-                  `,
-              },
-            ],
-          }}
-        />
+        {yearsDistinct.map((year, i) => {
+          const months = timeline.filter((t) => t.acontecimento__ano === year);
+          return (
+            <YearBlock key={`year-block-${i}`} months={months} year={year} />
+          );
+        })}
       </Box>
     </VStack>
   );

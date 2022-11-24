@@ -9,7 +9,7 @@ import {
   ModalOverlay,
   VStack,
 } from "@chakra-ui/react";
-import { Response } from "../types/airtable";
+import { StatesResponse } from "../types/airtable";
 import {
   BriefcaseIcon,
   UsersIcon,
@@ -52,7 +52,7 @@ export default function ExpandedPopup({
 }: {
   onClose: () => void;
   isOpen: boolean;
-  stateInfo?: Response;
+  stateInfo?: StatesResponse;
 }) {
   const { t } = useTranslation("home");
 

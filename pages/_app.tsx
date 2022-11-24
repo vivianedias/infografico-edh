@@ -31,7 +31,7 @@ function App({ Component, pageProps }: AppProps) {
             alignItems="center"
             as="main"
             py={IS_IN_MAINTENANCE ? 0 : { base: 8, md: 16 }}
-            px={IS_IN_MAINTENANCE ? 0 : { base: 12, md: 24 }}
+            px={IS_IN_MAINTENANCE ? 0 : { base: 10, md: 24 }}
             backgroundColor={"white"}
           >
             <Component {...pageProps} />

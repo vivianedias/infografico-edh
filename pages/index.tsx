@@ -15,19 +15,18 @@ import {
 
 import fetcher from "../shared/utils/fetcher";
 import { Response } from "../shared/types/airtable";
+import getDistinct from "@/shared/utils/getDistinct";
 
 export default function Home({
-  data: tableData,
+  data: { tableData, timeline },
   error,
 }: {
-  data: Response[] | null;
+  data: Response;
   error?: boolean;
 }) {
   const { t } = useTranslation("home");
 
-  const periodsDistinct = tableData
-    ? [...new Set(tableData.map((item) => item.periodo))].filter(Boolean)
-    : [];
+  const periodsDistinct = getDistinct(tableData, "periodo");
   const [selectedPeriod, selectPeriod] = useState<string>(periodsDistinct[0]);
 
   return (
@@ -56,13 +55,20 @@ export default function Home({
                     tableData={tableData}
                     selectedPeriod={selectedPeriod}
                   />
-                  <VStack spacing={6} align={"flex-start"}>
+                  <VStack
+                    spacing={6}
+                    align={"flex-start"}
+                    minW={{ base: "100%", lg: "unset" }}
+                  >
                     <YearButtons
                       years={periodsDistinct}
                       selectPeriod={selectPeriod}
                       selectedPeriod={selectedPeriod}
                     />
-                    <Timeline />
+                    <Timeline
+                      timeline={timeline}
+                      selectedPeriod={selectedPeriod}
+                    />
                   </VStack>
                 </Stack>
               );
