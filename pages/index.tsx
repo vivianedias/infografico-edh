@@ -65,7 +65,10 @@ export default function Home({
                       selectPeriod={selectPeriod}
                       selectedPeriod={selectedPeriod}
                     />
-                    <Timeline timeline={timeline} />
+                    <Timeline
+                      timeline={timeline}
+                      selectedPeriod={selectedPeriod}
+                    />
                   </VStack>
                 </Stack>
               );

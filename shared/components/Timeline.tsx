@@ -120,11 +120,21 @@ function MonthlyBlock({
 
 export default function Timeline({
   timeline,
+  selectedPeriod,
 }: {
   timeline: TimelineResponse[];
+  selectedPeriod: string;
 }) {
   const { t } = useTranslation("home");
-  const yearsDistinct = getDistinct(timeline, "acontecimento__ano");
+  const filterSelectedYears = timeline.filter((t) => {
+    const currentYear = t.acontecimento__ano;
+    const [minPeriod, maxPeriod] = selectedPeriod.split("-");
+    if (currentYear >= Number(minPeriod) && currentYear <= Number(maxPeriod)) {
+      return true;
+    }
+    return false;
+  });
+  const yearsDistinct = getDistinct(filterSelectedYears, "acontecimento__ano");
 
   return (
     <VStack
