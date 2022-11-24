@@ -19,7 +19,7 @@ export default function YearButtons({
       css={
         years.length > 1 &&
         css`
-          & > button:first-child {
+          & > button:first-of-type {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
           }
