@@ -1,16 +1,66 @@
-import { Circle, Box, Icon, VStack, Text } from "@chakra-ui/react";
+import { Circle, Box, Icon, VStack, Text, calc } from "@chakra-ui/react";
 import { ComponentType } from "react";
+import { CheckIcon, XMarkIcon } from "@heroicons/react/24/solid";
+
+function renderStatusIcon({
+  gradient,
+  status,
+}: {
+  gradient: string;
+  status: string;
+}) {
+  switch (status) {
+    case "SIM":
+      return (
+        <Icon
+          as={CheckIcon}
+          boxSize={4}
+          color={`brand.gradient.${gradient}.text`}
+        />
+      );
+    case "NÃO":
+      return (
+        <Icon
+          as={XMarkIcon}
+          boxSize={4}
+          color={`brand.gradient.${gradient}.text`}
+        />
+      );
+    case "PARCIALMENTE":
+      return (
+        <Box
+          h={"1.25rem"}
+          w={"0.625rem"}
+          display={"inline-block"}
+          bgColor={`brand.gradient.${gradient}.text`}
+          borderBottomRightRadius={"1.25rem"}
+          borderTopRightRadius={"1.25rem"}
+          position={"absolute"}
+          right={"2px"}
+        />
+      );
+    case "NÃO FOI POSSÍVEL CONSTATAR":
+      return (
+        <Box
+          boxSize={"1.25rem"}
+          display={"inline-block"}
+          bgColor={"brand.light"}
+          borderRadius={"full"}
+        />
+      );
+  }
+}
 
 export default function IconWithEmoji({
   MainIcon,
-  EmojiIcon,
+  status,
   gradient,
   category,
 }: {
   MainIcon: ComponentType;
-  EmojiIcon: ComponentType;
   gradient: string;
   category: string;
+  status: string;
 }) {
   return (
     <VStack justify={"center"} align={"center"}>
@@ -27,11 +77,10 @@ export default function IconWithEmoji({
           size={6}
           bgColor={`brand.gradient.${gradient}.primary`}
         >
-          <Icon
-            as={EmojiIcon}
-            boxSize={5}
-            color={`brand.gradient.${gradient}.text`}
-          />
+          {renderStatusIcon({
+            gradient,
+            status,
+          })}
         </Circle>
       </Box>
       <Text

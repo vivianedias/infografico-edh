@@ -70,7 +70,7 @@ export default function SecretaryContent({
   stateSecretaries: OrgaosFields[];
 }) {
   return (
-    <HStack>
+    <HStack overflowX={"auto"}>
       {stateSecretaries.map((stateSecretary, i) => {
         const { orgao__estado, createdAt, id, ...rest } = stateSecretary;
         return (

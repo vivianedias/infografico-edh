@@ -9,7 +9,7 @@ import {
   ModalOverlay,
   VStack,
 } from "@chakra-ui/react";
-import { StatesResponse } from "../types/airtable";
+import { StatesFields, StatesResponse } from "../types/airtable";
 import {
   BriefcaseIcon,
   UsersIcon,
@@ -23,24 +23,27 @@ import SecretaryContent from "./SecretaryContent";
 
 type IconItemsReturn = {
   label: string;
-  EmojiIcon: React.FC;
+  status: string;
   MainIcon: React.FC;
 };
 
-const ICON_ITEMS = (t: (param: string) => string): IconItemsReturn[] => [
+const ICON_ITEMS = (
+  t: (param: string) => string,
+  stateInfo: StatesFields
+): IconItemsReturn[] => [
   {
     label: t("category.document"),
-    EmojiIcon: FaceSmileIcon,
+    status: stateInfo.estado_basico__documento_orientador,
     MainIcon: BriefcaseIcon,
   },
   {
     label: t("category.collegiate"),
-    EmojiIcon: FaceSmileIcon,
+    status: stateInfo.estado_basico__orgao_colegiado,
     MainIcon: UsersIcon,
   },
   {
     label: t("category.govern"),
-    EmojiIcon: FaceSmileIcon,
+    status: stateInfo.estado_basico__orgao_publico,
     MainIcon: DocumentTextIcon,
   },
 ];
@@ -78,7 +81,7 @@ export default function ExpandedPopup({
         <ModalBody>
           <VStack spacing={8}>
             <HStack justify={"space-around"} color={"brand.primary"}>
-              {ICON_ITEMS(t).map(({ label, ...rest }, i) => (
+              {ICON_ITEMS(t, stateInfo).map(({ label, ...rest }, i) => (
                 <IconWithEmoji
                   key={`icon-with-emoji-${i}`}
                   category={label}
