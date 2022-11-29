@@ -79,8 +79,12 @@ export default function ExpandedPopup({
         <ModalHeader>{stateInfo?.estado__nome}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <VStack spacing={8}>
-            <HStack justify={"space-around"} color={"brand.primary"}>
+          <VStack spacing={8} overflowX={"hidden"}>
+            <HStack
+              justify={"space-around"}
+              color={"brand.primary"}
+              spacing={16}
+            >
               {ICON_ITEMS(t, stateInfo).map(({ label, ...rest }, i) => (
                 <IconWithEmoji
                   key={`icon-with-emoji-${i}`}

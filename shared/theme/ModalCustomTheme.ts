@@ -19,7 +19,8 @@ const baseStyle = definePartsStyle((props) => {
     body: {
       bgColor: "white",
       color: "brand.primary",
-      overflow: "hidden",
+      maxH: "3xl",
+      overflowX: "hidden",
     },
     dialog: {
       w: "xl",

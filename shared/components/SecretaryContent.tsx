@@ -23,12 +23,12 @@ function SecretaryContentLineItem({
         textAlign={"right"}
         lineHeight={"none"}
         fontWeight={700}
-        flex={1}
+        flex={0.5}
         textTransform={"capitalize"}
       >
         {title}:
       </Text>
-      <Box height={"100%"} position={"absolute"} right={"50%"}>
+      <Box height={"100%"} position={"absolute"} right={"73%"}>
         <Divider
           border={"1px solid"}
           borderColor={"brand.primary"}
@@ -36,7 +36,7 @@ function SecretaryContentLineItem({
           alignItems={"stretch"}
         />
       </Box>
-      <Text flex={1}>{description}</Text>
+      <Text flex={1.5}>{description}</Text>
     </HStack>
   );
 }
@@ -49,7 +49,13 @@ function SecretaryContentItem({ stateSecretary }: SecretaryContentItemProps) {
   const { t } = useTranslation("home");
 
   return (
-    <VStack bgColor={"brand.light"} borderRadius={"2xl"} p={7}>
+    <VStack
+      bgColor={"brand.light"}
+      borderRadius={"2xl"}
+      py={6}
+      px={4}
+      minW={"90%"}
+    >
       {Object.keys(stateSecretary).map((secretaryKey, i) => {
         const key = secretaryKey as keyof typeof stateSecretary;
         return (
@@ -70,7 +76,7 @@ export default function SecretaryContent({
   stateSecretaries: OrgaosFields[];
 }) {
   return (
-    <HStack overflowX={"auto"}>
+    <HStack w={"md"} align={"flex-start"}>
       {stateSecretaries.map((stateSecretary, i) => {
         const { orgao__estado, createdAt, id, ...rest } = stateSecretary;
         return (
