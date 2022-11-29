@@ -63,8 +63,6 @@ export default function ExpandedPopup({
   const degree = stateInfo?.estado_basico__grau_institucionalizacao;
   const gradient = INFO_ACCESS[degree];
 
-  // console.log({ stateInfo });
-
   return (
     <Modal
       onClose={onClose}
@@ -90,7 +88,9 @@ export default function ExpandedPopup({
               ))}
             </HStack>
             <Divider borderColor={"brand.primary"} borderWidth={"1px"} />
-            <SecretaryContent />
+            {stateInfo.orgaos ? (
+              <SecretaryContent stateSecretaries={stateInfo.orgaos} />
+            ) : null}
           </VStack>
         </ModalBody>
       </ModalContent>

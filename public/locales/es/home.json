@@ -20,13 +20,13 @@
   },
   "popup": {
     "expanded": {
-      "governmentBodies": "cuerpos gubernamentales",
-      "budget": "Presupuesto",
-      "concept": "Concepto",
-      "mainTopics": "temas principales",
-      "policies": "Políticas de EDH",
-      "plans": "EDH en planes educativos",
-      "teamSize": "equipo EDH"
+      "orgao__nome": "cuerpos gubernamentales",
+      "orgao__orcamento": "Presupuesto",
+      "orgao__conceito_edh": "Concepto",
+      "orgao__temas_principais": "temas principales",
+      "orgao__atividades_principais": "Políticas de EDH",
+      "orgao__edh_plano_educacao": "EDH en planes educativos",
+      "orgao__equipe_edh": "equipo EDH"
     }
   },
   "errorMsg": {

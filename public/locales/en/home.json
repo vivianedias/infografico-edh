@@ -20,13 +20,13 @@
   },
   "popup": {
     "expanded": {
-      "governmentBodies": "Government Bodies",
-      "budget": "Budget",
-      "concept": "Concept",
-      "mainTopics": "Main Topics",
-      "policies": "EDH Policies",
-      "plans": "Education Plans for EDH",
-      "teamSize": "EDH Team"
+      "orgao__nome": "Government Bodies",
+      "orgao__orcamento": "Budget",
+      "orgao__conceito_edh": "Concept",
+      "orgao__temas_principais": "Main Topics",
+      "orgao__atividades_principais": "EDH Policies",
+      "orgao__edh_plano_educacao": "Education Plans for EDH",
+      "orgao__equipe_edh": "EDH Team"
     }
   },
   "errorMsg": {

@@ -15,7 +15,11 @@ export default function IconWithEmoji({
   return (
     <VStack justify={"center"} align={"center"}>
       <Box position="relative">
-        <Icon as={MainIcon} boxSize={"50px"} backgroundColor={"transparent"} />
+        <Icon
+          as={MainIcon}
+          boxSize={"2.5rem"}
+          backgroundColor={"transparent"}
+        />
         <Circle
           position="absolute"
           bottom={0}
@@ -31,10 +35,10 @@ export default function IconWithEmoji({
         </Circle>
       </Box>
       <Text
-        lineHeight={"base"}
-        fontWeight={500}
+        lineHeight={"none"}
+        fontWeight={700}
         textAlign={"center"}
-        fontSize={"xl"}
+        fontSize={"sm"}
       >
         {category}
       </Text>

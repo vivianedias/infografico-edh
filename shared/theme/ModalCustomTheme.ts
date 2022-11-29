@@ -15,7 +15,6 @@ const baseStyle = definePartsStyle((props) => {
       textAlign: "center",
       bgColor: `brand.gradient.${c}.primary`,
       color: `brand.gradient.${c}.text`,
-      h: "5.438rem",
     },
     body: {
       bgColor: "white",
@@ -39,17 +38,18 @@ const baseStyle = definePartsStyle((props) => {
 });
 
 const xl = defineStyle({
-  py: 4,
-  fontSize: "4xl",
+  py: 5,
+  fontSize: "3xl",
   lineHeight: "150%",
   fontWeight: 500,
 });
 
 const md = defineStyle({
-  fontSize: "md",
-  p: 12,
+  fontSize: "sm",
+  py: 10,
+  px: 8,
   fontWeight: 400,
-  lineHeight: "shorter",
+  lineHeight: "none",
 });
 
 const sizes = {

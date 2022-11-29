@@ -11,10 +11,10 @@ import { Header, Footer, Analytics } from "../shared/components";
 import fetcher from "../shared/utils/fetcher";
 import { IS_IN_MAINTENANCE } from "@/shared/utils/constants";
 
+import "@fontsource/montserrat/300.css";
 import "@fontsource/montserrat/400.css";
 import "@fontsource/montserrat/500.css";
 import "@fontsource/montserrat/700.css";
-import "@fontsource/montserrat/300.css";
 
 const theme = extendTheme(customTheme);
 

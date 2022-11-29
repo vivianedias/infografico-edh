@@ -1,78 +1,82 @@
-import { HStack, VStack, Text } from "@chakra-ui/react";
+import { HStack, VStack, Text, Divider, Box } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
+import { OrgaosFields } from "../types/airtable";
 
-function SecretaryContentItem({
+function SecretaryContentLineItem({
   title,
   description,
 }: {
   title: string;
-  description: string;
+  description: any;
 }) {
   return (
-    <HStack direction={"column"} spacing={7} align={"flex-start"}>
+    <HStack
+      direction={"column"}
+      spacing={7}
+      align={"flex-start"}
+      mt={"0 !important"}
+      position={"relative"}
+      w={"100%"}
+      pb={7}
+    >
       <Text
         textAlign={"right"}
-        lineHeight={"base"}
-        fontWeight={500}
-        fontSize={"lg"}
-        flex={0.5}
+        lineHeight={"none"}
+        fontWeight={700}
+        flex={1}
         textTransform={"capitalize"}
       >
         {title}:
       </Text>
+      <Box height={"100%"} position={"absolute"} right={"50%"}>
+        <Divider
+          border={"1px solid"}
+          borderColor={"brand.primary"}
+          orientation={"vertical"}
+          alignItems={"stretch"}
+        />
+      </Box>
       <Text flex={1}>{description}</Text>
     </HStack>
   );
 }
 
-type SecretariesReturn = {
-  title: string;
-  description: string;
+type SecretaryContentItemProps = {
+  stateSecretary: Omit<OrgaosFields, "orgao__estado" | "createdAt" | "id">;
 };
 
-const SECRETARIES = (t: (param: string) => string): SecretariesReturn[] => [
-  {
-    title: t("popup.expanded.governmentBodies"),
-    description: "",
-  },
-  {
-    title: t("popup.expanded.budget"),
-    description: "",
-  },
-  {
-    title: t("popup.expanded.concept"),
-    description: "",
-  },
-  {
-    title: t("popup.expanded.mainTopics"),
-    description: "",
-  },
-  {
-    title: t("popup.expanded.policies"),
-    description: "",
-  },
-  {
-    title: t("popup.expanded.plans"),
-    description: "",
-  },
-  {
-    title: t("popup.expanded.teamSize"),
-    description: "",
-  },
-];
-
-export default function SecretaryContent() {
+function SecretaryContentItem({ stateSecretary }: SecretaryContentItemProps) {
   const { t } = useTranslation("home");
 
   return (
-    <VStack spacing={5}>
-      {SECRETARIES(t).map((props, i) => (
-        <SecretaryContentItem
-          {...props}
-          key={`secretary-content-item-${i}`}
-          description={`Coordenadoria de Direitos Humanos da Secretaria de Estado da Mulher, Inclusão, Assistência Social, do Trabalho e dos Direitos Humanos. Serviço de Projetos Escolares em Direitos Humanos da Secretaria de Estado da Educação.`}
-        />
-      ))}
+    <VStack bgColor={"brand.light"} borderRadius={"2xl"} p={7}>
+      {Object.keys(stateSecretary).map((secretaryKey, i) => {
+        const key = secretaryKey as keyof typeof stateSecretary;
+        return (
+          <SecretaryContentLineItem
+            key={`secretary-content-item-${i}`}
+            title={t(`popup.expanded.${secretaryKey}`)}
+            description={stateSecretary[key]}
+          />
+        );
+      })}
     </VStack>
+  );
+}
+
+export default function SecretaryContent({
+  stateSecretaries,
+}: {
+  stateSecretaries: OrgaosFields[];
+}) {
+  return (
+    <HStack>
+      {stateSecretaries.map((stateSecretary, i) => {
+        const { orgao__estado, createdAt, id, ...rest } = stateSecretary;
+        return (
+          <SecretaryContentItem stateSecretary={rest} key={`secretary-${i}`} />
+        );
+      })}
+    </HStack>
   );
 }
