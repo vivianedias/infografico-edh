@@ -1,6 +1,9 @@
 import { HStack, VStack, Text, Divider, Box } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
+import { useState } from "react";
 import { OrgaosFields } from "../types/airtable";
+import styles from "../../styles/SecretaryContent.module.css";
+import { css } from "@emotion/react";
 
 function SecretaryContentLineItem({
   title,
@@ -43,9 +46,13 @@ function SecretaryContentLineItem({
 
 type SecretaryContentItemProps = {
   stateSecretary: Omit<OrgaosFields, "orgao__estado" | "createdAt" | "id">;
+  onClick: () => void;
 };
 
-function SecretaryContentItem({ stateSecretary }: SecretaryContentItemProps) {
+function SecretaryContentItem({
+  stateSecretary,
+  onClick,
+}: SecretaryContentItemProps) {
   const { t } = useTranslation("home");
 
   return (
@@ -55,6 +62,7 @@ function SecretaryContentItem({ stateSecretary }: SecretaryContentItemProps) {
       py={6}
       px={4}
       minW={"90%"}
+      onClick={onClick}
     >
       {Object.keys(stateSecretary).map((secretaryKey, i) => {
         const key = secretaryKey as keyof typeof stateSecretary;
@@ -75,12 +83,32 @@ export default function SecretaryContent({
 }: {
   stateSecretaries: OrgaosFields[];
 }) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
   return (
-    <HStack w={"md"} align={"flex-start"}>
+    <HStack
+      w={"md"}
+      align={"flex-start"}
+      css={
+        !activeIndex &&
+        stateSecretaries.length > 1 &&
+        css`
+          position: relative;
+          left: 10px;
+        `
+      }
+      className={`${activeIndex === 0 && styles["slide-in"]} ${
+        activeIndex === 1 && styles["slide-out"]
+      }`}
+    >
       {stateSecretaries.map((stateSecretary, i) => {
         const { orgao__estado, createdAt, id, ...rest } = stateSecretary;
         return (
-          <SecretaryContentItem stateSecretary={rest} key={`secretary-${i}`} />
+          <SecretaryContentItem
+            onClick={() => setActiveIndex(i)}
+            stateSecretary={rest}
+            key={`secretary-${i}`}
+          />
         );
       })}
     </HStack>
