@@ -1,25 +1,32 @@
+import { useState } from "react";
+import { useTranslation } from "next-i18next";
 import {
   Divider,
   HStack,
+  IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
+  ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
   VStack,
 } from "@chakra-ui/react";
-import { StatesFields, StatesResponse } from "../types/airtable";
 import {
-  BriefcaseIcon,
-  UsersIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
   DocumentTextIcon,
-  FaceSmileIcon,
-} from "@heroicons/react/24/outline";
+  UsersIcon,
+  BriefcaseIcon,
+} from "@heroicons/react/24/solid";
+
 import IconWithEmoji from "./IconWithEmoji";
-import { useTranslation } from "next-i18next";
-import { INFO_ACCESS } from "../utils/buildCaseFilters";
 import SecretaryContent from "./SecretaryContent";
+
+import { INFO_ACCESS } from "../utils/buildCaseFilters";
+import { OrgaosFields, StatesFields, StatesResponse } from "../types/airtable";
 
 type IconItemsReturn = {
   label: string;
@@ -48,6 +55,41 @@ const ICON_ITEMS = (
   },
 ];
 
+function Pagination({
+  page,
+  setPage,
+  gradient,
+}: {
+  page: number;
+  setPage: (param: number) => void;
+  gradient: string;
+}) {
+  return (
+    <HStack color={`brand.gradient.${gradient}.primary`}>
+      <IconButton
+        icon={<ChevronLeftIcon />}
+        aria-label={"Ir para direita"}
+        onClick={() => setPage(0)}
+        variant={"link"}
+        disabled={page === 1}
+        size={"sm"}
+        color={`brand.gradient.${gradient}.primary`}
+      />
+      <Text fontWeight={page === 1 ? 700 : 400}>1</Text> -{" "}
+      <Text fontWeight={page === 2 ? 700 : 400}>2</Text>
+      <IconButton
+        icon={<ChevronRightIcon />}
+        aria-label={"Ir para esquerda"}
+        onClick={() => setPage(1)}
+        variant={"link"}
+        disabled={page === 2}
+        size={"sm"}
+        color={`brand.gradient.${gradient}.primary`}
+      />
+    </HStack>
+  );
+}
+
 export default function ExpandedPopup({
   onClose,
   isOpen,
@@ -57,6 +99,7 @@ export default function ExpandedPopup({
   isOpen: boolean;
   stateInfo?: StatesResponse;
 }) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const { t } = useTranslation("home");
 
   if (!stateInfo) {
@@ -65,6 +108,7 @@ export default function ExpandedPopup({
 
   const degree = stateInfo?.estado_basico__grau_institucionalizacao;
   const gradient = INFO_ACCESS[degree];
+  const hasStateSecretaries = stateInfo.orgaos && stateInfo.orgaos.length > 0;
 
   return (
     <Modal
@@ -79,7 +123,11 @@ export default function ExpandedPopup({
         <ModalHeader>{stateInfo?.estado__nome}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <VStack spacing={8} overflowX={"hidden"}>
+          <VStack
+            spacing={8}
+            overflowX={"hidden"}
+            overflowY={hasStateSecretaries ? "auto" : "hidden"}
+          >
             <HStack
               justify={"space-around"}
               color={"brand.primary"}
@@ -94,12 +142,27 @@ export default function ExpandedPopup({
                 />
               ))}
             </HStack>
-            <Divider borderColor={"brand.primary"} borderWidth={"1px"} />
-            {stateInfo.orgaos ? (
-              <SecretaryContent stateSecretaries={stateInfo.orgaos} />
+            {hasStateSecretaries ? (
+              <>
+                <Divider borderColor={"brand.primary"} borderWidth={"1px"} />
+                <SecretaryContent
+                  stateSecretaries={stateInfo.orgaos as OrgaosFields[]}
+                  activeIndex={activeIndex}
+                  setActiveIndex={setActiveIndex}
+                />
+              </>
             ) : null}
           </VStack>
         </ModalBody>
+        {stateInfo.orgaos && stateInfo.orgaos.length > 1 ? (
+          <ModalFooter>
+            <Pagination
+              page={activeIndex ? activeIndex + 1 : 1}
+              setPage={setActiveIndex}
+              gradient={gradient}
+            />
+          </ModalFooter>
+        ) : null}
       </ModalContent>
     </Modal>
   );

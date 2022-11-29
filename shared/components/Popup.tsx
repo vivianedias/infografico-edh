@@ -34,7 +34,7 @@ export function PopupContent({
 
   return (
     <>
-      <Box rounded={"md"} boxShadow={"md"} width={"230px"}>
+      <Box rounded={"md"} boxShadow={"md"} width={"230px"} overflow={"hidden"}>
         <Flex
           justifyContent={"space-evenly"}
           py={2}

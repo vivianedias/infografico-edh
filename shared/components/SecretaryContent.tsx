@@ -80,11 +80,14 @@ function SecretaryContentItem({
 
 export default function SecretaryContent({
   stateSecretaries,
+  activeIndex,
+  setActiveIndex,
 }: {
   stateSecretaries: OrgaosFields[];
+  activeIndex: number | null;
+  setActiveIndex: (param: number) => void;
 }) {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
+  console.log({ stateSecretaries });
   return (
     <HStack
       w={"md"}

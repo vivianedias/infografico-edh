@@ -36,6 +36,10 @@ const baseStyle = definePartsStyle((props) => {
       borderRadius: "full",
       p: 2.5,
     },
+    footer: {
+      justifyContent: "center",
+      py: 2,
+    },
   };
 });
 

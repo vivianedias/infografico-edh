@@ -29,12 +29,12 @@ function renderStatusIcon({
     case "PARCIALMENTE":
       return (
         <Box
-          h={"1.25rem"}
-          w={"0.625rem"}
+          h={"1.125rem"}
+          w={"0.563rem"}
           display={"inline-block"}
           bgColor={`brand.gradient.${gradient}.text`}
-          borderBottomRightRadius={"1.25rem"}
-          borderTopRightRadius={"1.25rem"}
+          borderBottomRightRadius={"1.125rem"}
+          borderTopRightRadius={"1.125rem"}
           position={"absolute"}
           right={"2px"}
         />
@@ -42,7 +42,7 @@ function renderStatusIcon({
     case "NÃO FOI POSSÍVEL CONSTATAR":
       return (
         <Box
-          boxSize={"1.25rem"}
+          boxSize={"1.125rem"}
           display={"inline-block"}
           bgColor={"brand.light"}
           borderRadius={"full"}
@@ -74,7 +74,7 @@ export default function IconWithEmoji({
           position="absolute"
           bottom={0}
           left={"30px"}
-          size={6}
+          size={5}
           bgColor={`brand.gradient.${gradient}.primary`}
         >
           {renderStatusIcon({
