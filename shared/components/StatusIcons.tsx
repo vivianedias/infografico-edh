@@ -55,12 +55,12 @@ export default function StatusIcon({
           color="brand.primary"
         >
           <Box
-            h={"1rem"}
-            w={"0.5rem"}
+            h={4}
+            w={2}
             display={"inline-block"}
             bgColor={`brand.gradient.${gradient}.text`}
-            borderBottomRightRadius={"1rem"}
-            borderTopRightRadius={"1rem"}
+            borderBottomRightRadius={4}
+            borderTopRightRadius={4}
             position={"absolute"}
             right={"2px"}
           />

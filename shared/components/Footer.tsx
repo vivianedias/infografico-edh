@@ -96,7 +96,7 @@ const FooterColumn = ({ FOOTER_ITEMS }: { FOOTER_ITEMS: FooterItensType }) => {
           color={"header.menu.link"}
           href={navItem.href}
           isExternal
-          fontSize={"16px"}
+          fontSize={"md"}
           fontWeight={500}
           _hover={{
             textDecoration: "none",
@@ -135,7 +135,7 @@ const SocialMediaIcon = ({
 }) => {
   return (
     <Link isExternal href={href}>
-      <Square bgColor={bgColor} size={"32px"}>
+      <Square bgColor={bgColor} size={8}>
         <Icon as={SVGIcon} />
       </Square>
     </Link>

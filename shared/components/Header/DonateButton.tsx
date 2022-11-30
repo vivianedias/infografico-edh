@@ -1,20 +1,17 @@
-import { Button, ButtonGroup, Icon, Link } from "@chakra-ui/react";;
+import { Button, ButtonGroup, Icon, Link } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
 type TranslationType = (param: string) => string;
 
 const DonateButton = ({ t }: { t: TranslationType }) => {
-  const donateHref = "https://app.doare.org/br/doacao/229743/instituto-aurora/por-um-mundo-onde-nenhuma-vida-vale-menos-do-que-outra"
+  const donateHref =
+    "https://app.doare.org/br/doacao/229743/instituto-aurora/por-um-mundo-onde-nenhuma-vida-vale-menos-do-que-outra";
 
   return (
-    <Link
-      href={donateHref}
-      isExternal
-      _hover={{textDecoration: "solid"}}
-    >
-      <ButtonGroup size="sm" isAttached variant="outline" >
+    <Link href={donateHref} isExternal _hover={{ textDecoration: "solid" }}>
+      <ButtonGroup size="sm" isAttached variant="outline">
         <Button
-          maxW={"75px"}
+          maxW={20}
           fontSize={"sm"}
           fontWeight={700}
           color={"white"}

@@ -12,7 +12,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 const DesktopNav = ({ NAV_ITEMS, t }: DesktopNavType) => {
   return (
-    <Stack display={{ base: "none", md: "flex" }} direction={"row"} spacing={5} >
+    <Stack display={{ base: "none", md: "flex" }} direction={"row"} spacing={5}>
       {NAV_ITEMS(t).map((navItem, i) => {
         return (
           <Box key={`${navItem.label}-${i}`}>
@@ -68,7 +68,7 @@ const DropDownContent = ({ navItemChildren }: DropDownContentType) => {
       bg={"header.subMenu.background"}
       p={6}
       rounded={0}
-      maxW={"240px"}
+      maxW={60}
     >
       <Stack>
         {navItemChildren.map((child: any) => (

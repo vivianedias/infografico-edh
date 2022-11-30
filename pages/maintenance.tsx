@@ -9,23 +9,17 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
       locale,
-      ...(await serverSideTranslations(locale || "pt-BR", [
-        "maintenance",
-      ])),
+      ...(await serverSideTranslations(locale || "pt-BR", ["maintenance"])),
     },
   };
-}
-
+};
 
 export default function Maintenance() {
-  const { t } = useTranslation("maintenance")
+  const { t } = useTranslation("maintenance");
 
   return (
     <>
-      <Head 
-        title={t("title")}
-        description={t("description")}
-      />
+      <Head title={t("title")} description={t("description")} />
       <VStack
         as="article"
         bgColor={"red.500"}
@@ -36,19 +30,20 @@ export default function Maintenance() {
         align={"center"}
         spacing={6}
       >
-        <Circle bgColor={"white"} size={"75px"}>
-          <Icon as={ExclamationTriangleIcon} color={"red.500"} boxSize={"55px"} />
+        <Circle bgColor={"white"} size={20}>
+          <Icon as={ExclamationTriangleIcon} color={"red.500"} boxSize={14} />
         </Circle>
         <Heading as="h1" size={"2xl"} color={"white"}>
           {t("heading")}
         </Heading>
         <Box maxW={"40%"}>
           <Text textAlign={"center"} fontSize={"lg"} mb={6} color={"white"}>
-            {t("description")}{" "}{t("statusUpdate1")}
-            <a href="https://www.twitter.com/">Twitter</a>{" "}
-            {t("statusUpdate2")}
+            {t("description")} {t("statusUpdate1")}
+            <a href="https://www.twitter.com/">Twitter</a> {t("statusUpdate2")}
           </Text>
-          <Text textAlign={"center"} color={"white"}>{t("signature")}</Text>
+          <Text textAlign={"center"} color={"white"}>
+            {t("signature")}
+          </Text>
         </Box>
       </VStack>
     </>

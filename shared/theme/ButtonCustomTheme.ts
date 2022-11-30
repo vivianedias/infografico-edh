@@ -13,8 +13,8 @@ const baseStyle = defineStyle({
 const sizes = {
   md: defineStyle({
     fontSize: "xl",
-    minH: "4.313rem",
-    minW: "7.688rem",
+    minH: 16,
+    minW: 32,
     margin: "0 !important",
   }),
 };

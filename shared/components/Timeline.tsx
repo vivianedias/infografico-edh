@@ -36,7 +36,7 @@ function YearBlock({
       w={"full"}
     >
       <Circle
-        size={"20px"}
+        size={5}
         borderColor={"brand.pink"}
         border={"3px solid"}
         bgColor={"white"}
