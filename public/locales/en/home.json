@@ -27,6 +27,12 @@
       "orgao__atividades_principais": "EDH Policies",
       "orgao__edh_plano_educacao": "Education Plans for EDH",
       "orgao__equipe_edh": "EDH Team"
+    },
+    "icons": {
+      "SIM": "There is a",
+      "NÃO": "There's no",
+      "PARCIALMENTE": "Partially has",
+      "NÃO FOI POSSÍVEL CONSTATAR": "We couldn't find any"
     }
   },
   "errorMsg": {

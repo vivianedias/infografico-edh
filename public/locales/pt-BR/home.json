@@ -27,6 +27,12 @@
       "orgao__atividades_principais": "Políticas de EDH",
       "orgao__edh_plano_educacao": "EDH nos planos de educação",
       "orgao__equipe_edh": "Equipe de EDH"
+    },
+    "icons": {
+      "SIM": "Possui",
+      "NÃO": "Não possui",
+      "PARCIALMENTE": "Possui parcialmente",
+      "NÃO FOI POSSÍVEL CONSTATAR": "Não foi possível constatar se possui"
     }
   },
   "errorMsg": {

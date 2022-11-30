@@ -149,7 +149,7 @@ export default function ExpandedPopup({
                 <SecretaryContent
                   stateSecretaries={stateInfo.orgaos as OrgaosFields[]}
                   activeIndex={activeIndex}
-                  setActiveIndex={setActiveIndex}
+                  gradient={gradient}
                 />
               </>
             ) : null}

@@ -1,16 +1,85 @@
 import { useTranslation } from "next-i18next";
-import { HStack, VStack, Text, Divider, Box } from "@chakra-ui/react";
+import {
+  HStack,
+  VStack,
+  Text,
+  Divider,
+  Box,
+  Flex,
+  Circle,
+} from "@chakra-ui/react";
 import { css } from "@emotion/react";
 
+import StatusIcon from "./StatusIcons";
 import { OrgaosFields } from "../types/airtable";
 import styles from "../../styles/SecretaryContent.module.css";
+
+function renderEducationalPlansTags({
+  gradient,
+  tags,
+}: {
+  gradient: string;
+  tags: string[];
+}) {
+  return (
+    <Flex flexWrap={"wrap"} gap={2}>
+      {tags.map((t, i) => (
+        <Box
+          key={`educational-plans-tags-${i}`}
+          p={2.5}
+          bgColor={`brand.gradient.${gradient}.primary`}
+          color={`brand.gradient.${gradient}.text`}
+          fontSize={"sm"}
+          fontWeight={500}
+          borderRadius={"base"}
+        >
+          {t}
+        </Box>
+      ))}
+    </Flex>
+  );
+}
+
+function renderSecretaryContentLineText({
+  description,
+  property,
+  gradient,
+}: {
+  description: string | string[];
+  property: string;
+  gradient: string;
+}) {
+  switch (property) {
+    case "orgao__temas_principais":
+      return renderEducationalPlansTags({
+        gradient,
+        tags: description as string[],
+      });
+    case "orgao__edh_plano_educacao":
+      return (
+        <Circle size={5} bgColor={`brand.gradient.${gradient}.primary`}>
+          <StatusIcon
+            status={description as string}
+            gradient={gradient}
+            category={"plano de educação"}
+          />
+        </Circle>
+      );
+    default:
+      return <Text>{description}</Text>;
+  }
+}
 
 function SecretaryContentLineItem({
   title,
   description,
+  property,
+  gradient,
 }: {
   title: string;
   description: any;
+  property: string;
+  gradient: string;
 }) {
   return (
     <HStack
@@ -22,13 +91,7 @@ function SecretaryContentLineItem({
       w={"100%"}
       pb={7}
     >
-      <Text
-        textAlign={"right"}
-        lineHeight={"none"}
-        fontWeight={700}
-        flex={0.5}
-        textTransform={"capitalize"}
-      >
+      <Text textAlign={"right"} lineHeight={"none"} fontWeight={700} flex={0.5}>
         {title}:
       </Text>
       <Box height={"100%"} position={"absolute"} right={"73%"}>
@@ -39,19 +102,25 @@ function SecretaryContentLineItem({
           alignItems={"stretch"}
         />
       </Box>
-      <Text flex={1.5}>{description}</Text>
+      <Box flex={1.5}>
+        {renderSecretaryContentLineText({
+          description,
+          property,
+          gradient,
+        })}
+      </Box>
     </HStack>
   );
 }
 
 type SecretaryContentItemProps = {
   stateSecretary: Omit<OrgaosFields, "orgao__estado" | "createdAt" | "id">;
-  onClick: () => void;
+  gradient: string;
 };
 
 function SecretaryContentItem({
   stateSecretary,
-  onClick,
+  gradient,
 }: SecretaryContentItemProps) {
   const { t } = useTranslation("home");
 
@@ -62,8 +131,6 @@ function SecretaryContentItem({
       py={6}
       px={4}
       minW={"90%"}
-      onClick={onClick}
-      cursor={"pointer"}
     >
       {Object.keys(stateSecretary).map((secretaryKey, i) => {
         const key = secretaryKey as keyof typeof stateSecretary;
@@ -72,6 +139,8 @@ function SecretaryContentItem({
             key={`secretary-content-item-${i}`}
             title={t(`popup.expanded.${secretaryKey}`)}
             description={stateSecretary[key]}
+            property={key}
+            gradient={gradient}
           />
         );
       })}
@@ -82,11 +151,11 @@ function SecretaryContentItem({
 export default function SecretaryContent({
   stateSecretaries,
   activeIndex,
-  setActiveIndex,
+  gradient,
 }: {
   stateSecretaries: OrgaosFields[];
   activeIndex: number | null;
-  setActiveIndex: (param: number) => void;
+  gradient: string;
 }) {
   return (
     <HStack
@@ -108,14 +177,9 @@ export default function SecretaryContent({
         const { orgao__estado, createdAt, id, ...rest } = stateSecretary;
         return (
           <SecretaryContentItem
-            onClick={() => {
-              if (stateSecretaries.length > 1) {
-                return setActiveIndex(i);
-              }
-              return null;
-            }}
             stateSecretary={rest}
             key={`secretary-${i}`}
+            gradient={gradient}
           />
         );
       })}

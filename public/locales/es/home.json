@@ -20,13 +20,19 @@
   },
   "popup": {
     "expanded": {
-      "orgao__nome": "cuerpos gubernamentales",
+      "orgao__nome": "Cuerpos gubernamentales",
       "orgao__orcamento": "Presupuesto",
       "orgao__conceito_edh": "Concepto",
-      "orgao__temas_principais": "temas principales",
+      "orgao__temas_principais": "Temas principales",
       "orgao__atividades_principais": "Políticas de EDH",
       "orgao__edh_plano_educacao": "EDH en planes educativos",
-      "orgao__equipe_edh": "equipo EDH"
+      "orgao__equipe_edh": "Equipo EDH"
+    },
+    "icons": {
+      "SIM": "Hay",
+      "NÃO": "No hay",
+      "PARCIALMENTE": "Tiene parcialmente",
+      "NÃO FOI POSSÍVEL CONSTATAR": "No fue posible determinar si"
     }
   },
   "errorMsg": {
