@@ -44,7 +44,7 @@ const theme = {
         none: {
           primary: "rgba(188, 154, 200, 1)",
           secondary: "#e0cce7",
-          text: "rgba(98, 66, 110, 1)",
+          text: "white",
         },
         no_info: {
           primary: "rgba(239, 198, 223, 1)",

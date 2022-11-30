@@ -20,7 +20,7 @@ import {
   DocumentTextIcon,
   UsersIcon,
   BriefcaseIcon,
-} from "@heroicons/react/24/solid";
+} from "@heroicons/react/24/outline";
 
 import IconWithEmoji from "./IconWithEmoji";
 import SecretaryContent from "./SecretaryContent";

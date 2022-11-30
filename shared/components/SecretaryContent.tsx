@@ -1,9 +1,9 @@
-import { HStack, VStack, Text, Divider, Box } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
-import { useState } from "react";
+import { HStack, VStack, Text, Divider, Box } from "@chakra-ui/react";
+import { css } from "@emotion/react";
+
 import { OrgaosFields } from "../types/airtable";
 import styles from "../../styles/SecretaryContent.module.css";
-import { css } from "@emotion/react";
 
 function SecretaryContentLineItem({
   title,
@@ -87,7 +87,6 @@ export default function SecretaryContent({
   activeIndex: number | null;
   setActiveIndex: (param: number) => void;
 }) {
-  console.log({ stateSecretaries });
   return (
     <HStack
       w={"md"}
@@ -108,7 +107,12 @@ export default function SecretaryContent({
         const { orgao__estado, createdAt, id, ...rest } = stateSecretary;
         return (
           <SecretaryContentItem
-            onClick={() => setActiveIndex(i)}
+            onClick={() => {
+              if (stateSecretaries.length > 1) {
+                return setActiveIndex(i);
+              }
+              return null;
+            }}
             stateSecretary={rest}
             key={`secretary-${i}`}
           />
