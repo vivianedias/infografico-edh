@@ -1,8 +1,11 @@
 import { FunctionComponent, ReactNode, useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
+import { useTranslation } from "next-i18next";
 import {
   Box,
+  Circle,
   Flex,
+  HStack,
   Icon,
   IconButton,
   List,
@@ -13,8 +16,27 @@ import {
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
 import ExpandedPopup from "./ExpandedPopup";
+import StatusIcon from "./StatusIcons";
 import { INFO_ACCESS } from "../utils/buildCaseFilters";
 import { StatesResponse } from "../types/airtable";
+
+const POPUP_ITEMS = (
+  t: (param: string) => string,
+  stateInfo: StatesResponse
+) => [
+  {
+    status: stateInfo.estado_basico__documento_orientador,
+    category: t("category.document"),
+  },
+  {
+    status: stateInfo.estado_basico__orgao_publico,
+    category: t("category.govern"),
+  },
+  {
+    status: stateInfo.estado_basico__orgao_colegiado,
+    category: t("category.collegiate"),
+  },
+];
 
 export function PopupContent({
   label,
@@ -24,6 +46,7 @@ export function PopupContent({
   stateInfo?: StatesResponse;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { t } = useTranslation("home");
 
   if (!stateInfo) {
     return null;
@@ -65,11 +88,27 @@ export function PopupContent({
             }
           />
         </Flex>
-        <Box px={7} py={3} backgroundColor={"white"}>
-          <List fontSize={"sm"} color={"brand.primary"}>
-            <ListItem>Documento orientador</ListItem>
-            <ListItem>Orgão de governo</ListItem>
-            <ListItem>Orgão colegiado</ListItem>
+        <Box px={6} py={3} backgroundColor={"white"}>
+          <List fontSize={"sm"} color={"brand.primary"} spacing={3}>
+            {POPUP_ITEMS(t, stateInfo).map(({ status, category }, i) => (
+              <ListItem key={`popup-items-${i}`}>
+                <HStack>
+                  <Circle
+                    size={4}
+                    bgColor={`brand.gradient.${gradient}.primary`}
+                    position={"relative"}
+                  >
+                    <StatusIcon
+                      gradient={gradient}
+                      status={status}
+                      category={category.toLowerCase()}
+                      size={"sm"}
+                    />
+                  </Circle>
+                  <Text>{category}</Text>
+                </HStack>
+              </ListItem>
+            ))}
           </List>
         </Box>
       </Box>

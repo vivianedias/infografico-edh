@@ -74,7 +74,7 @@ function MonthlyBlock({
       <Flex
         width={"full"}
         direction={"row"}
-        fontSize={"2xl"}
+        fontSize={"xl"}
         justifyContent={"space-between"}
         borderBottom={"1px solid"}
         borderColor={"brand.primary"}
@@ -151,7 +151,7 @@ export default function Timeline({
       spacing={7}
       align={"flex-start"}
     >
-      <Heading color={"brand.primary"} size={"xl"}>
+      <Heading color={"brand.primary"} size={"lg"}>
         {t("timeline.title")}
       </Heading>
       <Box

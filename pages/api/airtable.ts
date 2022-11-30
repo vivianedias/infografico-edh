@@ -30,7 +30,7 @@ function addOrgaosToStatesData(
 ) {
   return states.map((s) => {
     const orgaosByState = orgaos.filter(
-      (o) => o.orgao__estado === s.estado__sigla
+      (o) => o.estado__sigla === s.estado__sigla
     );
     return {
       ...s,

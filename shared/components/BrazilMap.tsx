@@ -10,6 +10,7 @@ import isValid from "../utils/isValid";
 
 import { BrazilStatesGeojson, Feature } from "../types/geojson";
 import { StatesResponse } from "../types/airtable";
+import getStateInfo from "../utils/getStateInfo";
 
 export default function BrazilMap({
   data,
@@ -121,14 +122,15 @@ export default function BrazilMap({
   function includePopups(map: Map) {
     map.on("click", "state-fills", (e: any) => {
       const labels = e.features.map((feature: Feature) => {
-        const stateInfo = tableData.find(
-          (state) => state.estado__sigla === feature.properties.sigla
-        );
         return (
           <PopupContent
             key={feature.properties.id}
             label={feature.properties.name}
-            stateInfo={stateInfo}
+            stateInfo={getStateInfo({
+              tableData,
+              feature,
+              selectedPeriod,
+            })}
           />
         );
       });
