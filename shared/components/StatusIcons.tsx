@@ -60,8 +60,8 @@ export default function StatusIcon({
             w={2}
             display={"inline-block"}
             bgColor={`brand.gradient.${gradient}.text`}
-            borderBottomRightRadius={4}
-            borderTopRightRadius={4}
+            borderBottomRightRadius={"lg"}
+            borderTopRightRadius={"lg"}
             position={"absolute"}
             right={"2px"}
           />
