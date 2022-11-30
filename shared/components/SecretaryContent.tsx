@@ -63,6 +63,7 @@ function SecretaryContentItem({
       px={4}
       minW={"90%"}
       onClick={onClick}
+      cursor={"pointer"}
     >
       {Object.keys(stateSecretary).map((secretaryKey, i) => {
         const key = secretaryKey as keyof typeof stateSecretary;

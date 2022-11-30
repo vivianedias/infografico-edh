@@ -1,6 +1,7 @@
 import { Circle, Box, Icon, VStack, Text, calc } from "@chakra-ui/react";
 import { ComponentType } from "react";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { MinusCircleIcon } from "@heroicons/react/24/outline";
 
 function renderStatusIcon({
   gradient,
@@ -29,23 +30,22 @@ function renderStatusIcon({
     case "PARCIALMENTE":
       return (
         <Box
-          h={"1.125rem"}
-          w={"0.563rem"}
+          h={"1rem"}
+          w={"0.5rem"}
           display={"inline-block"}
           bgColor={`brand.gradient.${gradient}.text`}
-          borderBottomRightRadius={"1.125rem"}
-          borderTopRightRadius={"1.125rem"}
+          borderBottomRightRadius={"1rem"}
+          borderTopRightRadius={"1rem"}
           position={"absolute"}
           right={"2px"}
         />
       );
     case "NÃO FOI POSSÍVEL CONSTATAR":
       return (
-        <Box
-          boxSize={"1.125rem"}
-          display={"inline-block"}
-          bgColor={"brand.light"}
-          borderRadius={"full"}
+        <Icon
+          as={MinusCircleIcon}
+          boxSize={4}
+          color={`brand.gradient.${gradient}.text`}
         />
       );
   }
