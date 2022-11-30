@@ -65,6 +65,8 @@ function renderSecretaryContentLineText({
           />
         </Circle>
       );
+    case "orgao__equipe_edh":
+      return <Text>{description} pessoas</Text>;
     default:
       return <Text>{description}</Text>;
   }
@@ -118,12 +120,24 @@ type SecretaryContentItemProps = {
   gradient: string;
 };
 
+const STATE_SECRETARY_SORT = [
+  "orgao__nome",
+  "orgao__orcamento",
+  "orgao__conceito_edh",
+  "orgao__temas_principais",
+  "orgao__atividades_principais",
+  "orgao__edh_plano_educacao",
+  "orgao__equipe_edh",
+];
+
 function SecretaryContentItem({
   stateSecretary,
   gradient,
 }: SecretaryContentItemProps) {
   const { t } = useTranslation("home");
-
+  const sortedStateSecretary = Object.keys(stateSecretary).sort(
+    (a, b) => STATE_SECRETARY_SORT.indexOf(a) - STATE_SECRETARY_SORT.indexOf(b)
+  );
   return (
     <VStack
       bgColor={"brand.light"}
@@ -132,7 +146,7 @@ function SecretaryContentItem({
       px={4}
       minW={"90%"}
     >
-      {Object.keys(stateSecretary).map((secretaryKey, i) => {
+      {sortedStateSecretary.map((secretaryKey, i) => {
         const key = secretaryKey as keyof typeof stateSecretary;
         return (
           <SecretaryContentLineItem
