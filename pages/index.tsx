@@ -99,7 +99,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     log.error(`Error trying to fetch airtable data`, e);
     return {
       props: {
-        data: null,
+        data: {
+          tableData: null,
+          timeline: null,
+        },
         error: true,
         locale: ctx.locale,
         ...(await serverSideTranslations(ctx.locale || "pt-BR", [

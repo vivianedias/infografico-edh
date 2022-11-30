@@ -1,40 +1,42 @@
-import { Circle, Box, Icon, VStack, Text } from "@chakra-ui/react";
 import { ComponentType } from "react";
+
+import { Circle, Box, Icon, VStack, Text } from "@chakra-ui/react";
+import StatusIcon from "./StatusIcons";
 
 export default function IconWithEmoji({
   MainIcon,
-  EmojiIcon,
+  status,
   gradient,
   category,
 }: {
   MainIcon: ComponentType;
-  EmojiIcon: ComponentType;
   gradient: string;
   category: string;
+  status: string;
 }) {
   return (
     <VStack justify={"center"} align={"center"}>
       <Box position="relative">
-        <Icon as={MainIcon} boxSize={"50px"} backgroundColor={"transparent"} />
+        <Icon as={MainIcon} boxSize={10} backgroundColor={"transparent"} />
         <Circle
           position="absolute"
           bottom={0}
           left={"30px"}
-          size={6}
+          size={5}
           bgColor={`brand.gradient.${gradient}.primary`}
         >
-          <Icon
-            as={EmojiIcon}
-            boxSize={5}
-            color={`brand.gradient.${gradient}.text`}
+          <StatusIcon
+            gradient={gradient}
+            status={status}
+            category={category.toLowerCase()}
           />
         </Circle>
       </Box>
       <Text
-        lineHeight={"base"}
-        fontWeight={500}
+        lineHeight={"none"}
+        fontWeight={700}
         textAlign={"center"}
-        fontSize={"xl"}
+        fontSize={"sm"}
       >
         {category}
       </Text>

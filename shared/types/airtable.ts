@@ -18,6 +18,8 @@ export type TimelineFields = {
 };
 
 export type OrgaosFields = {
+  createdAt: string;
+  id: string;
   orgao__estado: string;
   orgao__nome: string;
   orgao__orcamento: string;

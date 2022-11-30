@@ -16,7 +16,7 @@ export default function Legend() {
   return (
     <Box
       position="absolute"
-      width={"180px"}
+      width={44}
       height={"fit-content"}
       bottom={"40px"}
       left={"50px"}
@@ -42,8 +42,8 @@ export default function Legend() {
               <ListItem key={`${label}-${i}`}>
                 <HStack spacing={2}>
                   <Box
-                    minWidth={"20px"}
-                    height={"12px"}
+                    minWidth={5}
+                    height={3}
                     backgroundColor={`brand.gradient.${label}.primary`}
                   />
                   <Text

@@ -1,78 +1,202 @@
-import { HStack, VStack, Text } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
+import {
+  HStack,
+  VStack,
+  Text,
+  Divider,
+  Box,
+  Flex,
+  Circle,
+} from "@chakra-ui/react";
+import { css } from "@emotion/react";
 
-function SecretaryContentItem({
-  title,
-  description,
+import StatusIcon from "./StatusIcons";
+import { OrgaosFields } from "../types/airtable";
+import styles from "../../styles/SecretaryContent.module.css";
+
+function renderEducationalPlansTags({
+  gradient,
+  tags,
 }: {
-  title: string;
-  description: string;
+  gradient: string;
+  tags: string[];
 }) {
   return (
-    <HStack direction={"column"} spacing={7} align={"flex-start"}>
-      <Text
-        textAlign={"right"}
-        lineHeight={"base"}
-        fontWeight={500}
-        fontSize={"lg"}
-        flex={0.5}
-        textTransform={"capitalize"}
-      >
+    <Flex flexWrap={"wrap"} gap={2}>
+      {tags.map((t, i) => (
+        <Box
+          key={`educational-plans-tags-${i}`}
+          p={2.5}
+          bgColor={`brand.gradient.${gradient}.primary`}
+          color={`brand.gradient.${gradient}.text`}
+          fontSize={"sm"}
+          fontWeight={500}
+          borderRadius={"base"}
+        >
+          {t}
+        </Box>
+      ))}
+    </Flex>
+  );
+}
+
+function renderSecretaryContentLineText({
+  description,
+  property,
+  gradient,
+}: {
+  description: string | string[];
+  property: string;
+  gradient: string;
+}) {
+  switch (property) {
+    case "orgao__temas_principais":
+      return renderEducationalPlansTags({
+        gradient,
+        tags: description as string[],
+      });
+    case "orgao__edh_plano_educacao":
+      return (
+        <Circle size={5} bgColor={`brand.gradient.${gradient}.primary`}>
+          <StatusIcon
+            status={description as string}
+            gradient={gradient}
+            category={"plano de educação"}
+          />
+        </Circle>
+      );
+    case "orgao__equipe_edh":
+      return <Text>{description} pessoas</Text>;
+    default:
+      return <Text>{description}</Text>;
+  }
+}
+
+function SecretaryContentLineItem({
+  title,
+  description,
+  property,
+  gradient,
+}: {
+  title: string;
+  description: any;
+  property: string;
+  gradient: string;
+}) {
+  return (
+    <HStack
+      direction={"column"}
+      spacing={7}
+      align={"flex-start"}
+      mt={"0 !important"}
+      position={"relative"}
+      w={"100%"}
+      pb={7}
+    >
+      <Text textAlign={"right"} lineHeight={"none"} fontWeight={700} flex={0.5}>
         {title}:
       </Text>
-      <Text flex={1}>{description}</Text>
+      <Box height={"100%"} position={"absolute"} right={"73%"}>
+        <Divider
+          border={"1px solid"}
+          borderColor={"brand.primary"}
+          orientation={"vertical"}
+          alignItems={"stretch"}
+        />
+      </Box>
+      <Box flex={1.5}>
+        {renderSecretaryContentLineText({
+          description,
+          property,
+          gradient,
+        })}
+      </Box>
     </HStack>
   );
 }
 
-type SecretariesReturn = {
-  title: string;
-  description: string;
+type SecretaryContentItemProps = {
+  stateSecretary: Omit<OrgaosFields, "orgao__estado" | "createdAt" | "id">;
+  gradient: string;
 };
 
-const SECRETARIES = (t: (param: string) => string): SecretariesReturn[] => [
-  {
-    title: t("popup.expanded.governmentBodies"),
-    description: "",
-  },
-  {
-    title: t("popup.expanded.budget"),
-    description: "",
-  },
-  {
-    title: t("popup.expanded.concept"),
-    description: "",
-  },
-  {
-    title: t("popup.expanded.mainTopics"),
-    description: "",
-  },
-  {
-    title: t("popup.expanded.policies"),
-    description: "",
-  },
-  {
-    title: t("popup.expanded.plans"),
-    description: "",
-  },
-  {
-    title: t("popup.expanded.teamSize"),
-    description: "",
-  },
+const STATE_SECRETARY_SORT = [
+  "orgao__nome",
+  "orgao__orcamento",
+  "orgao__conceito_edh",
+  "orgao__temas_principais",
+  "orgao__atividades_principais",
+  "orgao__edh_plano_educacao",
+  "orgao__equipe_edh",
 ];
 
-export default function SecretaryContent() {
+function SecretaryContentItem({
+  stateSecretary,
+  gradient,
+}: SecretaryContentItemProps) {
   const { t } = useTranslation("home");
-
+  const sortedStateSecretary = Object.keys(stateSecretary).sort(
+    (a, b) => STATE_SECRETARY_SORT.indexOf(a) - STATE_SECRETARY_SORT.indexOf(b)
+  );
   return (
-    <VStack spacing={5}>
-      {SECRETARIES(t).map((props, i) => (
-        <SecretaryContentItem
-          {...props}
-          key={`secretary-content-item-${i}`}
-          description={`Coordenadoria de Direitos Humanos da Secretaria de Estado da Mulher, Inclusão, Assistência Social, do Trabalho e dos Direitos Humanos. Serviço de Projetos Escolares em Direitos Humanos da Secretaria de Estado da Educação.`}
-        />
-      ))}
+    <VStack
+      bgColor={"brand.light"}
+      borderRadius={"2xl"}
+      py={6}
+      px={4}
+      minW={"90%"}
+    >
+      {sortedStateSecretary.map((secretaryKey, i) => {
+        const key = secretaryKey as keyof typeof stateSecretary;
+        return (
+          <SecretaryContentLineItem
+            key={`secretary-content-item-${i}`}
+            title={t(`popup.expanded.${secretaryKey}`)}
+            description={stateSecretary[key]}
+            property={key}
+            gradient={gradient}
+          />
+        );
+      })}
     </VStack>
+  );
+}
+
+export default function SecretaryContent({
+  stateSecretaries,
+  activeIndex,
+  gradient,
+}: {
+  stateSecretaries: OrgaosFields[];
+  activeIndex: number | null;
+  gradient: string;
+}) {
+  return (
+    <HStack
+      w={"md"}
+      align={"flex-start"}
+      css={
+        !activeIndex &&
+        stateSecretaries.length > 1 &&
+        css`
+          position: relative;
+          left: 10px;
+        `
+      }
+      className={`${activeIndex === 0 && styles["slide-in"]} ${
+        activeIndex === 1 && styles["slide-out"]
+      }`}
+    >
+      {stateSecretaries.map((stateSecretary, i) => {
+        const { orgao__estado, createdAt, id, ...rest } = stateSecretary;
+        return (
+          <SecretaryContentItem
+            stateSecretary={rest}
+            key={`secretary-${i}`}
+            gradient={gradient}
+          />
+        );
+      })}
+    </HStack>
   );
 }

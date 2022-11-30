@@ -2,18 +2,18 @@ import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from "next-i18next";
 
 import { Box, Heading, Text, Button } from "@chakra-ui/react";
 import { Head } from "../shared/components";
 
 export default function ServerError() {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
   const router = useRouter();
 
   return (
     <>
-      <Head 
+      <Head
         title={t("errorPage.500.title")}
         description={t("errorPage.500.description")}
       />
@@ -27,7 +27,7 @@ export default function ServerError() {
         >
           500
         </Heading>
-        <Text fontSize="18px" mt={3} mb={2}>
+        <Text fontSize="lg" mt={3} mb={2}>
           {t("errorPage.500.title")}
         </Text>
         <Text color={"gray.500"} mb={6}>
@@ -55,8 +55,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       ...(await serverSideTranslations(locale || "pt-BR", [
         "common",
         "header",
-        "footer"
+        "footer",
       ])),
     },
   };
-}
+};

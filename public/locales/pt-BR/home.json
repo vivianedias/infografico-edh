@@ -20,13 +20,23 @@
   },
   "popup": {
     "expanded": {
-      "governmentBodies": "Orgãos",
-      "budget": "Orçamento",
-      "concept": "Conceito",
-      "mainTopics": "Temas principais",
-      "policies": "Políticas de EDH",
-      "plans": "EDH nos planos de educação",
-      "teamSize": "Equipe de EDH"
+      "orgao__nome": "Orgãos",
+      "orgao__orcamento": "Orçamento",
+      "orgao__conceito_edh": "Conceito",
+      "orgao__temas_principais": "Temas principais",
+      "orgao__atividades_principais": "Políticas de EDH",
+      "orgao__edh_plano_educacao": "EDH nos planos de educação",
+      "orgao__equipe_edh": "Equipe de EDH"
+    },
+    "icons": {
+      "SIM": "Possui",
+      "NÃO": "Não possui",
+      "PARCIALMENTE": "Possui parcialmente",
+      "NÃO FOI POSSÍVEL CONSTATAR": "Não foi possível constatar se possui"
+    },
+    "pagination": {
+      "left": "Voltar para o card anterior",
+      "right": "Ir para o próximo card"
     }
   },
   "errorMsg": {

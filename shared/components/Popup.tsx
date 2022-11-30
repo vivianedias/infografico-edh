@@ -34,7 +34,7 @@ export function PopupContent({
 
   return (
     <>
-      <Box rounded={"md"} boxShadow={"md"} overflow={"hidden"} width={"230px"}>
+      <Box rounded={"md"} boxShadow={"md"} width={56} overflow={"hidden"}>
         <Flex
           justifyContent={"space-evenly"}
           py={2}
@@ -49,7 +49,7 @@ export function PopupContent({
             {label}
           </Text>
           <IconButton
-            boxSize={"30px"}
+            boxSize={7}
             size={"sm"}
             variant={"unstyled"}
             aria-label={"Expandir popup"}
@@ -60,7 +60,7 @@ export function PopupContent({
               <Icon
                 as={InformationCircleIcon}
                 color={`brand.gradient.${gradient}.text`}
-                boxSize={"25px"}
+                boxSize={6}
               />
             }
           />

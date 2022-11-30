@@ -2,10 +2,10 @@ import NextLink from "next/link";
 import { Box, Heading, Text, Center } from "@chakra-ui/react";
 import { Head } from "./index";
 
-export default function Custom404({ t }: { t: (key: string) => string; }) {
+export default function Custom404({ t }: { t: (key: string) => string }) {
   return (
     <>
-      <Head 
+      <Head
         title={t("errorPage.404.title")}
         description={t("errorPage.404.description")}
       />
@@ -19,7 +19,7 @@ export default function Custom404({ t }: { t: (key: string) => string; }) {
         >
           404
         </Heading>
-        <Text fontSize="18px" mt={3} mb={2}>
+        <Text fontSize="lg" mt={3} mb={2}>
           {t("errorPage.404.title")}
         </Text>
         <Text color={"gray.500"} mb={6}>
