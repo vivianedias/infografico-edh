@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useTranslation } from "next-i18next";
 import {
   HStack,
@@ -114,7 +115,10 @@ function SecretaryContentLineItem({
 }
 
 type SecretaryContentItemProps = {
-  stateSecretary: Omit<OrgaosFields, "orgao__estado" | "createdAt" | "id">;
+  stateSecretary: Omit<
+    OrgaosFields,
+    "estado__sigla" | "createdAt" | "id" | "periodo"
+  >;
   gradient: string;
 };
 
@@ -164,11 +168,19 @@ export default function SecretaryContent({
   stateSecretaries,
   activeIndex,
   gradient,
+  setActiveIndex,
 }: {
   stateSecretaries: OrgaosFields[];
   activeIndex: number | null;
   gradient: string;
+  setActiveIndex: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
+  useEffect(() => {
+    return () => {
+      setActiveIndex(null);
+    };
+  }, []);
+
   return (
     <HStack
       w={"md"}
@@ -186,7 +198,8 @@ export default function SecretaryContent({
       }`}
     >
       {stateSecretaries.map((stateSecretary, i) => {
-        const { orgao__estado, createdAt, id, ...rest } = stateSecretary;
+        const { estado__sigla, createdAt, id, periodo, ...rest } =
+          stateSecretary;
         return (
           <SecretaryContentItem
             stateSecretary={rest}
