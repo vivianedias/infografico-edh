@@ -65,8 +65,6 @@ function renderSecretaryContentLineText({
           />
         </Circle>
       );
-    case "orgao__equipe_edh":
-      return <Text>{description} pessoas</Text>;
     default:
       return <Text>{description}</Text>;
   }

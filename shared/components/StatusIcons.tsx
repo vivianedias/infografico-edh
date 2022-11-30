@@ -8,13 +8,17 @@ export default function StatusIcon({
   gradient,
   status,
   category,
+  size,
 }: {
   gradient: string;
   status: string;
   category: string;
+  size: string;
 }) {
   const { t } = useTranslation("home");
   const iconStatusText = t(`popup.icons.${status}`);
+  const outerSize = size === "sm" ? 3 : 4;
+  const innerSize = size === "sm" ? 1.5 : 2;
 
   switch (status) {
     case "SIM":
@@ -27,7 +31,7 @@ export default function StatusIcon({
         >
           <Icon
             as={CheckIcon}
-            boxSize={4}
+            boxSize={outerSize}
             color={`brand.gradient.${gradient}.text`}
           />
         </Tooltip>
@@ -42,7 +46,7 @@ export default function StatusIcon({
         >
           <Icon
             as={XMarkIcon}
-            boxSize={4}
+            boxSize={outerSize}
             color={`brand.gradient.${gradient}.text`}
           />
         </Tooltip>
@@ -56,8 +60,8 @@ export default function StatusIcon({
           color="brand.primary"
         >
           <Box
-            h={4}
-            w={2}
+            h={outerSize}
+            w={innerSize}
             display={"inline-block"}
             bgColor={`brand.gradient.${gradient}.text`}
             borderBottomRightRadius={"lg"}
@@ -77,7 +81,7 @@ export default function StatusIcon({
         >
           <Icon
             as={MinusCircleIcon}
-            boxSize={4}
+            boxSize={outerSize}
             color={`brand.gradient.${gradient}.text`}
           />
         </Tooltip>
@@ -86,3 +90,7 @@ export default function StatusIcon({
       return <></>;
   }
 }
+
+StatusIcon.defaultProps = {
+  size: "md",
+};
