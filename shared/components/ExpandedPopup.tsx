@@ -72,10 +72,11 @@ function Pagination({
         onClick={() => setPage(0)}
         variant={"link"}
         disabled={page === 1}
-        size={"sm"}
+        size={"xs"}
         color={`brand.gradient.${gradient}.primary`}
       />
-      <Text fontWeight={page === 1 ? 700 : 400}>1</Text> -{" "}
+      <Text fontWeight={page === 1 ? 700 : 400}>1</Text>
+      <Text as={"span"}>/</Text>
       <Text fontWeight={page === 2 ? 700 : 400}>2</Text>
       <IconButton
         icon={<ChevronRightIcon />}
@@ -83,7 +84,7 @@ function Pagination({
         onClick={() => setPage(1)}
         variant={"link"}
         disabled={page === 2}
-        size={"sm"}
+        size={"xs"}
         color={`brand.gradient.${gradient}.primary`}
       />
     </HStack>
