@@ -33,6 +33,10 @@
       "NÃO": "There's no",
       "PARCIALMENTE": "Partially has",
       "NÃO FOI POSSÍVEL CONSTATAR": "We couldn't find any"
+    },
+    "pagination": {
+      "left": "Go left",
+      "right": "Go right"
     }
   },
   "errorMsg": {

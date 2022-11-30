@@ -33,6 +33,10 @@
       "NÃO": "No hay",
       "PARCIALMENTE": "Tiene parcialmente",
       "NÃO FOI POSSÍVEL CONSTATAR": "No fue posible determinar si"
+    },
+    "pagination": {
+      "left": "Volver a la tarjeta anterior",
+      "right": "Ir a la siguiente tarjeta"
     }
   },
   "errorMsg": {

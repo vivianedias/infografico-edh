@@ -14,13 +14,14 @@ export default function StatusIcon({
   category: string;
 }) {
   const { t } = useTranslation("home");
+  const iconStatusText = t(`popup.icons.${status}`);
 
   switch (status) {
     case "SIM":
       return (
         <Tooltip
           hasArrow
-          label={`${t(`popup.icons.${status}`)} ${category}`}
+          label={`${iconStatusText} ${category}`}
           bg="brand.light"
           color="brand.primary"
         >
@@ -35,7 +36,7 @@ export default function StatusIcon({
       return (
         <Tooltip
           hasArrow
-          label={`${t(`popup.icons.${status}`)} ${category}`}
+          label={`${iconStatusText} ${category}`}
           bg="brand.light"
           color="brand.primary"
         >
@@ -50,7 +51,7 @@ export default function StatusIcon({
       return (
         <Tooltip
           hasArrow
-          label={`${t(`popup.icons.${status}`)} ${category}`}
+          label={`${iconStatusText} ${category}`}
           bg="brand.light"
           color="brand.primary"
         >
@@ -70,7 +71,7 @@ export default function StatusIcon({
       return (
         <Tooltip
           hasArrow
-          label={`${t(`popup.icons.${status}`)} ${category}`}
+          label={`${iconStatusText} ${category}`}
           bg="brand.light"
           color="brand.primary"
         >

@@ -64,11 +64,13 @@ function Pagination({
   setPage: (param: number) => void;
   gradient: string;
 }) {
+  const { t } = useTranslation("home");
+
   return (
     <HStack color={`brand.gradient.${gradient}.primary`}>
       <IconButton
         icon={<ChevronLeftIcon />}
-        aria-label={"Ir para direita"}
+        aria-label={t("popup.pagination.left")}
         onClick={() => setPage(0)}
         variant={"link"}
         disabled={page === 1}
@@ -80,7 +82,7 @@ function Pagination({
       <Text fontWeight={page === 2 ? 700 : 400}>2</Text>
       <IconButton
         icon={<ChevronRightIcon />}
-        aria-label={"Ir para esquerda"}
+        aria-label={t("popup.pagination.right")}
         onClick={() => setPage(1)}
         variant={"link"}
         disabled={page === 2}
@@ -145,7 +147,10 @@ export default function ExpandedPopup({
             </HStack>
             {hasStateSecretaries ? (
               <>
-                <Divider borderColor={"brand.primary"} borderWidth={"1px"} />
+                <Divider
+                  borderColor={`brand.gradient.${gradient}.primary`}
+                  borderWidth={"1px"}
+                />
                 <SecretaryContent
                   stateSecretaries={stateInfo.orgaos as OrgaosFields[]}
                   activeIndex={activeIndex}

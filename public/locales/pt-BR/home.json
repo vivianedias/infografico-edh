@@ -33,6 +33,10 @@
       "NÃO": "Não possui",
       "PARCIALMENTE": "Possui parcialmente",
       "NÃO FOI POSSÍVEL CONSTATAR": "Não foi possível constatar se possui"
+    },
+    "pagination": {
+      "left": "Voltar para o card anterior",
+      "right": "Ir para o próximo card"
     }
   },
   "errorMsg": {
