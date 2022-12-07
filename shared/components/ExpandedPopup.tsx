@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "next-i18next";
 import {
-  Divider,
+  Flex,
   HStack,
   IconButton,
   Modal,
@@ -67,7 +67,7 @@ function Pagination({
   const { t } = useTranslation("home");
 
   return (
-    <HStack color={`brand.gradient.${gradient}.primary`}>
+    <HStack color={"brand.primary"}>
       <IconButton
         icon={<ChevronLeftIcon />}
         aria-label={t("popup.pagination.left")}
@@ -77,9 +77,11 @@ function Pagination({
         size={"xs"}
         color={`brand.gradient.${gradient}.primary`}
       />
-      <Text fontWeight={page === 1 ? 700 : 400}>1</Text>
-      <Text as={"span"}>/</Text>
-      <Text fontWeight={page === 2 ? 700 : 400}>2</Text>
+      <Flex>
+        <Text fontWeight={page === 1 ? 700 : 400}>1</Text>
+        <Text as={"span"}>/</Text>
+        <Text fontWeight={page === 2 ? 700 : 400}>2</Text>
+      </Flex>
       <IconButton
         icon={<ChevronRightIcon />}
         aria-label={t("popup.pagination.right")}
@@ -146,18 +148,12 @@ export default function ExpandedPopup({
               ))}
             </HStack>
             {hasStateSecretaries ? (
-              <>
-                <Divider
-                  borderColor={`brand.gradient.${gradient}.primary`}
-                  borderWidth={"1px"}
-                />
-                <SecretaryContent
-                  stateSecretaries={stateInfo.orgaos as OrgaosFields[]}
-                  activeIndex={activeIndex}
-                  gradient={gradient}
-                  setActiveIndex={setActiveIndex}
-                />
-              </>
+              <SecretaryContent
+                stateSecretaries={stateInfo.orgaos as OrgaosFields[]}
+                activeIndex={activeIndex}
+                gradient={gradient}
+                setActiveIndex={setActiveIndex}
+              />
             ) : null}
           </VStack>
         </ModalBody>
