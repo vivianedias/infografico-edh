@@ -7,7 +7,7 @@ import {
 const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(parts.keys);
 
-const baseStyle = definePartsStyle((props) => {
+const stateSecretaries = definePartsStyle((props) => {
   const { colorScheme: c } = props;
 
   return {
@@ -63,7 +63,9 @@ const sizes = {
 };
 
 const modalTheme = defineMultiStyleConfig({
-  baseStyle,
+  variants: {
+    secretaries: stateSecretaries,
+  },
   sizes,
   defaultProps: {
     size: "lg",
