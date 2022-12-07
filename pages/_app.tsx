@@ -30,8 +30,8 @@ function App({ Component, pageProps }: AppProps) {
             justifyContent="flex-start"
             alignItems="center"
             as="main"
-            py={IS_IN_MAINTENANCE ? 0 : { base: 8, md: 16 }}
-            px={IS_IN_MAINTENANCE ? 0 : { base: 10, md: 24 }}
+            py={IS_IN_MAINTENANCE ? 0 : { base: 8, xl: 16 }}
+            px={IS_IN_MAINTENANCE ? 0 : { base: 10, xl: 24 }}
             backgroundColor={"white"}
           >
             <Component {...pageProps} />

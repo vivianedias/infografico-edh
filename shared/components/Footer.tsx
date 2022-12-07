@@ -26,7 +26,7 @@ export default function Footer() {
 
   return (
     <Flex
-      width={"100%"}
+      width={"full"}
       bg={"black"}
       paddingTop={20}
       paddingBottom={20}
@@ -37,19 +37,19 @@ export default function Footer() {
       <VStack
         spacing={7}
         align={"flex-start"}
-        w={{ base: "100%", lg: "6xl" }}
+        w={{ base: "full", lg: "6xl" }}
         mx={10}
       >
         <HStack
-          w={"100%"}
-          h={"100%"}
+          w={"full"}
+          h={"full"}
           align={{ base: "space-between", md: "flex-start" }}
           justify={{ base: "space-between", md: "space-between" }}
           flexWrap={"wrap"}
           spacing={12}
         >
           <Flex
-            w={"100%"}
+            w={"full"}
             flexWrap={"wrap"}
             gap={8}
             align={"space-between"}
@@ -62,7 +62,7 @@ export default function Footer() {
           </Flex>
         </HStack>
         <Divider borderColor={"header.menu.hover"} />
-        <Flex flexWrap={"wrap"} gap={8} w={"100%"} justify={"space-between"}>
+        <Flex flexWrap={"wrap"} gap={8} w={"full"} justify={"space-between"}>
           <FooterText t={t} />
           <HStack>
             <SocialMediaIcon
@@ -90,9 +90,9 @@ export default function Footer() {
 const FooterColumn = ({ FOOTER_ITEMS }: { FOOTER_ITEMS: FooterItensType }) => {
   return (
     <Stack spacing={0.5} w={{ base: "80%", sm: "45%", md: "20%" }}>
-      {FOOTER_ITEMS.map((navItem, i) => (
+      {FOOTER_ITEMS.map((navItem) => (
         <Link
-          key={`${navItem.label}-${i}`}
+          key={navItem.label}
           color={"header.menu.link"}
           href={navItem.href}
           isExternal

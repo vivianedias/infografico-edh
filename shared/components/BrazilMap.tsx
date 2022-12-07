@@ -183,15 +183,15 @@ export default function BrazilMap({
   }, [selectedPeriod]);
 
   return (
-    <Box as="section" width={{ base: "100%", md: "unset" }}>
+    <Box as="section" width={{ base: "100%", xl: "unset" }}>
       {popupLngLat ? (
         <PopupBase map={map} lngLat={popupLngLat}>
           {content}
         </PopupBase>
       ) : null}
       <Box
-        w={{ base: "100%", md: "2xl" }}
-        h={{ base: "100vh", md: "3xl" }}
+        w={{ base: "100%", xl: "2xl" }}
+        h={{ base: "70vh", xl: "3xl" }}
         position="relative"
       >
         <Box ref={mapContainer} className="map-container" boxSize={"100%"} />

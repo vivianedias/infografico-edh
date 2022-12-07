@@ -3,10 +3,10 @@
     "title": "Educar em direitos humanos - Instituto Aurora",
     "description": "Nosso sonho é que as pessoas compreendam que compartilhamos uma mesma humanidade. Por isso, trabalhamos por uma cultura de direitos humanos."
   },
-  "title": "Mapa EDH Brasil",
+  "title": "Panorama da Educação em Direitos Humanos no Brasil",
   "subtitle": "Clique nos estados para obter mais detalhes",
   "legend": {
-    "title": "Grau atual de institucionalização da EDH",
+    "title": "Current degree of institutionalization of Human Rights Education (HRE)",
     "high": "Alto",
     "medium": "Médio",
     "low": "Baixo",
@@ -15,8 +15,8 @@
   },
   "category": {
     "document": "Guiding document",
-    "collegiate": "Collegiate body",
-    "govern": "Governing body"
+    "collegiate": "Collegiate body of HRE",
+    "govern": "Governing body of HRE"
   },
   "popup": {
     "expanded": {
@@ -24,9 +24,9 @@
       "orgao__orcamento": "Budget",
       "orgao__conceito_edh": "Concept",
       "orgao__temas_principais": "Main Topics",
-      "orgao__atividades_principais": "EDH Policies",
-      "orgao__edh_plano_educacao": "Education Plans for EDH",
-      "orgao__equipe_edh": "EDH Team"
+      "orgao__atividades_principais": "HRE Policies",
+      "orgao__edh_plano_educacao": "Education Plans for HRE",
+      "orgao__equipe_edh": "HRE Team"
     },
     "icons": {
       "SIM": "There is a",
@@ -43,8 +43,8 @@
     "loadingMapData": "There was an error while trying to fetch the map's data. Try again later.",
     "loadingMapShape": "There was an error while trying to fetch the map. Try again later."
   },
-  "loading": "Carregando...",
+  "loading": "Loading...",
   "timeline": {
-    "title": "Timeline"
+    "title": "Federal Government Timeline"
   }
 }

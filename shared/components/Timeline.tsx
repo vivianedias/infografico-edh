@@ -46,10 +46,10 @@ function YearBlock({
         className={"circle"}
       />
       <VStack spacing={3.5}>
-        {monthDistinct.map((month, i) => {
+        {monthDistinct.map((month) => {
           return (
             <MonthlyBlock
-              key={`monthly-block-${i}`}
+              key={`monthly-block-${month}`}
               year={year}
               {...aggregateMonthDescriptions(months, month)}
             />
@@ -100,14 +100,14 @@ function MonthlyBlock({
       </Flex>
       <Collapse in={isOpen} animateOpacity>
         <VStack spacing={3.5}>
-          {description.map((d, i) => (
+          {description.map((d) => (
             <Text
               color={"brand.primary"}
               lineHeight={"shorter"}
               letterSpacing={"tight"}
-              fontSize={"sm"}
+              fontSize={"xs"}
               fontWeight={400}
-              key={`description-${i}`}
+              key={`${month}-${year}-description`}
             >
               {d}
             </Text>
@@ -144,8 +144,8 @@ export default function Timeline({
       boxShadow={"0px 4px 4px rgba(0, 0, 0, 0.25)"}
       borderRadius={"lg"}
       bgColor={"white"}
-      p={{ base: 3, lg: 10 }}
-      w={{ base: "100%", lg: "sm" }}
+      p={{ base: 5, xl: 10 }}
+      w={{ base: "100%", xl: "sm" }}
       h={"2xl"}
       overflowY={"hidden"}
       spacing={7}
@@ -157,7 +157,7 @@ export default function Timeline({
       <Box
         w={"full"}
         overflowY={"auto"}
-        px={{ base: 2, lg: 2.5 }}
+        px={{ base: 2, xl: 2.5 }}
         css={css`
           & > :not(:first-of-type) {
             padding-top: var(--chakra-space-8);
@@ -189,7 +189,7 @@ export default function Timeline({
         {yearsDistinct.map((year, i) => {
           const months = timeline.filter((t) => t.acontecimento__ano === year);
           return (
-            <YearBlock key={`year-block-${i}`} months={months} year={year} />
+            <YearBlock key={`year-block-${year}`} months={months} year={year} />
           );
         })}
       </Box>

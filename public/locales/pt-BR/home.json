@@ -3,10 +3,10 @@
     "title": "Educar em direitos humanos - Instituto Aurora",
     "description": "Nosso sonho é que as pessoas compreendam que compartilhamos uma mesma humanidade. Por isso, trabalhamos por uma cultura de direitos humanos."
   },
-  "title": "Mapa EDH Brasil",
+  "title": "Panorama da Educação em Direitos Humanos no Brasil",
   "subtitle": "Clique nos estados para obter mais detalhes",
   "legend": {
-    "title": "Grau atual de institucionalização da EDH",
+    "title": "Grau atual de institucionalização da Educação em Direitos Humanos (EDH)",
     "high": "Alto",
     "medium": "Médio",
     "low": "Baixo",
@@ -15,8 +15,8 @@
   },
   "category": {
     "document": "Documento orientador",
-    "collegiate": "Órgão colegiado",
-    "govern": "Órgão de governo"
+    "collegiate": "Órgãos colegiados de EDH",
+    "govern": "Órgãos de governo de EDH"
   },
   "popup": {
     "expanded": {
@@ -43,8 +43,8 @@
     "loadingMapData": "Houve um erro ao buscar os dados do mapa. Tente novamente mais tarde.",
     "loadingMapShape": "Houve um erro ao buscar o mapa. Tente novamente mais tarde."
   },
-  "loading": "Loading...",
+  "loading": "Carregando...",
   "timeline": {
-    "title": "Timeline"
+    "title": "Timeline do Governo Federal"
   }
 }

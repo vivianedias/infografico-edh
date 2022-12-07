@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "next-i18next";
 import {
-  Divider,
+  Flex,
   HStack,
   IconButton,
   Modal,
@@ -66,24 +66,34 @@ function Pagination({
 }) {
   const { t } = useTranslation("home");
 
+  const goToFirstPage = useCallback(() => {
+    setPage(0);
+  }, [setPage]);
+
+  const goToLastPage = useCallback(() => {
+    setPage(1);
+  }, [setPage]);
+
   return (
-    <HStack color={`brand.gradient.${gradient}.primary`}>
+    <HStack color={"brand.primary"}>
       <IconButton
         icon={<ChevronLeftIcon />}
         aria-label={t("popup.pagination.left")}
-        onClick={() => setPage(0)}
+        onClick={goToFirstPage}
         variant={"link"}
         disabled={page === 1}
         size={"xs"}
         color={`brand.gradient.${gradient}.primary`}
       />
-      <Text fontWeight={page === 1 ? 700 : 400}>1</Text>
-      <Text as={"span"}>/</Text>
-      <Text fontWeight={page === 2 ? 700 : 400}>2</Text>
+      <Flex>
+        <Text fontWeight={page === 1 ? 700 : 400}>1</Text>
+        <Text as={"span"}>/</Text>
+        <Text fontWeight={page === 2 ? 700 : 400}>2</Text>
+      </Flex>
       <IconButton
         icon={<ChevronRightIcon />}
         aria-label={t("popup.pagination.right")}
-        onClick={() => setPage(1)}
+        onClick={goToLastPage}
         variant={"link"}
         disabled={page === 2}
         size={"xs"}
@@ -136,9 +146,9 @@ export default function ExpandedPopup({
               color={"brand.primary"}
               spacing={16}
             >
-              {ICON_ITEMS(t, stateInfo).map(({ label, ...rest }, i) => (
+              {ICON_ITEMS(t, stateInfo).map(({ label, ...rest }) => (
                 <IconWithEmoji
-                  key={`icon-with-emoji-${i}`}
+                  key={`icon-with-emoji-${label}`}
                   category={label}
                   gradient={gradient}
                   {...rest}
@@ -146,18 +156,12 @@ export default function ExpandedPopup({
               ))}
             </HStack>
             {hasStateSecretaries ? (
-              <>
-                <Divider
-                  borderColor={`brand.gradient.${gradient}.primary`}
-                  borderWidth={"1px"}
-                />
-                <SecretaryContent
-                  stateSecretaries={stateInfo.orgaos as OrgaosFields[]}
-                  activeIndex={activeIndex}
-                  gradient={gradient}
-                  setActiveIndex={setActiveIndex}
-                />
-              </>
+              <SecretaryContent
+                stateSecretaries={stateInfo.orgaos as OrgaosFields[]}
+                activeIndex={activeIndex}
+                gradient={gradient}
+                setActiveIndex={setActiveIndex}
+              />
             ) : null}
           </VStack>
         </ModalBody>

@@ -32,11 +32,11 @@ export default function Home({
   return (
     <>
       <Head title={t("meta.title")} description={t("meta.description")} />
-      <Box width={"full"}>
-        <Heading size={"3xl"} color={"brand.primary"} pb={4}>
+      <Box w={{ base: "full", xl: "6xl" }}>
+        <Heading size={"lg"} color={"brand.primary"} pb={4}>
           {t("title")}
         </Heading>
-        <Text fontSize={"3xl"} fontWeight={300} color={"brand.primary"} pb={8}>
+        <Text fontSize={"xl"} fontWeight={300} color={"brand.primary"} pb={8}>
           {t("subtitle")}
         </Text>
         {error ? <Text>{t("errorMsg.loadingMapData")}</Text> : null}
@@ -45,9 +45,9 @@ export default function Home({
             {({ data }) => {
               return (
                 <Stack
-                  justifyContent={"center"}
+                  justifyContent={{ base: "center", xl: "space-between" }}
                   align={"flex-start"}
-                  direction={{ base: "column-reverse", lg: "row" }}
+                  direction={{ base: "column", xl: "row" }}
                   spacing={8}
                 >
                   <BrazilMap
@@ -58,7 +58,7 @@ export default function Home({
                   <VStack
                     spacing={6}
                     align={"flex-start"}
-                    minW={{ base: "100%", lg: "unset" }}
+                    minW={{ base: "100%", xl: "unset" }}
                   >
                     <YearButtons
                       years={periodsDistinct}
