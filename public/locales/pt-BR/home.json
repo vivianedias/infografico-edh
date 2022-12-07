@@ -46,5 +46,14 @@
   "loading": "Carregando...",
   "timeline": {
     "title": "Timeline do Governo Federal"
+  },
+  "research": "Quer saber mais como a pesquisa foi desenvolvida?",
+  "resources": "Para baixar outros materiais",
+  "clickLink": "clique aqui.",
+  "accessLink": "acesse o link.",
+  "methodologyPopup": {
+    "title": "Metodologia",
+    "description": "Para traçar o panorama da Educação em Direitos Humanos no Brasil, a pesquisa foi dividida em duas etapas. Na primeira, buscou-se compreender a institucionalização em nível federal, recorrendo às informações atreladas ao Ministério da Mulher, da Família e Direitos Humanos onde está a pasta de EDH; na segunda, foram analisados os estados brasileiros com a intenção de compreender em que medida a EDH está institucionalizada em cada localidade. As informações foram coletadas considerando-se dois biênios: 2019-2020 e 2021-2022. A pesquisa foi realizada por meio de informações disponibilizadas em sites oficiais, por e-mail e por telefone. As informações sobre os estados apresentadas neste infográfico correspondem ao segundo biênio. Para dados detalhadas de cada estado, faça o",
+    "link": "download dos materiais no link."
   }
 }

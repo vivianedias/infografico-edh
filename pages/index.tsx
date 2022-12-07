@@ -16,6 +16,7 @@ import {
 import fetcher from "../shared/utils/fetcher";
 import { Response } from "../shared/types/airtable";
 import getDistinct from "@/shared/utils/getDistinct";
+import Research from "@/shared/components/Research";
 
 export default function Home({
   data: { tableData, timeline },
@@ -75,6 +76,7 @@ export default function Home({
             }}
           </BrazilGeojson>
         ) : null}
+        <Research />
       </Box>
     </>
   );

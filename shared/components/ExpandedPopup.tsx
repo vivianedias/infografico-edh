@@ -130,6 +130,7 @@ export default function ExpandedPopup({
       isCentered
       scrollBehavior={"inside"}
       colorScheme={gradient}
+      variant={"secretaries"}
     >
       <ModalOverlay />
       <ModalContent>
