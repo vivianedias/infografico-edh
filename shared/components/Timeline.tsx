@@ -46,10 +46,10 @@ function YearBlock({
         className={"circle"}
       />
       <VStack spacing={3.5}>
-        {monthDistinct.map((month, i) => {
+        {monthDistinct.map((month) => {
           return (
             <MonthlyBlock
-              key={`monthly-block-${i}`}
+              key={`monthly-block-${month}`}
               year={year}
               {...aggregateMonthDescriptions(months, month)}
             />
@@ -100,14 +100,14 @@ function MonthlyBlock({
       </Flex>
       <Collapse in={isOpen} animateOpacity>
         <VStack spacing={3.5}>
-          {description.map((d, i) => (
+          {description.map((d) => (
             <Text
               color={"brand.primary"}
               lineHeight={"shorter"}
               letterSpacing={"tight"}
               fontSize={"xs"}
               fontWeight={400}
-              key={`description-${i}`}
+              key={`${month}-${year}-description`}
             >
               {d}
             </Text>
@@ -189,7 +189,7 @@ export default function Timeline({
         {yearsDistinct.map((year, i) => {
           const months = timeline.filter((t) => t.acontecimento__ano === year);
           return (
-            <YearBlock key={`year-block-${i}`} months={months} year={year} />
+            <YearBlock key={`year-block-${year}`} months={months} year={year} />
           );
         })}
       </Box>

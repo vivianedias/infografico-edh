@@ -90,9 +90,9 @@ export default function Footer() {
 const FooterColumn = ({ FOOTER_ITEMS }: { FOOTER_ITEMS: FooterItensType }) => {
   return (
     <Stack spacing={0.5} w={{ base: "80%", sm: "45%", md: "20%" }}>
-      {FOOTER_ITEMS.map((navItem, i) => (
+      {FOOTER_ITEMS.map((navItem) => (
         <Link
-          key={`${navItem.label}-${i}`}
+          key={navItem.label}
           color={"header.menu.link"}
           href={navItem.href}
           isExternal
