@@ -33,10 +33,10 @@ export default function Home({
     <>
       <Head title={t("meta.title")} description={t("meta.description")} />
       <Box w={{ base: "full", xl: "6xl" }}>
-        <Heading size={"3xl"} color={"brand.primary"} pb={4}>
+        <Heading size={"lg"} color={"brand.primary"} pb={4}>
           {t("title")}
         </Heading>
-        <Text fontSize={"3xl"} fontWeight={300} color={"brand.primary"} pb={8}>
+        <Text fontSize={"xl"} fontWeight={300} color={"brand.primary"} pb={8}>
           {t("subtitle")}
         </Text>
         {error ? <Text>{t("errorMsg.loadingMapData")}</Text> : null}
