@@ -144,8 +144,8 @@ export default function Timeline({
       boxShadow={"0px 4px 4px rgba(0, 0, 0, 0.25)"}
       borderRadius={"lg"}
       bgColor={"white"}
-      p={{ base: 3, lg: 10 }}
-      w={{ base: "100%", lg: "sm" }}
+      p={{ base: 5, xl: 10 }}
+      w={{ base: "100%", xl: "sm" }}
       h={"2xl"}
       overflowY={"hidden"}
       spacing={7}
@@ -157,7 +157,7 @@ export default function Timeline({
       <Box
         w={"full"}
         overflowY={"auto"}
-        px={{ base: 2, lg: 2.5 }}
+        px={{ base: 2, xl: 2.5 }}
         css={css`
           & > :not(:first-of-type) {
             padding-top: var(--chakra-space-8);
