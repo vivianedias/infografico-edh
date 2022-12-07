@@ -15,8 +15,8 @@
   },
   "category": {
     "document": "Guiding document",
-    "collegiate": "Collegiate body of EDH",
-    "govern": "Governing body of EDH"
+    "collegiate": "Collegiate body of HRE",
+    "govern": "Governing body of HRE"
   },
   "popup": {
     "expanded": {
@@ -24,9 +24,9 @@
       "orgao__orcamento": "Budget",
       "orgao__conceito_edh": "Concept",
       "orgao__temas_principais": "Main Topics",
-      "orgao__atividades_principais": "EDH Policies",
-      "orgao__edh_plano_educacao": "Education Plans for EDH",
-      "orgao__equipe_edh": "EDH Team"
+      "orgao__atividades_principais": "HRE Policies",
+      "orgao__edh_plano_educacao": "Education Plans for HRE",
+      "orgao__equipe_edh": "HRE Team"
     },
     "icons": {
       "SIM": "There is a",
@@ -43,8 +43,8 @@
     "loadingMapData": "There was an error while trying to fetch the map's data. Try again later.",
     "loadingMapShape": "There was an error while trying to fetch the map. Try again later."
   },
-  "loading": "Carregando...",
+  "loading": "Loading...",
   "timeline": {
-    "title": "Timeline do Governo Federal"
+    "title": "Federal Government Timeline"
   }
 }

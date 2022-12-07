@@ -43,7 +43,7 @@
     "loadingMapData": "Houve um erro ao buscar os dados do mapa. Tente novamente mais tarde.",
     "loadingMapShape": "Houve um erro ao buscar o mapa. Tente novamente mais tarde."
   },
-  "loading": "Loading...",
+  "loading": "Carregando...",
   "timeline": {
     "title": "Timeline do Governo Federal"
   }
