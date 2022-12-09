@@ -12,6 +12,7 @@ import {
   ModalCloseButton,
   ModalHeader,
   Divider,
+  Box,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 
@@ -23,11 +24,14 @@ function CustomModal({
   onClose: () => void;
 }) {
   const { t } = useTranslation("home");
-  console.log({ isOpen });
   return (
     <Modal onClose={onClose} isOpen={isOpen} isCentered size={"2xl"}>
       <ModalOverlay />
-      <ModalContent py={12} px={20} bgColor={"brand.light"}>
+      <ModalContent
+        py={{ base: 6, xl: 12 }}
+        px={{ base: 10, xl: 10 }}
+        bgColor={"brand.light"}
+      >
         <ModalCloseButton
           color={"brand.primary"}
           border={"2px solid"}
@@ -48,7 +52,13 @@ function CustomModal({
         <ModalBody p={0} mt={5}>
           <Text fontSize={"md"} lineHeight={"151.5%"} color={"brand.primary"}>
             {t("methodologyPopup.description")}{" "}
-            <Link href={"#"} textDecor={"underline"}>
+            <Link
+              isExternal
+              href={
+                "https://institutoaurora.org/panorama-da-educacao-em-direitos-humanos/"
+              }
+              textDecor={"underline"}
+            >
               {t("methodologyPopup.link")}
             </Link>
           </Text>
@@ -65,23 +75,35 @@ export default function Research() {
   return (
     <>
       <Flex align={"center"} mt={10}>
-        <Text color={"brand.primary"}>{t("research")} </Text>
-        <Button
-          fontWeight={700}
-          textDecor={"underline"}
-          onClick={modal.onOpen}
-          variant={"link"}
-          color={"brand.primary"}
-          fontSize={"md"}
-          minW={"110px"}
-          minH={"20px"}
-        >
-          {t("clickLink")}
-        </Button>
+        <Text color={"brand.primary"}>
+          {t("research")}
+          <Box as="span">
+            <Button
+              fontWeight={700}
+              textDecor={"underline"}
+              onClick={modal.onOpen}
+              variant={"link"}
+              color={"brand.primary"}
+              fontSize={"md"}
+              minW={"110px"}
+              minH={"20px"}
+              display={"inline-flex"}
+            >
+              {t("clickLink")}
+            </Button>
+          </Box>
+        </Text>
       </Flex>
       <Text color={"brand.primary"}>
         {t("resources")}{" "}
-        <Link href={"#"} fontWeight={700} textDecor={"underline"}>
+        <Link
+          href={
+            "https://institutoaurora.org/panorama-da-educacao-em-direitos-humanos/"
+          }
+          fontWeight={700}
+          textDecor={"underline"}
+          isExternal
+        >
           {t("accessLink")}
         </Link>
       </Text>
