@@ -17,6 +17,7 @@ import fetcher from "../shared/utils/fetcher";
 import { Response } from "../shared/types/airtable";
 import getDistinct from "@/shared/utils/getDistinct";
 import Research from "@/shared/components/Research";
+import Comparison from "@/shared/components/Comparison";
 
 export default function Home({
   data: { tableData, timeline },
@@ -33,7 +34,7 @@ export default function Home({
   return (
     <>
       <Head title={t("meta.title")} description={t("meta.description")} />
-      <Box w={{ base: "full", xl: "6xl" }}>
+      <Box w={{ base: "full", xl: "6xl" }} minH={"100vh"}>
         <Heading size={"lg"} color={"brand.primary"} pb={4}>
           {t("title")}
         </Heading>
@@ -77,6 +78,9 @@ export default function Home({
           </BrazilGeojson>
         ) : null}
         <Research />
+      </Box>
+      <Box w={{ base: "full", xl: "6xl" }} minH={"100vh"}>
+        <Comparison tableData={tableData} />
       </Box>
     </>
   );
