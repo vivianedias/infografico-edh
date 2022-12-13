@@ -13,7 +13,7 @@ type Option = {
   label: string;
 };
 
-type PlaceholderCardProps = {
+type ComparisonCardsProps = {
   tableData: StatesResponse[];
   optionsStates: Option[];
 };
@@ -45,7 +45,7 @@ const styles: StylesConfig<Option> = {
   }),
 };
 
-function PlaceholderCard({ tableData, optionsStates }: PlaceholderCardProps) {
+function ComparisonCards({ tableData, optionsStates }: ComparisonCardsProps) {
   const { t } = useTranslation("home");
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [state, setState] = useState<StatesResponse | null>(null);
@@ -111,7 +111,7 @@ export default function Comparison({
       </Box>
       <Stack spacing={5} direction={{ base: "column", xl: "row" }}>
         {[...Array(3).keys()].map((i) => (
-          <PlaceholderCard
+          <ComparisonCards
             key={`placeholder-card-${i}`}
             optionsStates={optionsStates}
             tableData={tableData}

@@ -147,6 +147,7 @@ function SecretaryContentItem({
       py={6}
       px={4}
       minW={"90%"}
+      w={"100%"}
     >
       {sortedStateSecretary.map((secretaryKey, i) => {
         const key = secretaryKey as keyof typeof stateSecretary;
