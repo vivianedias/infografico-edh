@@ -7,11 +7,15 @@ import { MinusCircleIcon } from "@heroicons/react/24/outline";
 export default function StatusIcon({
   gradient,
   status,
+  documentName,
+  collegiateName,
   category,
   size,
 }: {
   gradient: string;
   status: string;
+  documentName: any;
+  collegiateName: any;
   category: string;
   size: string;
 }) {
@@ -20,15 +24,13 @@ export default function StatusIcon({
   const outerSize = size === "sm" ? 3 : 4;
   const innerSize = size === "sm" ? 1.5 : 2;
 
+  const label =
+    documentName ?? collegiateName ?? `${iconStatusText} ${category}`;
+
   switch (status) {
     case "SIM":
       return (
-        <Tooltip
-          hasArrow
-          label={`${iconStatusText} ${category}`}
-          bg="brand.light"
-          color="brand.primary"
-        >
+        <Tooltip hasArrow label={label} bg="brand.light" color="brand.primary">
           <Icon
             as={CheckIcon}
             boxSize={outerSize}
@@ -38,12 +40,7 @@ export default function StatusIcon({
       );
     case "NÃO":
       return (
-        <Tooltip
-          hasArrow
-          label={`${iconStatusText} ${category}`}
-          bg="brand.light"
-          color="brand.primary"
-        >
+        <Tooltip hasArrow label={label} bg="brand.light" color="brand.primary">
           <Icon
             as={XMarkIcon}
             boxSize={outerSize}
@@ -53,12 +50,7 @@ export default function StatusIcon({
       );
     case "PARCIALMENTE":
       return (
-        <Tooltip
-          hasArrow
-          label={`${iconStatusText} ${category}`}
-          bg="brand.light"
-          color="brand.primary"
-        >
+        <Tooltip hasArrow label={label} bg="brand.light" color="brand.primary">
           <Box
             h={outerSize}
             w={innerSize}
@@ -73,12 +65,7 @@ export default function StatusIcon({
       );
     case "NÃO FOI POSSÍVEL CONSTATAR":
       return (
-        <Tooltip
-          hasArrow
-          label={`${iconStatusText} ${category}`}
-          bg="brand.light"
-          color="brand.primary"
-        >
+        <Tooltip hasArrow label={label} bg="brand.light" color="brand.primary">
           <Icon
             as={MinusCircleIcon}
             boxSize={outerSize}
