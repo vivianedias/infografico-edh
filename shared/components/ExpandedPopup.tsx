@@ -28,7 +28,18 @@ import SecretaryContent from "./SecretaryContent";
 import { INFO_ACCESS } from "../utils/buildCaseFilters";
 import { OrgaosFields, StatesFields, StatesResponse } from "../types/airtable";
 
-const ICON_ITEMS = (t: (param: string) => string, stateInfo: StatesFields) => [
+type IconItemsReturn = {
+  label: string;
+  status: string;
+  MainIcon: React.FC;
+  documentName?: any;
+  collegiateName?: any;
+};
+
+const ICON_ITEMS = (
+  t: (param: string) => string,
+  stateInfo: StatesFields
+): IconItemsReturn[] => [
   {
     label: t("category.document"),
     status: stateInfo.estado_basico__documento_orientador,
