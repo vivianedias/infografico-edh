@@ -100,14 +100,14 @@ function MonthlyBlock({
       </Flex>
       <Collapse in={isOpen} animateOpacity>
         <VStack spacing={3.5}>
-          {description.map((d) => (
+          {description.map((d, i) => (
             <Text
               color={"brand.primary"}
               lineHeight={"shorter"}
               letterSpacing={"tight"}
               fontSize={"xs"}
               fontWeight={400}
-              key={`${month}-${year}-description`}
+              key={`${month}-${year + i}-description`}
             >
               {d}
             </Text>
