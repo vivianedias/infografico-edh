@@ -57,10 +57,11 @@
     "link": "download dos materiais no link."
   },
   "comparison": {
-    "title": "Comparação de Educação de Desenvolvimento Humano entre estados",
-    "subtitle": "Primeiramente selecione os de 2 a 3 estados que queira comparar as inforções de governo; Depois escolha quais parâmetros quer comparar.",
+    "title": "Comparison of Human Development Education across states",
+    "subtitle": "First select the 2 to 3 states you want to compare government information; Then choose which parameters you want to compare.",
     "select": {
-      "placeholder": "Adicione um estado"
-    }
+      "placeholder": "Add a state"
+    },
+    "unselectState": "Remove state"
   }
 }

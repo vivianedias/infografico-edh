@@ -61,6 +61,7 @@
     "subtitle": "Primeiramente selecione os de 2 a 3 estados que queira comparar as inforções de governo; Depois escolha quais parâmetros quer comparar.",
     "select": {
       "placeholder": "Adicione um estado"
-    }
+    },
+    "unselectState": "Remover estado"
   }
 }
