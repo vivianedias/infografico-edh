@@ -63,8 +63,8 @@ function PlaceholderCard({ tableData, optionsStates }: PlaceholderCardProps) {
     <ComparisonCard state={state} setState={setState} />
   ) : (
     <Flex
-      w={"sm"}
-      h={"lg"}
+      w={"md"}
+      h={"3xl"}
       bgColor={"brand.light"}
       border={"1px dashed"}
       borderColor={"brand.primary"}
@@ -106,7 +106,7 @@ export default function Comparison({
           {t("comparison.subtitle")}
         </Text>
       </Box>
-      <Stack spacing={16} direction={{ base: "column", xl: "row" }}>
+      <Stack spacing={5} direction={{ base: "column", xl: "row" }}>
         {[...Array(3).keys()].map((i) => (
           <PlaceholderCard
             key={`placeholder-card-${i}`}

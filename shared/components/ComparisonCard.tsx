@@ -66,24 +66,39 @@ export default function ComparisonCard({
       borderRadius={"lg"}
       border={"1px solid"}
       borderColor={"brand.primary"}
+      w={"md"}
+      h={"3xl"}
       overflow={"hidden"}
-      w={"full"}
+      position={"relative"}
     >
       <ComparisonHeader gradient={gradient} setState={setState}>
         {state.estado__nome}
       </ComparisonHeader>
-      <StateInfo
-        gradient={gradient}
-        stateInfo={state}
-        activeIndex={activeIndex}
-        setActiveIndex={setActiveIndex}
-      />
-      {state.orgaos && state.orgaos.length > 1 ? (
-        <Pagination
-          page={activeIndex ? activeIndex + 1 : 1}
-          setPage={setActiveIndex}
+      <Box overflowY={"auto"}>
+        <StateInfo
           gradient={gradient}
+          stateInfo={state}
+          activeIndex={activeIndex}
+          setActiveIndex={setActiveIndex}
         />
+      </Box>
+
+      {state.orgaos && state.orgaos.length > 1 ? (
+        <Flex
+          position={"absolute"}
+          bottom={0}
+          bgColor={"white"}
+          w={"full"}
+          h={"2.5rem"}
+          align={"center"}
+          justify={"center"}
+        >
+          <Pagination
+            page={activeIndex ? activeIndex + 1 : 1}
+            setPage={setActiveIndex}
+            gradient={gradient}
+          />
+        </Flex>
       ) : null}
     </Box>
   );
