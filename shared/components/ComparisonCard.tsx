@@ -63,11 +63,11 @@ export default function ComparisonCard({
 
   return (
     <Box
-      w={"xl"}
       borderRadius={"lg"}
       border={"1px solid"}
       borderColor={"brand.primary"}
       overflow={"hidden"}
+      w={"full"}
     >
       <ComparisonHeader gradient={gradient} setState={setState}>
         {state.estado__nome}

@@ -79,7 +79,7 @@ export default function Home({
         ) : null}
         <Research />
       </Box>
-      <Box w={{ base: "full", xl: "6xl" }} minH={"100vh"}>
+      <Box minH={"100vh"} pt={10} w={"full"}>
         <Comparison tableData={tableData} />
       </Box>
     </>

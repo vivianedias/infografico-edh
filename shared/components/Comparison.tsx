@@ -97,13 +97,15 @@ export default function Comparison({
   }));
 
   return (
-    <Box pt={10}>
-      <Heading size={"lg"} color={"brand.primary"} pb={4}>
-        {t("comparison.title")}
-      </Heading>
-      <Text fontSize={"xl"} fontWeight={300} color={"brand.primary"} pb={8}>
-        {t("comparison.subtitle")}
-      </Text>
+    <Flex align={"center"} direction={"column"}>
+      <Box w={{ base: "full", xl: "6xl" }}>
+        <Heading size={"lg"} color={"brand.primary"} pb={4}>
+          {t("comparison.title")}
+        </Heading>
+        <Text fontSize={"xl"} fontWeight={300} color={"brand.primary"} pb={8}>
+          {t("comparison.subtitle")}
+        </Text>
+      </Box>
       <Stack spacing={16} direction={{ base: "column", xl: "row" }}>
         {[...Array(3).keys()].map((i) => (
           <PlaceholderCard
@@ -113,6 +115,6 @@ export default function Comparison({
           />
         ))}
       </Stack>
-    </Box>
+    </Flex>
   );
 }
