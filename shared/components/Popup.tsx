@@ -30,13 +30,13 @@ const POPUP_ITEMS = (
     category: t("category.document"),
   },
   {
-    status: stateInfo.estado_basico__orgao_publico,
-    category: t("category.govern"),
-  },
-  {
     status: stateInfo.estado_basico__orgao_colegiado,
     collegiateName: stateInfo.estado_basico__orgao_colegiado_nome,
     category: t("category.collegiate"),
+  },
+  {
+    status: stateInfo.estado_basico__orgao_publico,
+    category: t("category.govern"),
   },
 ];
 

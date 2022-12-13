@@ -28,24 +28,17 @@ import SecretaryContent from "./SecretaryContent";
 import { INFO_ACCESS } from "../utils/buildCaseFilters";
 import { OrgaosFields, StatesFields, StatesResponse } from "../types/airtable";
 
-type IconItemsReturn = {
-  label: string;
-  status: string;
-  MainIcon: React.FC;
-};
-
-const ICON_ITEMS = (
-  t: (param: string) => string,
-  stateInfo: StatesFields
-): IconItemsReturn[] => [
+const ICON_ITEMS = (t: (param: string) => string, stateInfo: StatesFields) => [
   {
     label: t("category.document"),
     status: stateInfo.estado_basico__documento_orientador,
+    documentName: stateInfo.estado_basico__documento_orientador_nome,
     MainIcon: BriefcaseIcon,
   },
   {
     label: t("category.collegiate"),
     status: stateInfo.estado_basico__orgao_colegiado,
+    collegiateName: stateInfo.estado_basico__orgao_colegiado_nome,
     MainIcon: UsersIcon,
   },
   {
@@ -147,14 +140,19 @@ export default function ExpandedPopup({
               color={"brand.primary"}
               spacing={16}
             >
-              {ICON_ITEMS(t, stateInfo).map(({ label, ...rest }) => (
-                <IconWithEmoji
-                  key={`icon-with-emoji-${label}`}
-                  category={label}
-                  gradient={gradient}
-                  {...rest}
-                />
-              ))}
+              {ICON_ITEMS(t, stateInfo).map(
+                ({ label, status, documentName, collegiateName, MainIcon }) => (
+                  <IconWithEmoji
+                    key={`icon-with-emoji-${label}`}
+                    MainIcon={MainIcon}
+                    gradient={gradient}
+                    category={label}
+                    status={status}
+                    documentName={documentName}
+                    collegiateName={collegiateName}
+                  />
+                )
+              )}
             </HStack>
             {hasStateSecretaries ? (
               <SecretaryContent
