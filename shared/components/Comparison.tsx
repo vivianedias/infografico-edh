@@ -66,7 +66,7 @@ function PlaceholderCard({ tableData, optionsStates }: PlaceholderCardProps) {
     <ComparisonCard state={state} setState={setState} />
   ) : (
     <Flex
-      w={{ base: "full", xl: "md" }}
+      w={{ base: "full", xl: "30rem" }}
       h={"3xl"}
       bgColor={"brand.light"}
       border={"1px dashed"}

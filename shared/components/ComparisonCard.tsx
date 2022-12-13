@@ -71,7 +71,7 @@ export default function ComparisonCard({
       borderRadius={"lg"}
       border={"1px solid"}
       borderColor={"brand.primary"}
-      w={{ base: "full", md: "md" }}
+      w={{ base: "full", md: "30rem" }}
       h={"3xl"}
       overflow={"hidden"}
       position={"relative"}

@@ -34,7 +34,7 @@ export default function Home({
   return (
     <>
       <Head title={t("meta.title")} description={t("meta.description")} />
-      <Box w={{ base: "full", xl: "6xl" }} minH={"100vh"}>
+      <Box w={{ base: "full", xl: "6xl" }}>
         <Heading size={"lg"} color={"brand.primary"} pb={4}>
           {t("title")}
         </Heading>
@@ -79,7 +79,7 @@ export default function Home({
         ) : null}
         <Research />
       </Box>
-      <Box minH={"100vh"} pt={10} w={"full"}>
+      <Box pt={10} w={"full"}>
         <Comparison tableData={tableData} />
       </Box>
     </>
