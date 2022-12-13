@@ -15,6 +15,8 @@ type IconItemsReturn = {
   label: string;
   status: string;
   MainIcon: React.FC;
+  documentName?: any;
+  collegiateName?: any;
 };
 
 const ICON_ITEMS = (
@@ -24,11 +26,13 @@ const ICON_ITEMS = (
   {
     label: t("category.document"),
     status: stateInfo.estado_basico__documento_orientador,
+    documentName: stateInfo.estado_basico__documento_orientador_nome,
     MainIcon: BriefcaseIcon,
   },
   {
     label: t("category.collegiate"),
     status: stateInfo.estado_basico__orgao_colegiado,
+    collegiateName: stateInfo.estado_basico__orgao_colegiado_nome,
     MainIcon: UsersIcon,
   },
   {
@@ -37,7 +41,6 @@ const ICON_ITEMS = (
     MainIcon: DocumentTextIcon,
   },
 ];
-
 export default function StateInfo({
   stateInfo,
   activeIndex,
@@ -59,14 +62,19 @@ export default function StateInfo({
       overflowY={hasStateSecretaries ? "auto" : "hidden"}
     >
       <HStack justify={"space-around"} color={"brand.primary"} spacing={16}>
-        {ICON_ITEMS(t, stateInfo).map(({ label, ...rest }) => (
-          <IconWithEmoji
-            key={`icon-with-emoji-${label}`}
-            category={label}
-            gradient={gradient}
-            {...rest}
-          />
-        ))}
+        {ICON_ITEMS(t, stateInfo).map(
+          ({ label, status, documentName, collegiateName, MainIcon }) => (
+            <IconWithEmoji
+              key={`icon-with-emoji-${label}`}
+              MainIcon={MainIcon}
+              gradient={gradient}
+              category={label}
+              status={status}
+              documentName={documentName}
+              collegiateName={collegiateName}
+            />
+          )
+        )}
       </HStack>
       {hasStateSecretaries ? (
         <SecretaryContent
