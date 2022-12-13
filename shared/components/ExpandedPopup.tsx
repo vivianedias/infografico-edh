@@ -48,6 +48,7 @@ export default function ExpandedPopup({
         <ModalCloseButton />
         <ModalBody>
           <StateInfo
+            gradient={gradient}
             stateInfo={stateInfo}
             activeIndex={activeIndex}
             setActiveIndex={setActiveIndex}

@@ -43,15 +43,15 @@ export default function StateInfo({
   stateInfo,
   activeIndex,
   setActiveIndex,
+  gradient,
 }: {
   stateInfo: StatesResponse;
   activeIndex: number | null;
   setActiveIndex: React.Dispatch<React.SetStateAction<number | null>>;
+  gradient: string;
 }) {
   const { t } = useTranslation("home");
   const hasStateSecretaries = stateInfo.orgaos && stateInfo.orgaos.length > 0;
-  const degree = stateInfo.estado_basico__grau_institucionalizacao;
-  const gradient = INFO_ACCESS[degree];
 
   return (
     <VStack

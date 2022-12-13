@@ -3,11 +3,10 @@ import { useTranslation } from "next-i18next";
 import Select, { StylesConfig } from "react-select";
 import { Heading, Text, Box, Stack, Flex } from "@chakra-ui/react";
 
-import StateInfo from "./StateInfo";
-
 import getDistinct from "../utils/getDistinct";
 import customTheme from "../theme";
 import { type StatesResponse } from "../types/airtable";
+import ComparisonCard from "./ComparisonCard";
 
 type Option = {
   value: string;
@@ -50,7 +49,6 @@ function PlaceholderCard({ tableData, optionsStates }: PlaceholderCardProps) {
   const { t } = useTranslation("home");
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [state, setState] = useState<StatesResponse | null>(null);
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   function handleChange(e: any) {
     setSelectedState(e.value);
@@ -61,7 +59,9 @@ function PlaceholderCard({ tableData, optionsStates }: PlaceholderCardProps) {
     setState(findState || null);
   }, [selectedState]);
 
-  return (
+  return state ? (
+    <ComparisonCard state={state} setState={setState} />
+  ) : (
     <Flex
       w={"sm"}
       h={"lg"}
@@ -72,22 +72,14 @@ function PlaceholderCard({ tableData, optionsStates }: PlaceholderCardProps) {
       justify={"center"}
       p={12}
     >
-      {state ? (
-        <StateInfo
-          stateInfo={state}
-          activeIndex={activeIndex}
-          setActiveIndex={setActiveIndex}
+      <Box>
+        <Select
+          options={optionsStates}
+          placeholder={t("comparison.select.placeholder")}
+          styles={styles}
+          onChange={handleChange}
         />
-      ) : (
-        <Box>
-          <Select
-            options={optionsStates}
-            placeholder={t("comparison.select.placeholder")}
-            styles={styles}
-            onChange={handleChange}
-          />
-        </Box>
-      )}
+      </Box>
     </Flex>
   );
 }
