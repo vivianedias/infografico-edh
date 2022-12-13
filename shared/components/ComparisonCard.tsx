@@ -66,7 +66,7 @@ export default function ComparisonCard({
       borderRadius={"lg"}
       border={"1px solid"}
       borderColor={"brand.primary"}
-      w={"md"}
+      w={{ base: "full", md: "md" }}
       h={"3xl"}
       overflow={"hidden"}
       position={"relative"}
@@ -74,7 +74,8 @@ export default function ComparisonCard({
       <ComparisonHeader gradient={gradient} setState={setState}>
         {state.estado__nome}
       </ComparisonHeader>
-      <Box overflowY={"auto"}>
+
+      <Box py={5} px={2} overflowY={"scroll"} h={"2xl"}>
         <StateInfo
           gradient={gradient}
           stateInfo={state}
@@ -85,8 +86,6 @@ export default function ComparisonCard({
 
       {state.orgaos && state.orgaos.length > 1 ? (
         <Flex
-          position={"absolute"}
-          bottom={0}
           bgColor={"white"}
           w={"full"}
           h={"2.5rem"}

@@ -31,7 +31,7 @@ export default function Pagination({
         variant={"link"}
         disabled={page === 1}
         size={"xs"}
-        color={`brand.gradient.${gradient}.primary`}
+        color={"brand.primary"}
       />
       <Flex>
         <Text fontWeight={page === 1 ? 700 : 400}>1</Text>
@@ -45,7 +45,7 @@ export default function Pagination({
         variant={"link"}
         disabled={page === 2}
         size={"xs"}
-        color={`brand.gradient.${gradient}.primary`}
+        color={"brand.primary"}
       />
     </HStack>
   );
