@@ -10,7 +10,6 @@ import SecretaryContent from "./SecretaryContent";
 
 import { OrgaosFields, StatesFields, StatesResponse } from "../types/airtable";
 import { useTranslation } from "next-i18next";
-import { INFO_ACCESS } from "../utils/buildCaseFilters";
 
 type IconItemsReturn = {
   label: string;

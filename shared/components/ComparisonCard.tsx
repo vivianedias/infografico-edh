@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "next-i18next";
 import { Box, Flex, Icon, IconButton, Text } from "@chakra-ui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
@@ -19,6 +19,11 @@ function ComparisonHeader({
   setState: React.Dispatch<React.SetStateAction<StatesResponse | null>>;
 }) {
   const { t } = useTranslation("home");
+
+  const handleResetState = useCallback(() => {
+    setState(null);
+  }, [setState]);
+
   return (
     <Flex
       bgColor={`brand.gradient.${gradient}.primary`}
@@ -44,7 +49,7 @@ function ComparisonHeader({
         right={4}
         display={"inline-flex"}
         alignItems={"center"}
-        onClick={() => setState(null)}
+        onClick={handleResetState}
       />
     </Flex>
   );

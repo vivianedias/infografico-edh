@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 import Select, { StylesConfig } from "react-select";
 import { Heading, Text, Box, Stack, Flex } from "@chakra-ui/react";
@@ -50,9 +50,12 @@ function PlaceholderCard({ tableData, optionsStates }: PlaceholderCardProps) {
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [state, setState] = useState<StatesResponse | null>(null);
 
-  function handleChange(e: any) {
-    setSelectedState(e.value);
-  }
+  const handleChange = useCallback(
+    (e: any) => {
+      setSelectedState(e.value);
+    },
+    [setSelectedState]
+  );
 
   useEffect(() => {
     const findState = tableData.find((t) => t.estado__nome === selectedState);
