@@ -22,9 +22,9 @@ type ComparisonCardsProps = {
 };
 
 function ComparisonCards({ tableData }: ComparisonCardsProps) {
-  const { t } = useTranslation("home");
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [state, setState] = useState<StatesResponse | null>(null);
+  const { t } = useTranslation("home");
 
   const states = getDistinct(tableData, "estado__nome");
   const optionsStates = states.map((s) => ({
@@ -45,7 +45,7 @@ function ComparisonCards({ tableData }: ComparisonCardsProps) {
   }, [selectedState]);
 
   return state ? (
-    <ComparisonCard state={state} setState={setState} />
+    <ComparisonCard state={state} setSelectedState={setSelectedState} />
   ) : (
     <Flex
       w={{ base: "full", xl: "30rem" }}
@@ -103,24 +103,27 @@ export default function Comparison({
     label: t("comparison.selectAll") ?? "",
   };
 
-  function handleChange(selected: any) {
-    const selectedAllOption = selected.find(
-      (option: Option) => option.value === "all"
-    );
-
-    if (!selectedAllOption) {
-      setSelectValue(selected);
-
-      const selectedOptionsValue = selected.map((s: any) => s.value);
-      const deselectedOptions = STATE_SECRETARIES.filter(
-        (s) => !selectedOptionsValue.includes(s)
+  const handleChange = useCallback(
+    (selected: any) => {
+      const selectedAllOption = selected.find(
+        (option: Option) => option.value === "all"
       );
-      return setSecretaryInfoList(deselectedOptions);
-    }
 
-    setSelectValue(multiSelectInfo);
-    return setSecretaryInfoList([]);
-  }
+      if (!selectedAllOption) {
+        setSelectValue(selected);
+
+        const selectedOptionsValue = selected.map((s: any) => s.value);
+        const deselectedOptions = STATE_SECRETARIES.filter(
+          (s) => !selectedOptionsValue.includes(s)
+        );
+        return setSecretaryInfoList(deselectedOptions);
+      }
+
+      setSelectValue(multiSelectInfo);
+      return setSecretaryInfoList([]);
+    },
+    [multiSelectInfo]
+  );
 
   return (
     <Flex align={"center"} direction={"column"}>
