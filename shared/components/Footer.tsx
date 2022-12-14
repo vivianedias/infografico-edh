@@ -82,6 +82,10 @@ export default function Footer() {
             />
           </HStack>
         </Flex>
+        <Divider borderColor={"header.menu.hover"} />
+        <Flex flexWrap={"wrap"} w={"full"}>
+          <DevelopedByMedusaLab t={t} />
+        </Flex>
       </VStack>
     </Flex>
   );
@@ -139,6 +143,31 @@ const SocialMediaIcon = ({
         <Icon as={SVGIcon} />
       </Square>
     </Link>
+  );
+};
+
+const DevelopedByMedusaLab = ({ t }: { t: TranslationType }) => {
+  return (
+    <HStack>
+      <Text as="span" color={"header.menu.link"} fontWeight={500}>
+        {t("developedBy")}
+      </Text>
+      <Link
+        key={"medusa.lab"}
+        color={"medusalab.primary"}
+        href={"https://www.medusalab.tech/"}
+        isExternal
+        fontSize={"md"}
+        fontWeight={700}
+        _hover={{
+          textDecoration: "none",
+          color: "medusalab.primaryHover",
+        }}
+        textAlign={"start"}
+      >
+        {"<medusa.lab />"}
+      </Link>
+    </HStack>
   );
 };
 

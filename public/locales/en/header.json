@@ -1,13 +1,13 @@
 {
   "title": "Instituto Aurora",
-  "whatWeDo": "nossas frentes",
-  "whoWeAre": "quem somos",
-  "join": "faça parte",
-  "transparency": "transparência",
+  "whatWeDo": "what we do",
+  "whoWeAre": "who we are",
+  "join": "join",
+  "transparency": "transparency",
   "blog": "blog",
-  "donateButton": "doe",
-  "education": "educação plural",
-  "genderEquality": "igualdade de gênero",
-  "inequalities": "redução de desigualdades",
-  "culture": "cultura de paz"
+  "donateButton": "donate",
+  "education": "diverse education",
+  "genderEquality": "gender equality",
+  "inequalities": "reducing inequalities",
+  "culture": "peace culture"
 }
