@@ -1,16 +1,17 @@
 {
   "title": "Instituto Aurora",
   "home": "Home",
-  "whoWeAre": "Quem somos",
+  "whoWeAre": "Who We Are",
   "blog": "Blog",
-  "portfolio": "Portfólio",
-  "transparency": "Transparência",
-  "donate": "Doe",
-  "join": "Faça parte",
-  "nextEvents": "Próximos eventos",
-  "contact": "Contato",
-  "useTerms": "Termos de uso",
-  "privacyPolicy": "Política de Privacidade",
+  "portfolio": "Portfolio",
+  "transparency": "Transparency",
+  "donate": "Donate",
+  "join": "Join",
+  "nextEvents": "Next events",
+  "contact": "Get in touch",
+  "useTerms": "Terms of usage",
+  "privacyPolicy": "Privacy Policy",
   "association": "Associação Aurora para Educação em Direitos Humanos",
-  "cnpj": "31.609.321/0001-11"
+  "cnpj": "31.609.321/0001-11",
+  "developedBy": "Developed by "
 }
