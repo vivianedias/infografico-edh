@@ -1,5 +1,6 @@
 import customTheme from "../../theme";
 import { StylesConfig } from "react-select";
+import defaultStyles from "./singleSelectStyles";
 
 type Option = {
   value: string;
@@ -9,27 +10,31 @@ type Option = {
 const primaryColor = customTheme.colors.brand.primary;
 const textColor = customTheme.colors.brand.light;
 const styles: StylesConfig<Option> = {
+  ...defaultStyles,
   control: (baseStyles, state) => ({
     ...baseStyles,
     borderColor: primaryColor,
     color: primaryColor,
-    width: "250px",
     borderRadius: "10px",
+    minWidth: "24rem",
   }),
-  placeholder: (baseStyles, state) => ({
-    ...baseStyles,
-    color: primaryColor,
-    opacity: 0.5,
-  }),
-  dropdownIndicator: (baseStyles, state) => ({
-    ...baseStyles,
-    color: primaryColor,
-    transform: `rotate(${state.isFocused ? -180 : 0}deg)`,
-  }),
-  option: (styles, { isFocused }) => ({
+  multiValue: (styles, { data }) => ({
     ...styles,
-    backgroundColor: isFocused ? primaryColor : styles.backgroundColor,
-    color: isFocused ? textColor : styles.color,
+    backgroundColor: primaryColor,
+    fontWeight: 500,
+    borderRadius: "5px",
+  }),
+  multiValueLabel: (styles, { data }) => ({
+    ...styles,
+    color: textColor,
+  }),
+  multiValueRemove: (styles, { data }) => ({
+    ...styles,
+    color: textColor,
+    ":hover": {
+      backgroundColor: textColor,
+      color: primaryColor,
+    },
   }),
 };
 

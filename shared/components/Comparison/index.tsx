@@ -17,13 +17,18 @@ type Option = {
 
 type ComparisonCardsProps = {
   tableData: StatesResponse[];
-  optionsStates: Option[];
 };
 
-function ComparisonCards({ tableData, optionsStates }: ComparisonCardsProps) {
+function ComparisonCards({ tableData }: ComparisonCardsProps) {
   const { t } = useTranslation("home");
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [state, setState] = useState<StatesResponse | null>(null);
+
+  const states = getDistinct(tableData, "estado__nome");
+  const optionsStates = states.map((s) => ({
+    value: s,
+    label: s,
+  }));
 
   const handleChange = useCallback(
     (e: any) => {
@@ -68,32 +73,53 @@ export default function Comparison({
   tableData: StatesResponse[];
 }) {
   const { t } = useTranslation("home");
-  const states = getDistinct(tableData, "estado__nome");
-  const optionsStates = states.map((s) => ({
-    value: s,
-    label: s,
-  }));
+  const [, setSecretaryInfoList] = useState(STATE_SECRETARIES);
   const multiSelectInfo = STATE_SECRETARIES.map((s) => ({
     value: s,
     label: t(`popup.expanded.${s}`),
   }));
+  const [selectValue, setSelectValue] = useState(multiSelectInfo);
+  const all = {
+    value: "all",
+    label: t("comparison.selectAll") ?? "",
+  };
+
+  function handleChange(selected: any) {
+    const selectedAllOption = selected.find(
+      (option: Option) => option.value === "all"
+    );
+
+    if (!selectedAllOption) {
+      const selectedOptionsValue = selected.map((s: any) => s.value);
+      setSelectValue(selected);
+      return setSecretaryInfoList(selectedOptionsValue);
+    }
+
+    setSelectValue(multiSelectInfo);
+    return setSecretaryInfoList(STATE_SECRETARIES);
+  }
 
   return (
     <Flex align={"center"} direction={"column"}>
-      <Box w={{ base: "full", xl: "6xl" }}>
+      <Box w={{ base: "full", xl: "6xl" }} mb={8}>
         <Heading size={"lg"} color={"brand.primary"} pb={4}>
           {t("comparison.title")}
         </Heading>
         <Text fontSize={"xl"} fontWeight={300} color={"brand.primary"} pb={8}>
           {t("comparison.subtitle")}
         </Text>
+        <Select
+          value={selectValue}
+          options={[all, ...multiSelectInfo]}
+          isMulti
+          styles={multiSelectStyles}
+          onChange={handleChange}
+        />
       </Box>
-      <Select options={multiSelectInfo} isMulti styles={multiSelectStyles} />
       <Stack spacing={5} direction={{ base: "column", xl: "row" }}>
         {[...Array(3).keys()].map((i) => (
           <ComparisonCards
             key={`placeholder-card-${i}`}
-            optionsStates={optionsStates}
             tableData={tableData}
           />
         ))}
