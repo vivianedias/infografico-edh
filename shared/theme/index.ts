@@ -71,6 +71,7 @@ const theme = {
     medusalab: {
       primary: "#0bb883",
       primaryHover: "#53edbe",
+      secondary: "#0bb883",
     },
   },
 };
