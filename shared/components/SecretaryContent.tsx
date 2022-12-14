@@ -122,7 +122,7 @@ type SecretaryContentItemProps = {
   gradient: string;
 };
 
-const STATE_SECRETARY_SORT = [
+export const STATE_SECRETARIES = [
   "orgao__nome",
   "orgao__orcamento",
   "orgao__conceito_edh",
@@ -138,7 +138,7 @@ function SecretaryContentItem({
 }: SecretaryContentItemProps) {
   const { t } = useTranslation("home");
   const sortedStateSecretary = Object.keys(stateSecretary).sort(
-    (a, b) => STATE_SECRETARY_SORT.indexOf(a) - STATE_SECRETARY_SORT.indexOf(b)
+    (a, b) => STATE_SECRETARIES.indexOf(a) - STATE_SECRETARIES.indexOf(b)
   );
   return (
     <VStack

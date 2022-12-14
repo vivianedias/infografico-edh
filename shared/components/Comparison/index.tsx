@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
-import Select, { StylesConfig } from "react-select";
+import Select from "react-select";
 import { Heading, Text, Box, Stack, Flex } from "@chakra-ui/react";
 
-import getDistinct from "../utils/getDistinct";
-import customTheme from "../theme";
-import { type StatesResponse } from "../types/airtable";
-import ComparisonCard from "./ComparisonCard";
+import ComparisonCard from "../ComparisonCard";
+import getDistinct from "../../utils/getDistinct";
+import { STATE_SECRETARIES } from "../SecretaryContent";
+import { type StatesResponse } from "../../types/airtable";
+import singleSelectStyles from "./singleSelectStyles";
+import multiSelectStyles from "./multiSelectStyles";
 
 type Option = {
   value: string;
@@ -16,33 +18,6 @@ type Option = {
 type ComparisonCardsProps = {
   tableData: StatesResponse[];
   optionsStates: Option[];
-};
-
-const primaryColor = customTheme.colors.brand.primary;
-const textColor = customTheme.colors.brand.light;
-const styles: StylesConfig<Option> = {
-  control: (baseStyles, state) => ({
-    ...baseStyles,
-    borderColor: primaryColor,
-    color: primaryColor,
-    width: "250px",
-    borderRadius: "10px",
-  }),
-  placeholder: (baseStyles, state) => ({
-    ...baseStyles,
-    color: primaryColor,
-    opacity: 0.5,
-  }),
-  dropdownIndicator: (baseStyles, state) => ({
-    ...baseStyles,
-    color: primaryColor,
-    transform: `rotate(${state.isFocused ? -180 : 0}deg)`,
-  }),
-  option: (styles, { isFocused }) => ({
-    ...styles,
-    backgroundColor: isFocused ? primaryColor : styles.backgroundColor,
-    color: isFocused ? textColor : styles.color,
-  }),
 };
 
 function ComparisonCards({ tableData, optionsStates }: ComparisonCardsProps) {
@@ -79,7 +54,7 @@ function ComparisonCards({ tableData, optionsStates }: ComparisonCardsProps) {
         <Select
           options={optionsStates}
           placeholder={t("comparison.select.placeholder")}
-          styles={styles}
+          styles={singleSelectStyles}
           onChange={handleChange}
         />
       </Box>
@@ -98,6 +73,10 @@ export default function Comparison({
     value: s,
     label: s,
   }));
+  const multiSelectInfo = STATE_SECRETARIES.map((s) => ({
+    value: s,
+    label: t(`popup.expanded.${s}`),
+  }));
 
   return (
     <Flex align={"center"} direction={"column"}>
@@ -109,6 +88,7 @@ export default function Comparison({
           {t("comparison.subtitle")}
         </Text>
       </Box>
+      <Select options={multiSelectInfo} isMulti styles={multiSelectStyles} />
       <Stack spacing={5} direction={{ base: "column", xl: "row" }}>
         {[...Array(3).keys()].map((i) => (
           <ComparisonCards
