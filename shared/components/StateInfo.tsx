@@ -15,8 +15,8 @@ type IconItemsReturn = {
   label: string;
   status: string;
   MainIcon: React.FC;
-  documentName?: any;
-  collegiateName?: any;
+  documentName?: string | null | undefined;
+  collegiateName?: string | null | undefined;
 };
 
 const ICON_ITEMS = (

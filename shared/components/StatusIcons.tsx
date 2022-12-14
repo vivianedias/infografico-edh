@@ -14,8 +14,8 @@ export default function StatusIcon({
 }: {
   gradient: string;
   status: string;
-  documentName?: string | null;
-  collegiateName?: string | null;
+  documentName?: string | null | undefined;
+  collegiateName?: string | null | undefined;
   category: string;
   size: string;
 }) {

@@ -15,8 +15,8 @@ export default function IconWithEmoji({
   gradient: string;
   category: string;
   status: string;
-  documentName: any;
-  collegiateName: any;
+  documentName: string | null | undefined;
+  collegiateName: string | null | undefined;
 }) {
   return (
     <VStack justify={"center"} align={"center"}>
