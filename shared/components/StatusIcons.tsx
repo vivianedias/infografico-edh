@@ -1,6 +1,6 @@
 import { useTranslation } from "next-i18next";
 
-import { Box, Icon, Tooltip } from "@chakra-ui/react";
+import { Box, Icon, Text, Tooltip } from "@chakra-ui/react";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { MinusCircleIcon } from "@heroicons/react/24/outline";
 
@@ -14,8 +14,8 @@ export default function StatusIcon({
 }: {
   gradient: string;
   status: string;
-  documentName?: any;
-  collegiateName?: any;
+  documentName?: string | null;
+  collegiateName?: string | null;
   category: string;
   size: string;
 }) {
@@ -24,15 +24,19 @@ export default function StatusIcon({
   const outerSize = size === "sm" ? 3 : 4;
   const innerSize = size === "sm" ? 1.5 : 2;
 
-  const tootipLabel =
-    documentName ?? collegiateName ?? `${iconStatusText} ${category}`;
-
   switch (status) {
     case "SIM":
       return (
         <Tooltip
           hasArrow
-          label={tootipLabel}
+          label={
+            <CustomTooltipLabel
+              documentName={documentName}
+              collegiateName={collegiateName}
+              iconStatusText={iconStatusText}
+              category={category}
+            />
+          }
           bg="brand.light"
           color="brand.primary"
         >
@@ -47,7 +51,14 @@ export default function StatusIcon({
       return (
         <Tooltip
           hasArrow
-          label={tootipLabel}
+          label={
+            <CustomTooltipLabel
+              documentName={documentName}
+              collegiateName={collegiateName}
+              iconStatusText={iconStatusText}
+              category={category}
+            />
+          }
           bg="brand.light"
           color="brand.primary"
         >
@@ -62,7 +73,14 @@ export default function StatusIcon({
       return (
         <Tooltip
           hasArrow
-          label={tootipLabel}
+          label={
+            <CustomTooltipLabel
+              documentName={documentName}
+              collegiateName={collegiateName}
+              iconStatusText={iconStatusText}
+              category={category}
+            />
+          }
           bg="brand.light"
           color="brand.primary"
         >
@@ -82,7 +100,14 @@ export default function StatusIcon({
       return (
         <Tooltip
           hasArrow
-          label={tootipLabel}
+          label={
+            <CustomTooltipLabel
+              documentName={documentName}
+              collegiateName={collegiateName}
+              iconStatusText={iconStatusText}
+              category={category}
+            />
+          }
           bg="brand.light"
           color="brand.primary"
         >
@@ -97,6 +122,42 @@ export default function StatusIcon({
       return <></>;
   }
 }
+
+const CustomTooltipLabel = ({
+  documentName,
+  collegiateName,
+  iconStatusText,
+  category,
+}: {
+  documentName?: string | null;
+  collegiateName?: string | null;
+  iconStatusText: string;
+  category: string;
+}) => {
+  const hasDocumentOrCollegiate = documentName || collegiateName;
+
+  const defaultPhrase = `${iconStatusText} ${category}`;
+
+  const documentOrCollegiateName = documentName ?? collegiateName;
+
+  return (
+    <>
+      <Text as="span" fontWeight={hasDocumentOrCollegiate ? 700 : 400}>
+        {defaultPhrase}
+      </Text>
+      <Text
+        as="span"
+        fontWeight={700}
+        display={hasDocumentOrCollegiate ? "inline-flex" : "none"}
+      >
+        {":"}
+      </Text>
+      <Text as="i" display={hasDocumentOrCollegiate ? "inline-flex" : "none"}>
+        {documentOrCollegiateName}
+      </Text>
+    </>
+  );
+};
 
 StatusIcon.defaultProps = {
   size: "md",
