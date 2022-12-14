@@ -3,7 +3,7 @@ import { useTranslation } from "next-i18next";
 import Select from "react-select";
 import { Heading, Text, Box, Stack, Flex } from "@chakra-ui/react";
 
-import ComparisonCard from "../ComparisonCard";
+import ComparisonCard from "./Card";
 import getDistinct from "../../utils/getDistinct";
 import { STATE_SECRETARIES } from "../SecretaryContent";
 import { type StatesResponse } from "../../types/airtable";

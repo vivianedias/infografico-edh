@@ -3,11 +3,11 @@ import { useTranslation } from "next-i18next";
 import { Box, Flex, Icon, IconButton, Text } from "@chakra-ui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
-import Pagination from "./Pagination";
-import StateInfo from "./StateInfo";
+import Pagination from "../Pagination";
+import StateInfo from "../StateInfo";
 
-import { StatesResponse } from "../types/airtable";
-import { INFO_ACCESS } from "../utils/buildCaseFilters";
+import { StatesResponse } from "../../types/airtable";
+import { INFO_ACCESS } from "../../utils/buildCaseFilters";
 
 function ComparisonHeader({
   children,
