@@ -14,8 +14,8 @@ export default function StatusIcon({
 }: {
   gradient: string;
   status: string;
-  documentName?: string | null | undefined;
-  collegiateName?: string | null | undefined;
+  documentName?: string | null;
+  collegiateName?: string | null;
   category: string;
   size: string;
 }) {
@@ -23,20 +23,21 @@ export default function StatusIcon({
   const iconStatusText = t(`popup.icons.${status}`);
   const outerSize = size === "sm" ? 3 : 4;
   const innerSize = size === "sm" ? 1.5 : 2;
+  const tooltipLabel = (
+    <CustomTooltipLabel
+      documentName={documentName}
+      collegiateName={collegiateName}
+      iconStatusText={iconStatusText}
+      category={category}
+    />
+  );
 
   switch (status) {
     case "SIM":
       return (
         <Tooltip
           hasArrow
-          label={
-            <CustomTooltipLabel
-              documentName={documentName}
-              collegiateName={collegiateName}
-              iconStatusText={iconStatusText}
-              category={category}
-            />
-          }
+          label={tooltipLabel}
           bg="brand.light"
           color="brand.primary"
         >
@@ -51,14 +52,7 @@ export default function StatusIcon({
       return (
         <Tooltip
           hasArrow
-          label={
-            <CustomTooltipLabel
-              documentName={documentName}
-              collegiateName={collegiateName}
-              iconStatusText={iconStatusText}
-              category={category}
-            />
-          }
+          label={tooltipLabel}
           bg="brand.light"
           color="brand.primary"
         >
@@ -73,14 +67,7 @@ export default function StatusIcon({
       return (
         <Tooltip
           hasArrow
-          label={
-            <CustomTooltipLabel
-              documentName={documentName}
-              collegiateName={collegiateName}
-              iconStatusText={iconStatusText}
-              category={category}
-            />
-          }
+          label={tooltipLabel}
           bg="brand.light"
           color="brand.primary"
         >
@@ -100,14 +87,7 @@ export default function StatusIcon({
       return (
         <Tooltip
           hasArrow
-          label={
-            <CustomTooltipLabel
-              documentName={documentName}
-              collegiateName={collegiateName}
-              iconStatusText={iconStatusText}
-              category={category}
-            />
-          }
+          label={tooltipLabel}
           bg="brand.light"
           color="brand.primary"
         >
