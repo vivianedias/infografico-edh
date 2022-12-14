@@ -3,26 +3,26 @@ import { useTranslation } from "next-i18next";
 import { Box, Flex, Icon, IconButton, Text } from "@chakra-ui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
-import Pagination from "./Pagination";
-import StateInfo from "./StateInfo";
+import Pagination from "../Pagination";
+import StateInfo from "../StateInfo";
 
-import { StatesResponse } from "../types/airtable";
-import { INFO_ACCESS } from "../utils/buildCaseFilters";
+import { StatesResponse } from "../../types/airtable";
+import { INFO_ACCESS } from "../../utils/buildCaseFilters";
 
 function ComparisonHeader({
   children,
   gradient,
-  setState,
+  setSelectedState,
 }: {
   gradient: string;
   children: React.ReactNode;
-  setState: React.Dispatch<React.SetStateAction<StatesResponse | null>>;
+  setSelectedState: React.Dispatch<React.SetStateAction<string | null>>;
 }) {
   const { t } = useTranslation("home");
 
   const handleResetState = useCallback(() => {
-    setState(null);
-  }, [setState]);
+    setSelectedState(null);
+  }, [setSelectedState]);
 
   return (
     <Flex
@@ -57,10 +57,10 @@ function ComparisonHeader({
 
 export default function ComparisonCard({
   state,
-  setState,
+  setSelectedState,
 }: {
   state: StatesResponse;
-  setState: React.Dispatch<React.SetStateAction<StatesResponse | null>>;
+  setSelectedState: React.Dispatch<React.SetStateAction<string | null>>;
 }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const degree = state.estado_basico__grau_institucionalizacao;
@@ -76,7 +76,7 @@ export default function ComparisonCard({
       overflow={"hidden"}
       position={"relative"}
     >
-      <ComparisonHeader gradient={gradient} setState={setState}>
+      <ComparisonHeader gradient={gradient} setSelectedState={setSelectedState}>
         {state.estado__nome}
       </ComparisonHeader>
 

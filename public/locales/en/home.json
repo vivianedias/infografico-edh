@@ -62,6 +62,7 @@
     "select": {
       "placeholder": "Add a state"
     },
-    "unselectState": "Remove state"
+    "unselectState": "Remove state",
+    "selectAll": "Select all"
   }
 }

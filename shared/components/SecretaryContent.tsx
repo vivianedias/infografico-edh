@@ -92,7 +92,14 @@ function SecretaryContentLineItem({
       w={"100%"}
       pb={7}
     >
-      <Text textAlign={"right"} lineHeight={"none"} fontWeight={700} flex={0.5}>
+      <Text
+        textAlign={"right"}
+        lineHeight={"none"}
+        fontWeight={700}
+        flex={0.5}
+        right={"5px"}
+        position={"relative"}
+      >
         {title}:
       </Text>
       <Box height={"100%"} position={"absolute"} right={"73%"}>
@@ -103,7 +110,12 @@ function SecretaryContentLineItem({
           alignItems={"stretch"}
         />
       </Box>
-      <Box flex={1.5}>
+      <Box
+        flex={1.5}
+        opacity={1}
+        transition={"opacity 0.5s"}
+        className={`secretary-content-lineitem-${property}`}
+      >
         {renderSecretaryContentLineText({
           description,
           property,
@@ -122,7 +134,7 @@ type SecretaryContentItemProps = {
   gradient: string;
 };
 
-const STATE_SECRETARY_SORT = [
+export const STATE_SECRETARIES = [
   "orgao__nome",
   "orgao__orcamento",
   "orgao__conceito_edh",
@@ -138,7 +150,7 @@ function SecretaryContentItem({
 }: SecretaryContentItemProps) {
   const { t } = useTranslation("home");
   const sortedStateSecretary = Object.keys(stateSecretary).sort(
-    (a, b) => STATE_SECRETARY_SORT.indexOf(a) - STATE_SECRETARY_SORT.indexOf(b)
+    (a, b) => STATE_SECRETARIES.indexOf(a) - STATE_SECRETARIES.indexOf(b)
   );
   return (
     <VStack
