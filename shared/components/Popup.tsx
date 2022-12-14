@@ -26,15 +26,17 @@ const POPUP_ITEMS = (
 ) => [
   {
     status: stateInfo.estado_basico__documento_orientador,
+    documentName: stateInfo.estado_basico__documento_orientador_nome,
     category: t("category.document"),
+  },
+  {
+    status: stateInfo.estado_basico__orgao_colegiado,
+    collegiateName: stateInfo.estado_basico__orgao_colegiado_nome,
+    category: t("category.collegiate"),
   },
   {
     status: stateInfo.estado_basico__orgao_publico,
     category: t("category.govern"),
-  },
-  {
-    status: stateInfo.estado_basico__orgao_colegiado,
-    category: t("category.collegiate"),
   },
 ];
 
@@ -90,25 +92,29 @@ export function PopupContent({
         </Flex>
         <Box px={6} py={3} backgroundColor={"white"}>
           <List fontSize={"sm"} color={"brand.primary"} spacing={3}>
-            {POPUP_ITEMS(t, stateInfo).map(({ status, category }, i) => (
-              <ListItem key={`popup-items-${i}`}>
-                <HStack>
-                  <Circle
-                    size={4}
-                    bgColor={`brand.gradient.${gradient}.primary`}
-                    position={"relative"}
-                  >
-                    <StatusIcon
-                      gradient={gradient}
-                      status={status}
-                      category={category.toLowerCase()}
-                      size={"sm"}
-                    />
-                  </Circle>
-                  <Text>{category}</Text>
-                </HStack>
-              </ListItem>
-            ))}
+            {POPUP_ITEMS(t, stateInfo).map(
+              ({ status, documentName, collegiateName, category }, i) => (
+                <ListItem key={`popup-items-${i}`}>
+                  <HStack>
+                    <Circle
+                      size={4}
+                      bgColor={`brand.gradient.${gradient}.primary`}
+                      position={"relative"}
+                    >
+                      <StatusIcon
+                        gradient={gradient}
+                        status={status}
+                        documentName={documentName}
+                        collegiateName={collegiateName}
+                        category={category.toLowerCase()}
+                        size={"sm"}
+                      />
+                    </Circle>
+                    <Text>{category}</Text>
+                  </HStack>
+                </ListItem>
+              )
+            )}
           </List>
         </Box>
       </Box>
