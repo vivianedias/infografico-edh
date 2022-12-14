@@ -92,7 +92,14 @@ function SecretaryContentLineItem({
       w={"100%"}
       pb={7}
     >
-      <Text textAlign={"right"} lineHeight={"none"} fontWeight={700} flex={0.5}>
+      <Text
+        textAlign={"right"}
+        lineHeight={"none"}
+        fontWeight={700}
+        flex={0.5}
+        right={"5px"}
+        position={"relative"}
+      >
         {title}:
       </Text>
       <Box height={"100%"} position={"absolute"} right={"73%"}>
@@ -103,7 +110,12 @@ function SecretaryContentLineItem({
           alignItems={"stretch"}
         />
       </Box>
-      <Box flex={1.5}>
+      <Box
+        flex={1.5}
+        opacity={1}
+        transition={"opacity 0.5s"}
+        className={`secretary-content-lineitem-${property}`}
+      >
         {renderSecretaryContentLineText({
           description,
           property,

@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 import Select from "react-select";
 import { Heading, Text, Box, Stack, Flex } from "@chakra-ui/react";
+import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 
 import ComparisonCard from "./Card";
 import getDistinct from "../../utils/getDistinct";
@@ -67,13 +69,30 @@ function ComparisonCards({ tableData }: ComparisonCardsProps) {
   );
 }
 
+const dynamicStyle = (props: { secretaryList: string[] }) => {
+  if (props.secretaryList.length < 1) return ``;
+
+  const listOfClasses = props.secretaryList.map(
+    (s) => `.secretary-content-lineitem-${s}`
+  );
+  return css`
+    & ${listOfClasses.join(",")} {
+      opacity: 0;
+    }
+  `;
+};
+
+const ControlSecrearyLineItem = styled.div<{ secretaryList: string[] }>`
+  ${dynamicStyle}
+`;
+
 export default function Comparison({
   tableData,
 }: {
   tableData: StatesResponse[];
 }) {
   const { t } = useTranslation("home");
-  const [, setSecretaryInfoList] = useState(STATE_SECRETARIES);
+  const [secretaryList, setSecretaryInfoList] = useState<string[]>([]);
   const multiSelectInfo = STATE_SECRETARIES.map((s) => ({
     value: s,
     label: t(`popup.expanded.${s}`),
@@ -90,13 +109,17 @@ export default function Comparison({
     );
 
     if (!selectedAllOption) {
-      const selectedOptionsValue = selected.map((s: any) => s.value);
       setSelectValue(selected);
-      return setSecretaryInfoList(selectedOptionsValue);
+
+      const selectedOptionsValue = selected.map((s: any) => s.value);
+      const deselectedOptions = STATE_SECRETARIES.filter(
+        (s) => !selectedOptionsValue.includes(s)
+      );
+      return setSecretaryInfoList(deselectedOptions);
     }
 
     setSelectValue(multiSelectInfo);
-    return setSecretaryInfoList(STATE_SECRETARIES);
+    return setSecretaryInfoList([]);
   }
 
   return (
@@ -116,14 +139,16 @@ export default function Comparison({
           onChange={handleChange}
         />
       </Box>
-      <Stack spacing={5} direction={{ base: "column", xl: "row" }}>
-        {[...Array(3).keys()].map((i) => (
-          <ComparisonCards
-            key={`placeholder-card-${i}`}
-            tableData={tableData}
-          />
-        ))}
-      </Stack>
+      <ControlSecrearyLineItem secretaryList={secretaryList}>
+        <Stack spacing={5} direction={{ base: "column", xl: "row" }}>
+          {[...Array(3).keys()].map((i) => (
+            <ComparisonCards
+              key={`placeholder-card-${i}`}
+              tableData={tableData}
+            />
+          ))}
+        </Stack>
+      </ControlSecrearyLineItem>
     </Flex>
   );
 }
