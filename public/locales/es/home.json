@@ -58,7 +58,7 @@
   },
   "comparison": {
     "title": "Comparación de la Educación para el Desarrollo Humano entre estados",
-    "subtitle": "Primero seleccione los 2 o 3 estados en los que desea comparar la información del gobierno; Luego elija qué parámetros desea comparar.",
+    "subtitle": "Seleccione 2 o 3 estados para comparar; luego elija qué parámetros comparar.",
     "select": {
       "placeholder": "Adicione um estado"
     },

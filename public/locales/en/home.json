@@ -58,7 +58,7 @@
   },
   "comparison": {
     "title": "Comparison of Human Development Education across states",
-    "subtitle": "First select the 2 to 3 states you want to compare government information; Then choose which parameters you want to compare.",
+    "subtitle": "Select 2 or 3 states to compare; then choose which parameters to compare.",
     "select": {
       "placeholder": "Add a state"
     },
