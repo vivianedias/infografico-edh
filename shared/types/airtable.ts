@@ -4,8 +4,10 @@ export type StatesFields = {
   estado__sigla: string;
   estado_basico__acesso_informacao: string;
   estado_basico__documento_orientador: string;
+  estado_basico__documento_orientador_nome: string;
   estado_basico__grau_institucionalizacao: string;
   estado_basico__orgao_colegiado: string;
+  estado_basico__orgao_colegiado_nome: string;
   estado_basico__orgao_publico: string;
   periodo: string;
   orgaos?: OrgaosFields[];

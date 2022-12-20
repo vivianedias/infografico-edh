@@ -8,6 +8,8 @@ import {
   Box,
   Flex,
   Circle,
+  Grid,
+  GridItem,
 } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 
@@ -83,19 +85,13 @@ function SecretaryContentLineItem({
   gradient: string;
 }) {
   return (
-    <HStack
-      direction={"column"}
-      spacing={7}
-      align={"flex-start"}
-      mt={"0 !important"}
-      position={"relative"}
-      w={"100%"}
-      pb={7}
-    >
-      <Text textAlign={"right"} lineHeight={"none"} fontWeight={700} flex={0.5}>
-        {title}:
-      </Text>
-      <Box height={"100%"} position={"absolute"} right={"73%"}>
+    <>
+      <GridItem>
+        <Text textAlign={"right"} lineHeight={"none"} fontWeight={700}>
+          {title}:
+        </Text>
+      </GridItem>
+      <Box height={"100%"} position={"absolute"} left={"125px"}>
         <Divider
           border={"1px solid"}
           borderColor={"brand.primary"}
@@ -103,14 +99,18 @@ function SecretaryContentLineItem({
           alignItems={"stretch"}
         />
       </Box>
-      <Box flex={1.5}>
+      <GridItem
+        opacity={1}
+        transition={"opacity 0.5s"}
+        className={`secretary-content-lineitem-${property}`}
+      >
         {renderSecretaryContentLineText({
           description,
           property,
           gradient,
         })}
-      </Box>
-    </HStack>
+      </GridItem>
+    </>
   );
 }
 
@@ -122,7 +122,7 @@ type SecretaryContentItemProps = {
   gradient: string;
 };
 
-const STATE_SECRETARY_SORT = [
+export const STATE_SECRETARIES = [
   "orgao__nome",
   "orgao__orcamento",
   "orgao__conceito_edh",
@@ -138,15 +138,22 @@ function SecretaryContentItem({
 }: SecretaryContentItemProps) {
   const { t } = useTranslation("home");
   const sortedStateSecretary = Object.keys(stateSecretary).sort(
-    (a, b) => STATE_SECRETARY_SORT.indexOf(a) - STATE_SECRETARY_SORT.indexOf(b)
+    (a, b) => STATE_SECRETARIES.indexOf(a) - STATE_SECRETARIES.indexOf(b)
   );
   return (
-    <VStack
+    <Grid
+      position={"relative"}
+      gridTemplateColumns={"100px 13.5rem"}
+      gridTemplateRows={"1fr"}
+      columnGap={5}
+      rowGap={5}
       bgColor={"brand.light"}
       borderRadius={"2xl"}
       py={6}
       px={4}
       minW={"90%"}
+      w={"md"}
+      overflow={"hidden"}
     >
       {sortedStateSecretary.map((secretaryKey, i) => {
         const key = secretaryKey as keyof typeof stateSecretary;
@@ -160,7 +167,7 @@ function SecretaryContentItem({
           />
         );
       })}
-    </VStack>
+    </Grid>
   );
 }
 
@@ -183,7 +190,7 @@ export default function SecretaryContent({
 
   return (
     <HStack
-      w={"md"}
+      w={"full"}
       align={"flex-start"}
       css={
         !activeIndex &&

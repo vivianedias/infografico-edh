@@ -6,6 +6,8 @@ import StatusIcon from "./StatusIcons";
 export default function IconWithEmoji({
   MainIcon,
   status,
+  documentName,
+  collegiateName,
   gradient,
   category,
 }: {
@@ -13,6 +15,8 @@ export default function IconWithEmoji({
   gradient: string;
   category: string;
   status: string;
+  documentName?: string | null;
+  collegiateName?: string | null;
 }) {
   return (
     <VStack justify={"center"} align={"center"}>
@@ -28,6 +32,8 @@ export default function IconWithEmoji({
           <StatusIcon
             gradient={gradient}
             status={status}
+            documentName={documentName}
+            collegiateName={collegiateName}
             category={category.toLowerCase()}
           />
         </Circle>

@@ -1,4 +1,4 @@
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import { Box } from "@chakra-ui/layout";
 
 const ChakraNextImage = (props: any) => {
@@ -11,5 +11,3 @@ const ChakraNextImage = (props: any) => {
 };
 
 export default ChakraNextImage;
-
-
