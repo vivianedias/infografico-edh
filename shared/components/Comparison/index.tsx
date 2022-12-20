@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 import Select from "react-select";
-import { Heading, Text, Box, Stack, Flex } from "@chakra-ui/react";
+import { Heading, Text, Box, Grid, Flex, GridItem } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
@@ -47,25 +47,26 @@ function ComparisonCards({ tableData }: ComparisonCardsProps) {
   return state ? (
     <ComparisonCard state={state} setSelectedState={setSelectedState} />
   ) : (
-    <Flex
-      w={{ base: "full", xl: "30rem" }}
-      h={"3xl"}
-      bgColor={"brand.light"}
-      border={"1px dashed"}
-      borderColor={"brand.primary"}
-      borderRadius={"md"}
-      justify={"center"}
-      p={12}
-    >
-      <Box>
-        <Select
-          options={optionsStates}
-          placeholder={t("comparison.select.placeholder")}
-          styles={singleSelectStyles}
-          onChange={handleChange}
-        />
-      </Box>
-    </Flex>
+    <GridItem>
+      <Flex
+        bgColor={"brand.light"}
+        border={"1px dashed"}
+        borderColor={"brand.primary"}
+        borderRadius={"md"}
+        justify={"center"}
+        p={12}
+        h={"3xl"}
+      >
+        <Box>
+          <Select
+            options={optionsStates}
+            placeholder={t("comparison.select.placeholder")}
+            styles={singleSelectStyles}
+            onChange={handleChange}
+          />
+        </Box>
+      </Flex>
+    </GridItem>
   );
 }
 
@@ -143,14 +144,32 @@ export default function Comparison({
         />
       </Box>
       <ControlSecrearyLineItem secretaryList={secretaryList}>
-        <Stack spacing={5} direction={{ base: "column", xl: "row" }}>
+        <Grid
+          gridTemplateColumns={{
+            base: "max(31.875em)",
+            xl: "repeat(3, minmax(25.5em, 31.875em))",
+          }}
+          gridTemplateRows={{
+            base: "repeat(3, 1fr)",
+            xl: "1fr",
+          }}
+          columnGap={{
+            base: 0,
+            xl: 4,
+          }}
+          rowGap={{
+            base: 5,
+            xl: 0,
+          }}
+          maxWidth={"100vw"}
+        >
           {[...Array(3).keys()].map((i) => (
             <ComparisonCards
               key={`placeholder-card-${i}`}
               tableData={tableData}
             />
           ))}
-        </Stack>
+        </Grid>
       </ControlSecrearyLineItem>
     </Flex>
   );

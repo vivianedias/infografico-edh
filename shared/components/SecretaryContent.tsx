@@ -196,7 +196,7 @@ export default function SecretaryContent({
 
   return (
     <HStack
-      w={"md"}
+      w={"full"}
       align={"flex-start"}
       css={
         !activeIndex &&
