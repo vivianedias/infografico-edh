@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useTranslation } from "next-i18next";
-import { Box, Flex, Icon, IconButton, Text } from "@chakra-ui/react";
+import { Box, Flex, GridItem, Icon, IconButton, Text } from "@chakra-ui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
 import Pagination from "../Pagination";
@@ -67,43 +67,46 @@ export default function ComparisonCard({
   const gradient = INFO_ACCESS[degree];
 
   return (
-    <Box
-      borderRadius={"lg"}
-      border={"1px solid"}
-      borderColor={"brand.primary"}
-      w={{ base: "full", md: "30rem" }}
-      h={"3xl"}
-      overflow={"hidden"}
-      position={"relative"}
-    >
-      <ComparisonHeader gradient={gradient} setSelectedState={setSelectedState}>
-        {state.estado__nome}
-      </ComparisonHeader>
-
-      <Box py={5} px={2} overflowY={"scroll"} h={"2xl"}>
-        <StateInfo
+    <GridItem h={"3xl"}>
+      <Box
+        borderRadius={"lg"}
+        border={"1px solid"}
+        borderColor={"brand.primary"}
+        overflow={"hidden"}
+        position={"relative"}
+      >
+        <ComparisonHeader
           gradient={gradient}
-          stateInfo={state}
-          activeIndex={activeIndex}
-          setActiveIndex={setActiveIndex}
-        />
-      </Box>
-
-      {state.orgaos && state.orgaos.length > 1 ? (
-        <Flex
-          bgColor={"white"}
-          w={"full"}
-          h={"2.5rem"}
-          align={"center"}
-          justify={"center"}
+          setSelectedState={setSelectedState}
         >
-          <Pagination
-            page={activeIndex ? activeIndex + 1 : 1}
-            setPage={setActiveIndex}
+          {state.estado__nome}
+        </ComparisonHeader>
+
+        <Box py={5} px={2} overflowY={"scroll"} h={"2xl"}>
+          <StateInfo
             gradient={gradient}
+            stateInfo={state}
+            activeIndex={activeIndex}
+            setActiveIndex={setActiveIndex}
           />
-        </Flex>
-      ) : null}
-    </Box>
+        </Box>
+
+        {state.orgaos && state.orgaos.length > 1 ? (
+          <Flex
+            bgColor={"white"}
+            w={"full"}
+            h={"2.5rem"}
+            align={"center"}
+            justify={"center"}
+          >
+            <Pagination
+              page={activeIndex ? activeIndex + 1 : 1}
+              setPage={setActiveIndex}
+              gradient={gradient}
+            />
+          </Flex>
+        ) : null}
+      </Box>
+    </GridItem>
   );
 }

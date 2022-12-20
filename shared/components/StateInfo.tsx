@@ -56,11 +56,7 @@ export default function StateInfo({
   const hasStateSecretaries = stateInfo.orgaos && stateInfo.orgaos.length > 0;
 
   return (
-    <VStack
-      spacing={8}
-      overflowX={"hidden"}
-      overflowY={hasStateSecretaries ? "auto" : "hidden"}
-    >
+    <VStack spacing={8} overflow={"hidden"}>
       <HStack justify={"space-around"} color={"brand.primary"} spacing={16}>
         {ICON_ITEMS(t, stateInfo).map(
           ({ label, status, documentName, collegiateName, MainIcon }) => (

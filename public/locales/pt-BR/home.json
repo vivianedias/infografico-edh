@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Educar em direitos humanos - Instituto Aurora",
-    "description": "Nosso sonho é que as pessoas compreendam que compartilhamos uma mesma humanidade. Por isso, trabalhamos por uma cultura de direitos humanos."
+    "title": "Banco de dados da Educação em Direitos Humanos no Brasil",
+    "description": "O banco de dados da Educação em Direitos Humanos no Brasil apresenta informações sobre os estados brasileiros e o governo federal."
   },
   "title": "Panorama da Educação em Direitos Humanos no Brasil",
   "subtitle": "Clique nos estados para obter mais detalhes",
@@ -58,7 +58,7 @@
   },
   "comparison": {
     "title": "Comparação de Educação em Direitos Humano entre estados",
-    "subtitle": "Primeiramente selecione os de 2 a 3 estados que queira comparar as inforções de governo; Depois escolha quais parâmetros quer comparar.",
+    "subtitle": "Selecione 2 ou 3 estados para comparar; em seguida, escolha quais parâmetros comparar.",
     "select": {
       "placeholder": "Adicione um estado"
     },
