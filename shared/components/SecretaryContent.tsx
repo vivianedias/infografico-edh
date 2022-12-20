@@ -8,6 +8,8 @@ import {
   Box,
   Flex,
   Circle,
+  Grid,
+  GridItem,
 } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 
@@ -83,26 +85,13 @@ function SecretaryContentLineItem({
   gradient: string;
 }) {
   return (
-    <HStack
-      direction={"column"}
-      spacing={7}
-      align={"flex-start"}
-      mt={"0 !important"}
-      position={"relative"}
-      w={"100%"}
-      pb={7}
-    >
-      <Text
-        textAlign={"right"}
-        lineHeight={"none"}
-        fontWeight={700}
-        flex={0.5}
-        right={"5px"}
-        position={"relative"}
-      >
-        {title}:
-      </Text>
-      <Box height={"100%"} position={"absolute"} right={"73%"}>
+    <>
+      <GridItem>
+        <Text textAlign={"right"} lineHeight={"none"} fontWeight={700}>
+          {title}:
+        </Text>
+      </GridItem>
+      <Box height={"100%"} position={"absolute"} left={"125px"}>
         <Divider
           border={"1px solid"}
           borderColor={"brand.primary"}
@@ -110,8 +99,7 @@ function SecretaryContentLineItem({
           alignItems={"stretch"}
         />
       </Box>
-      <Box
-        flex={1.5}
+      <GridItem
         opacity={1}
         transition={"opacity 0.5s"}
         className={`secretary-content-lineitem-${property}`}
@@ -121,8 +109,8 @@ function SecretaryContentLineItem({
           property,
           gradient,
         })}
-      </Box>
-    </HStack>
+      </GridItem>
+    </>
   );
 }
 
@@ -153,13 +141,19 @@ function SecretaryContentItem({
     (a, b) => STATE_SECRETARIES.indexOf(a) - STATE_SECRETARIES.indexOf(b)
   );
   return (
-    <VStack
+    <Grid
+      position={"relative"}
+      gridTemplateColumns={"100px 13.5rem"}
+      gridTemplateRows={"1fr"}
+      columnGap={5}
+      rowGap={5}
       bgColor={"brand.light"}
       borderRadius={"2xl"}
       py={6}
       px={4}
       minW={"90%"}
-      w={"100%"}
+      w={"md"}
+      overflow={"hidden"}
     >
       {sortedStateSecretary.map((secretaryKey, i) => {
         const key = secretaryKey as keyof typeof stateSecretary;
@@ -173,7 +167,7 @@ function SecretaryContentItem({
           />
         );
       })}
-    </VStack>
+    </Grid>
   );
 }
 
