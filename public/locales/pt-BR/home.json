@@ -3,7 +3,7 @@
     "title": "Banco de dados da Educação em Direitos Humanos no Brasil",
     "description": "O banco de dados da Educação em Direitos Humanos no Brasil apresenta informações sobre os estados brasileiros e o governo federal."
   },
-  "title": "Panorama da Educação em Direitos Humanos no Brasil",
+  "title": "Panorama da EDH no Brasil: Banco de Dados",
   "subtitle": "Clique nos estados para obter mais detalhes",
   "legend": {
     "title": "Grau atual de institucionalização da Educação em Direitos Humanos (EDH)",
@@ -57,7 +57,7 @@
     "link": "download dos materiais no link."
   },
   "comparison": {
-    "title": "Comparação de Educação em Direitos Humano entre estados",
+    "title": "Comparação da Educação em Direitos Humano entre estados",
     "subtitle": "Selecione 2 ou 3 estados para comparar; em seguida, escolha quais parâmetros comparar.",
     "select": {
       "placeholder": "Adicione um estado"

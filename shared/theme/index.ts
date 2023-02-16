@@ -68,6 +68,10 @@ const theme = {
       },
       button: "#FBBC44",
     },
+    medusalab: {
+      primary: "#0bb883",
+      primaryHover: "#53edbe",
+    },
   },
 };
 
