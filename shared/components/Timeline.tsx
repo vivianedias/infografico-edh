@@ -105,7 +105,7 @@ function MonthlyBlock({
               color={"brand.primary"}
               lineHeight={"shorter"}
               letterSpacing={"tight"}
-              fontSize={"xs"}
+              fontSize={"md"}
               fontWeight={400}
               key={`${month}-${year + i}-description`}
             >
