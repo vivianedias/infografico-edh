@@ -4,13 +4,14 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { log } from "next-axiom";
 
-import { Box, Heading, Stack, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, Heading, Stack, Text, VStack } from "@chakra-ui/react";
 import {
   Head,
   BrazilMap,
   BrazilGeojson,
   YearButtons,
   Timeline,
+  LanguageLink,
 } from "../shared/components";
 
 import fetcher from "../shared/utils/fetcher";
@@ -35,9 +36,14 @@ export default function Home({
     <>
       <Head title={t("meta.title")} description={t("meta.description")} />
       <Box w={{ base: "full", xl: "6xl" }}>
-        <Heading size={"lg"} color={"brand.primary"} pb={4}>
-          {t("title")}
-        </Heading>
+        <Flex justifyContent={"space-between"}>
+          <Heading size={"lg"} color={"brand.primary"} pb={4}>
+            {t("title")}
+          </Heading>
+
+          <LanguageLink />
+        </Flex>
+
         <Text fontSize={"xl"} fontWeight={300} color={"brand.primary"} pb={8}>
           {t("subtitle")}
         </Text>
@@ -47,7 +53,10 @@ export default function Home({
             {({ data }) => {
               return (
                 <Stack
-                  justifyContent={{ base: "center", xl: "space-between" }}
+                  justifyContent={{
+                    base: "center",
+                    xl: "space-between",
+                  }}
                   align={"flex-start"}
                   direction={{ base: "column", xl: "row" }}
                   spacing={8}

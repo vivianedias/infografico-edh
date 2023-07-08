@@ -3,15 +3,15 @@
     "title": "Human Rights Education Database in Brazil",
     "description": "The Human Rights Education in Brazil database presents information on Brazilian states and the federal government."
   },
-  "title": "Panorama da EDH no Brasil: Banco de Dados",
-  "subtitle": "Clique nos estados para obter mais detalhes",
+  "title": "Human Rights Education Database in Brazil",
+  "subtitle": "Click on the states to obtain more details",
   "legend": {
     "title": "Current degree of institutionalization of Human Rights Education (HRE)",
-    "high": "Alto",
-    "medium": "Médio",
-    "low": "Baixo",
-    "none": "Nenhum",
-    "no_info": "Não foi possível constatar"
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low",
+    "none": "None",
+    "no_info": "No information"
   },
   "category": {
     "document": "Guiding document",
@@ -47,14 +47,14 @@
   "timeline": {
     "title": "Federal Government Timeline"
   },
-  "research": "Quer saber mais como a pesquisa foi desenvolvida?",
-  "resources": "Para baixar outros materiais",
-  "clickLink": "clique aqui.",
-  "accessLink": "acesse o link.",
+  "research": "Do you want to know more information about how the research was developed?",
+  "resources": "To download other materials",
+  "clickLink": "click here.",
+  "accessLink": "access this link.",
   "methodologyPopup": {
-    "title": "Metodologia",
-    "description": "Para traçar o panorama da Educação em Direitos Humanos no Brasil, a pesquisa foi dividida em duas etapas. Na primeira, buscou-se compreender a institucionalização em nível federal, recorrendo às informações atreladas ao Ministério da Mulher, da Família e Direitos Humanos onde está a pasta de EDH; na segunda, foram analisados os estados brasileiros com a intenção de compreender em que medida a EDH está institucionalizada em cada localidade. As informações foram coletadas considerando-se dois biênios: 2019-2020 e 2021-2022. A pesquisa foi realizada por meio de informações disponibilizadas em sites oficiais, por e-mail e por telefone. As informações sobre os estados apresentadas neste infográfico correspondem ao segundo biênio. Para dados detalhadas de cada estado, faça o",
-    "link": "download dos materiais no link."
+    "title": "Methodology",
+    "description": "To outline the panorama of Education in Human Rights in Brazil, the research was divided into two stages. In the first, we sought to understand institutionalization at the federal level, using information linked to the Ministry of Women, Family and Human Rights where the EDH entity is located; in the second, the Brazilian states were analyzed with the intention of understanding the extent to which EDH is institutionalized in each location. Information was collected considering two bienniums: 2019-2020 and 2021-2022. The research was carried out using information available on official websites, by email and by telephone. The information on satisfactory states in this infographic corresponds to the second biennium. To obtain more detailed data for each state,",
+    "link": "download the documents on this link."
   },
   "comparison": {
     "title": "Comparison of Human Development Education across states",

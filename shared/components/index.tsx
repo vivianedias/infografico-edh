@@ -8,3 +8,4 @@ export { default as BrazilGeojson } from "./BrazilGeojson";
 export { default as Popup } from "./Popup";
 export { default as YearButtons } from "./YearButtons";
 export { default as Timeline } from "./Timeline";
+export { default as LanguageLink } from "./LanguageLink";
